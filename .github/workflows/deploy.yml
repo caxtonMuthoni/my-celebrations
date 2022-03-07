@@ -47,7 +47,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           username: ${{ secrets.SSH_USERNAME }}
           script: |
-            cd /var/www/celebrations
+            cd /var/www/my-celebrations
             git checkout -f 
             git pull origin main
             composer install
