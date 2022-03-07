@@ -56,7 +56,9 @@
                       My Celebration Site Coming soon
                   </h1>
                   <p class="text-gray-700 dark:text-gray-500">Ngotho Technologies is about to release another cool web app</p>
-            </div>
+           
+                  <h5 class="text-primary mt-5">#standWithUkraine</h5>
+                </div>
         </div>
     </body>
 </html>
