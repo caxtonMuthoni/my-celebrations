@@ -31,6 +31,9 @@
             .celebration__img {
                 height: 200px;
             }
+            .text-primary {
+                color: #0275d8;
+            }
         </style>
     </head>
     <body class="antialiased">
