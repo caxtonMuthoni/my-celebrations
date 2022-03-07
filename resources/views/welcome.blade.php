@@ -66,7 +66,7 @@
                   </h1>
                   <p class="text-gray-700 dark:text-gray-500">Ngotho Technologies is about to release another cool web app</p>
            
-                  <h5 class="text-primary mt-5"><a href="https://twitter.com/hashtag/standwithukraine"> #standWithUkraine</a></h5>
+                  <h5 class="text-primary mt-5"><a href="https://twitter.com/hashtag/standwithukraine" target="_blank"> #standWithUkraine</a></h5>
                 </div>
         </div>
     </body>
