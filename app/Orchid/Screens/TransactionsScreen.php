@@ -2,6 +2,8 @@
 
 namespace App\Orchid\Screens;
 
+use App\Models\Transaction;
+use App\Orchid\Layouts\TransactionsListLayout;
 use Orchid\Screen\Screen;
 
 class TransactionsScreen extends Screen
@@ -13,7 +15,9 @@ class TransactionsScreen extends Screen
      */
     public function query(): iterable
     {
-        return [];
+        return [
+            'transactions' => Transaction::latest()->paginate()
+        ];
     }
 
     /**
@@ -23,7 +27,7 @@ class TransactionsScreen extends Screen
      */
     public function name(): ?string
     {
-        return 'TransactionsScreen';
+        return 'Business transactions';
     }
 
     /**
@@ -43,6 +47,8 @@ class TransactionsScreen extends Screen
      */
     public function layout(): iterable
     {
-        return [];
+        return [
+            TransactionsListLayout::class
+        ];
     }
 }
