@@ -2,6 +2,8 @@
 
 namespace App\Orchid\Screens;
 
+use App\Models\Book;
+use App\Orchid\Layouts\BooksListLayout;
 use Orchid\Screen\Screen;
 
 class BooksScreen extends Screen
@@ -13,7 +15,9 @@ class BooksScreen extends Screen
      */
     public function query(): iterable
     {
-        return [];
+        return [
+            'books' => Book::with('category', 'template')->latest()->paginate(),
+        ];
     }
 
     /**
@@ -23,7 +27,7 @@ class BooksScreen extends Screen
      */
     public function name(): ?string
     {
-        return 'BooksScreen';
+        return 'All created Books';
     }
 
     /**
@@ -43,6 +47,8 @@ class BooksScreen extends Screen
      */
     public function layout(): iterable
     {
-        return [];
+        return [
+            BooksListLayout::class
+        ];
     }
 }

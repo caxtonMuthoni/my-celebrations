@@ -11405,11 +11405,11 @@ textarea.form-control-lg {
   width: 300px;
   display: flex;
   flex-direction: column;
-  padding: 20px;
   border-radius: 5px;
   position: relative;
   margin: 10px 5px;
   cursor: pointer;
+  overflow: hidden;
 }
 .book-card__type {
   position: absolute;
@@ -11424,15 +11424,20 @@ textarea.form-control-lg {
 }
 .book-card__image {
   flex: 1;
+  width: 100%;
 }
 .book-card__image--picture {
   width: 100%;
-  height: 100%;
+  height: 200px;
   display: block;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: top;
+     object-position: top;
 }
 .book-card__content {
   flex: 2;
-  padding-top: 20px;
+  padding: 20px;
 }
 .book-card__content--header {
   font-weight: 600;

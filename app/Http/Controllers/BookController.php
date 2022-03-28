@@ -44,18 +44,25 @@ class BookController extends Controller
         $book->title = $request->title;
         $book->cover_message = $request->cover_message;
         $book->user_id = Auth::id();
-        $book->category_id = $request->category_id;
-        $book->template_id = $request->template_id;
-        $book->public = $request->public;
-        $book->published = $request->false;
-        $book->accepting_message = $request->accepting_message;
+        $book->category_id = $request->category;
+        $book->template_id = $request->template;
+        $book->public = filter_var($request->public, FILTER_VALIDATE_BOOLEAN);
+        $book->published = false;
+        $book->accepting_message = filter_var($request->accepting_message, FILTER_VALIDATE_BOOLEAN);
         $book->cover_image = $fileUrl;
         if($book->save()) {
+            $book = $book->refresh();
             return response()->json([
                 'status' => true,
+                'id' => $book->id,
                 'message' => "The book was created successfully"
             ]);
         }
+    }
+
+    public function bookContent($id) {
+        $book = Book::find($id);
+        return view('book.content', compact('book'));
     }
 
     /**

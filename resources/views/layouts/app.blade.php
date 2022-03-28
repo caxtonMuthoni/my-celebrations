@@ -40,7 +40,12 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('home')}}">{{ __('Dashboard') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="">{{ __('Account') }}</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -59,9 +64,6 @@
                         </li>
                         @endif
                         @else
-                        <li class="nav-item">
-                            <a class="nav-link" href="">{{ __('Account') }}</a>
-                        </li>
                         <li class="nav-item me-2">
                             <a class="ms-2 btn btn__primary" href="{{ route('book-create') }}">{{ __('Create new book') }}</a>
                         </li>

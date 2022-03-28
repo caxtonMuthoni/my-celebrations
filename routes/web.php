@@ -28,4 +28,5 @@ Route::group([
     'prefix' => 'book'
 ], function() {
       Route::get('create', [BookController::class, 'create'])->name('book-create');
+      Route::get('content/{id}', [BookController::class, 'bookContent'])->name('book-content');
 });

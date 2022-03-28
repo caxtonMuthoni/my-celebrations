@@ -167,6 +167,7 @@
                         <small id="book-title" class="form-text text-muted"
                             >What is your book's title?</small
                         >
+                        <HasError :form="form" field="title" />
                     </div>
 
                     <div class="mb-3">
@@ -185,6 +186,7 @@
                         <small id="book-title" class="form-text text-muted"
                             >Upload your book's cover image.</small
                         >
+                        <HasError :form="form" field="cover_image" />
                     </div>
                     <div class="form-check mt-4">
                         <input
@@ -237,6 +239,7 @@
                         <small id="book-title" class="form-text text-muted"
                             >What is your book's cover message ?</small
                         >
+                        <HasError :form="form" field="cover_message" />
                     </div>
                 </div>
             </div>
@@ -264,6 +267,7 @@
 import LoaderComponent from "./LoaderComponent.vue";
 import SearchComponent from "./SearchComponent.vue";
 import Form from "vform";
+import Toast from '../utils/toast';
 
 export default {
     components: { SearchComponent, LoaderComponent },
@@ -278,7 +282,7 @@ export default {
             accept_message: false,
             public: false,
             title: null,
-            cover_image: null
+            cover_image: null,
         }),
         loading: false,
     }),
@@ -315,11 +319,32 @@ export default {
             }
         },
 
-        createBook() {
-            console.log(this.form);
+        async createBook() {
+            try {
+                this.loading = true;
+                const response = await this.form.post("/api/celebrations/book");
+                const responseData = response.data;
+                if (responseData.status) {
+                    Toast.fire({
+                        icon: "success",
+                        text: "Your book was created successfully",
+                    });
+                    location.href = `/book/content/${responseData.id}`;
+                } else {
+                    throw "error occured";
+                }
+            } catch (error) {
+                this.$swal.fire({
+                    icon: "error",
+                    title: "An error occurred",
+                    text: "Oops! There was an error when uploading data, Please try again.",
+                });
+            } finally {
+                this.loading = false;
+            }
         },
 
-        handleFile(event) { 
+        handleFile(event) {
             const file = event.target.files[0];
             this.form.cover_image = file;
         },

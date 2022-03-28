@@ -21,7 +21,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['prefix' => 'celebrations'], function() {
+Route::group([
+    'prefix' => 'celebrations',
+    'middleware' => 'auth:api'
+], function() {
     Route::get('categories', [CategoryController::class, 'index']);
     Route::get('templates', [TemplateController::class, 'index']);
     Route::post('book', [BookController::class, 'store']);
