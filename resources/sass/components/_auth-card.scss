@@ -1,0 +1,23 @@
+.auth-card {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    width: 100%;
+
+    &__container {
+        height: 83vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__header {
+        font-size: 20px;
+        color: $color-dark;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+}

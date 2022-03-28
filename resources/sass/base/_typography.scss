@@ -1,0 +1,48 @@
+.heading {
+    font-family: $font-family-header;
+    font-weight: 700;
+
+    &--1 {
+        font-size: 45px;
+        line-height: 150%;
+    }
+
+    &--3 {
+        font-size: 18px;
+        line-height: 150%;
+    }
+
+    &--5 {
+        font-size: 18px;
+    }
+}
+
+.paragraph {
+    font-size: 16px;
+    line-height: 145%;
+
+    &__1 {
+        font-size: 22px;
+    }
+}
+
+.text {
+    &__primary {
+        color: $color-primary !important;
+    }
+
+    &__dark {
+        color:  $color-dark !important;
+    }
+}
+
+.special__header {
+    font-family: 'Concert One', cursive !important;
+    letter-spacing: 1px;
+}
+
+.navbar-brand{
+    color:#444 !important;
+    cursor: pointer;
+    text-decoration: none;
+}

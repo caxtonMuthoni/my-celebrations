@@ -6,3 +6,13 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+@import './base/typography';
+
+@import './components/btn';
+@import './components/auth-card';
+@import './components/stats-card';
+@import './components/book-card';
+
+@import './pages/welcome';
+@import './pages/book-create-steps/book-create';
