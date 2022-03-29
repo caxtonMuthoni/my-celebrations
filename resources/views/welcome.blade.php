@@ -39,7 +39,7 @@
                         @else
 
                         <li class="nav-item">
-                            <a href="{{ route('login') }}" class="nav-link">Sign In'</a>
+                            <a href="{{ route('login') }}" class="nav-link">Sign In</a>
                         </li>
 
                         @if (Route::has('register'))
