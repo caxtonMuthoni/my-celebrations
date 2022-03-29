@@ -1,12 +1,12 @@
 .book-cards {
-    display: flex;
+    // display: flex;
 }
 .book-card {
     background-color: #fff;
     max-height: 350px;
     height: 350px;
-    max-width: 300px;
-    width: 300px;
+    // max-width: 300px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     // padding: 20px;

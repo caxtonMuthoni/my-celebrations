@@ -25,7 +25,7 @@ class StoreBookRequest extends FormRequest
     {
         return [
             'title' => 'required',
-            'cover_image' => 'required',
+            'cover_image' => 'required | max:2048 | mimes:png,jpg,jpeg',
             'cover_message' => 'required',
             'category' => 'required',
             'template' => 'required',
