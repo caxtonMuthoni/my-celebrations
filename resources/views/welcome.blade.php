@@ -44,7 +44,7 @@
 
                         @if (Route::has('register'))
                         <li class="nav-item">
-                            <a href="{{ route('register') }}" class="btn btn__primary">Create account</a>
+                            <a href="{{ route('register') }}" class="btn btn__primary">Create Account</a>
                         </li>
                         @endif
                         @endauth
