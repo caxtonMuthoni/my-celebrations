@@ -36,5 +36,17 @@ class Book extends Model
         return $this->appUrl . Storage::url('cover_images/'.$this->attributes['cover_image']);
     }
 
+    public function content() {
+        return $this->hasOne(BookContent::class);
+    }
+
+    public function bookImages() {
+        return $this->hasMany(BookImage::class);
+    }
+
+    public function bookMessages() {
+        return $this->hasMany(BookMessage::class);
+    }
+
 
 }

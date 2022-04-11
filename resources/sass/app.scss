@@ -15,4 +15,20 @@
 @import './components/book-card';
 
 @import './pages/welcome';
+@import './pages/book-content';
+@import './pages/mybooks';
 @import './pages/book-create-steps/book-create';
+@import './pages/billing/billing-plans';
+@import './pages/billing/billing-payment';
+
+
+
+
+
+.table {
+    &__item {
+       height: 80px;
+       display: flex;
+       align-items: center;
+    }
+}

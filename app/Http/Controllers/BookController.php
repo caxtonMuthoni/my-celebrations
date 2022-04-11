@@ -61,9 +61,15 @@ class BookController extends Controller
     }
 
     public function bookContent($id) {
-        $book = Book::find($id);
-        return view('book.content', compact('book'));
+        $book = Book::with('bookImages')->find($id);
+        return view('book.content', compact('book', 'id'));
     }
+
+    public function myBooks() {
+        $books = Auth::user()->books;
+        return view('book.mybooks', compact('books'));
+    }
+
 
     /**
      * Display the specified resource.
@@ -71,9 +77,21 @@ class BookController extends Controller
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function show(Book $book)
+    public function show($id)
     {
-        //
+        $book = Book::with('content', 'bookImages', 'bookMessages.user')->find($id);
+        $content = $book->content;
+        return view('book.edit', compact('book', 'content'));
+    }
+
+    public function publicBooks(){
+        $books = Book::where('public', 1)->latest()->paginate();
+        return view('book.public-books', compact('books'));
+    }
+
+    public function readBook($id) {
+          $book = Book::with('content')->find($id);
+          return view('book.book-read', compact('book'));
     }
 
     /**

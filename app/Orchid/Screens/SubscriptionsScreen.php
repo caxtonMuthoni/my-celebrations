@@ -2,6 +2,9 @@
 
 namespace App\Orchid\Screens;
 
+use App\Models\Subscriber;
+use App\Orchid\Layouts\SubscribersListLayout;
+use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
 
 class SubscriptionsScreen extends Screen
@@ -13,7 +16,9 @@ class SubscriptionsScreen extends Screen
      */
     public function query(): iterable
     {
-        return [];
+        return [
+            'subscribers' => Subscriber::all(),
+        ];
     }
 
     /**
@@ -23,7 +28,7 @@ class SubscriptionsScreen extends Screen
      */
     public function name(): ?string
     {
-        return 'SubscriptionsScreen';
+        return 'Subscribers';
     }
 
     /**
@@ -33,7 +38,11 @@ class SubscriptionsScreen extends Screen
      */
     public function commandBar(): iterable
     {
-        return [];
+        return [
+            Link::make('New subscription plan')
+            ->icon('note')
+            ->route('platform.dashboard.subscription-edit')
+        ];
     }
 
     /**
@@ -43,6 +52,8 @@ class SubscriptionsScreen extends Screen
      */
     public function layout(): iterable
     {
-        return [];
+        return [
+            SubscribersListLayout::class
+        ];
     }
 }

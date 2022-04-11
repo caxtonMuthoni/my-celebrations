@@ -1,0 +1,94 @@
+.billing-plan {
+  &__card {
+      display: flex;
+      width: 100%;
+      background-color: #fff;
+      flex-direction: column;
+      border-radius: 5px;
+      border: 1px solid rgb(223, 223, 223);
+  }
+
+  &__header {
+      display: flex;
+      padding: 20px;
+      justify-content: space-around;
+
+      &--icon {
+          height: 40px;
+          width: 40px;
+          background: rgba(#65E2AC, .5);
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          i {
+              font-size: 25px;
+              color: #fff;
+          }
+      }
+
+      &--title {
+          font-size: 20px;
+          font-weight: bold;
+          text-transform: uppercase;
+      }
+  }
+
+  &__content {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      border-top: 1px solid rgb(233,233,233);
+
+      &--item {
+          display: flex;
+          margin-top: 5px;
+          align-items: center;
+      }
+
+      &--icon {
+          height: 15px;
+          width: 15px;
+          background: #8EFFAE;
+          padding: 1px;
+          border-radius: 50%;
+          overflow: hidden;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-right: 5px;
+
+          i {
+              color: #666;
+              font-size: 9px;
+          }
+      }
+
+      &--description {
+          font-size: 13px;
+      }
+  }
+
+  &__cta {
+    border-top: 1px solid rgb(233,233,233);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    &--amount {
+        font-size: 30px;
+        font-weight: bold;
+        margin-bottom: 10px;
+
+        &--period {
+            font-size: 15px;
+            color: #888;
+            font-weight: lighter;
+        }
+    }
+  }
+}

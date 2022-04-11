@@ -6,6 +6,9 @@ use App\Orchid\Screens\BooksScreen;
 use App\Orchid\Screens\CategoryScreen;
 use App\Orchid\Screens\DashboardScreen;
 use App\Orchid\Screens\EditCategoryScreen;
+use App\Orchid\Screens\EditSubscriberScreen;
+use App\Orchid\Screens\EditSubscriptionFeaturesScreen;
+use App\Orchid\Screens\EditSubscriptionPlansScreen;
 use App\Orchid\Screens\EditTemplateScreen;
 use App\Orchid\Screens\Examples\ExampleCardsScreen;
 use App\Orchid\Screens\Examples\ExampleChartsScreen;
@@ -17,6 +20,8 @@ use App\Orchid\Screens\Examples\ExampleTextEditorsScreen;
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
+use App\Orchid\Screens\SubscriptionFeaturesScreen;
+use App\Orchid\Screens\SubscriptionPlansScreen;
 use App\Orchid\Screens\SubscriptionsScreen;
 use App\Orchid\Screens\TemplateScreen;
 use App\Orchid\Screens\TransactionsScreen;
@@ -133,5 +138,14 @@ Route::screen('dashboard', DashboardScreen::class)
  Route::screen('template/{template?}', EditTemplateScreen::class)->name('platform.dashboard.template.edit');
 
  Route::screen('books', BooksScreen::class)->name('platform.dashboard.book');
+
  Route::screen('subscriptions', SubscriptionsScreen::class)->name('platform.dashboard.subscription');
+ Route::screen('subscription/{subscriber?}', EditSubscriberScreen::class)->name('platform.dashboard.subscription-edit');
+
  Route::screen('transactions', TransactionsScreen::class)->name('platform.dashboard.transaction');
+
+ Route::screen('subscriptions/plans', SubscriptionPlansScreen::class)->name('platform.dashboard.subscription-plans');
+ Route::screen('subscriptions/plan/{plan?}', EditSubscriptionPlansScreen::class)->name('platform.dashboard.subscription-plans-edit');
+
+ Route::screen('subscriptions/features', SubscriptionFeaturesScreen::class)->name('platform.dashboard.subscription-features');
+ Route::screen('subscriptions/feature/{plan?}', EditSubscriptionFeaturesScreen::class)->name('platform.dashboard.subscription-features-edit');
