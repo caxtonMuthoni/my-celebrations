@@ -94,6 +94,14 @@ class BookController extends Controller
           return view('book.book-read', compact('book'));
     }
 
+    public function bookMessage ($id) {
+        return view('book.message');
+    }
+
+    public function bookImages ($id) {
+        return view('book.images');
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

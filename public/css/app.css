@@ -11561,6 +11561,12 @@ body {
   right: 15px;
 }
 
+.book-read__cta {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
 .mybooks__img {
   height: 80px;
 }

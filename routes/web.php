@@ -34,6 +34,8 @@ Route::group([
       Route::get('book/{book}', [BookController::class, 'show'])->name('book-show');
       Route::get('books/public', [BookController::class, 'publicBooks'])->name('book-public-show');
       Route::get('books/read/{id}', [BookController::class, 'readBook'])->name('book-read');
+      Route::get('books/message/{id}', [BookController::class, 'bookMessage'])->name('book-message');
+      Route::get('books/images/{id}', [BookController::class, 'bookImages'])->name('book-images');
 });
 
 
