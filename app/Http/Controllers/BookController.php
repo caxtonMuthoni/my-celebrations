@@ -94,7 +94,8 @@ class BookController extends Controller
 
     public function readBook($id)
     {
-        return view('book.book-read', compact('id'));
+        $book = Book::with('template')->find($id);
+        return view('book.book-read', compact('id', 'book'));
     }
 
     public function readBookContentApi($id)

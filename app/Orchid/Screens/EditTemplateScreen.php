@@ -119,8 +119,15 @@ class EditTemplateScreen extends Screen
                     $zipPhysicalPath = 'app/public/' . $template->template_file->physicalPath();                    
                     $zipPath = storage_path($zipPhysicalPath);
                     $zip = new ZipArchive;
+                    $time = time();
+                    $path = 'templates/book/'. $time;
                     if ($zip->open($zipPath)) {
-                        $zip->extractTo('templates/book');
+                        $uploaded = $zip->extractTo('templates/book/'. $time);
+                        if($uploaded) {
+                            $url = env('APP_URL') .'/' . $path . "/dist/index.html";
+                            $template->template_url = $url;
+                            $template->save();
+                        }
                         $zip->close();
                     }
                 }

@@ -14,7 +14,7 @@
         </div>
     </div>
     <div id="mybook" class="container px-5" style="height: 100%; min-height:500px;">
-        <iframe class="bg-white" width="100%" style="min-height:500px;" height="100%" src="{{'http://127.0.0.1:8080?id='.$id}}" frameborder="0"></iframe>
+        <iframe class="bg-white" width="100%" style="min-height:500px;" height="100%" src="{{$book->template->template_url . '?id='.$id}}" frameborder="0"></iframe>
     </div>
 </div>
 
