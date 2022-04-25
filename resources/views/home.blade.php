@@ -35,6 +35,7 @@
     <h3 class="heading heading--5 text__dark">
         Latest Books
     </h3>
+    @if(count($data['latest_books']) > 0)
     <div class="book-cards row">
         @foreach($data['latest_books'] as $book)
         <div class="col-md-3">
@@ -53,6 +54,14 @@
         </div>
         @endforeach
     </div>
+    @else
+    <div class="row justify-content-center mt-3">
+        <div class="col-md-6 text-center">
+            <div class="alert alert-warning">You have not created any book.</div>
+            <a href="{{route('book-create')}}" class="btn btn-lg btn__primary mt-3">Create new celebration book</a>
+        </div>
+    </div>
+    @endif
 
 </div>
 @endsection

@@ -38,3 +38,6 @@ Route::group([
     Route::delete('bookmessage/{id}', [BookMessageController::class, 'destroy']);
 
 });
+
+
+Route::get('books/{id}', [BookController::class, 'readBookContentApi']);

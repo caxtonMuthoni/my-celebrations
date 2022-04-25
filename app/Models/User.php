@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Laravel\Sanctum\HasApiTokens;
 use Orchid\Platform\Models\User as Authenticatable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens;
     /**
@@ -19,6 +20,7 @@ class User extends Authenticatable
         'phonenumber',
         'password',
         'permissions',
+        'google_id',
     ];
 
     /**

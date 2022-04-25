@@ -5364,6 +5364,319 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AddBookMessageComponent.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AddBookMessageComponent.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _LoaderComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LoaderComponent.vue */ "./resources/js/components/LoaderComponent.vue");
+/* harmony import */ var _SearchComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SearchComponent.vue */ "./resources/js/components/SearchComponent.vue");
+/* harmony import */ var vform__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vform */ "./node_modules/vform/dist/vform.es.js");
+/* harmony import */ var _utils_toast__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../utils/toast */ "./resources/js/utils/toast.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {
+    SearchComponent: _SearchComponent_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    LoaderComponent: _LoaderComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  data: function data() {
+    return {
+      step: 2,
+      templates: [],
+      form: new vform__WEBPACK_IMPORTED_MODULE_3__["default"]({
+        message: null,
+        template: null
+      }),
+      loading: false
+    };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+              _this.loading = true;
+              _context.next = 4;
+              return _this.fetchTemplates();
+
+            case 4:
+              _context.next = 8;
+              break;
+
+            case 6:
+              _context.prev = 6;
+              _context.t0 = _context["catch"](0);
+
+            case 8:
+              _context.prev = 8;
+              _this.loading = false;
+              return _context.finish(8);
+
+            case 11:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[0, 6, 8, 11]]);
+    }))();
+  },
+  methods: {
+    fetchTemplates: function fetchTemplates() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                _context2.next = 3;
+                return axios.get("/api/celebrations/templates");
+
+              case 3:
+                response = _context2.sent;
+                _this2.templates = response.data;
+                _context2.next = 10;
+                break;
+
+              case 7:
+                _context2.prev = 7;
+                _context2.t0 = _context2["catch"](0);
+                throw _context2.t0;
+
+              case 10:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[0, 7]]);
+      }))();
+    },
+    createBook: function createBook() {
+      var _this3 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+        var response, responseData;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.prev = 0;
+                _this3.loading = true;
+                _context3.next = 4;
+                return _this3.form.post("/api/celebrations/book");
+
+              case 4:
+                response = _context3.sent;
+                responseData = response.data;
+
+                if (!responseData.status) {
+                  _context3.next = 11;
+                  break;
+                }
+
+                _utils_toast__WEBPACK_IMPORTED_MODULE_4__["default"].fire({
+                  icon: "success",
+                  text: "Your book was created successfully"
+                });
+                location.href = "/book/content/".concat(responseData.id);
+                _context3.next = 12;
+                break;
+
+              case 11:
+                throw "error occured";
+
+              case 12:
+                _context3.next = 17;
+                break;
+
+              case 14:
+                _context3.prev = 14;
+                _context3.t0 = _context3["catch"](0);
+
+                _this3.$swal.fire({
+                  icon: "error",
+                  title: "An error occurred",
+                  text: "Oops! There was an error when uploading data, Please try again."
+                });
+
+              case 17:
+                _context3.prev = 17;
+                _this3.loading = false;
+                return _context3.finish(17);
+
+              case 20:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, null, [[0, 14, 17, 20]]);
+      }))();
+    },
+    handleFile: function handleFile(event) {
+      var file = event.target.files[0];
+      this.form.cover_image = file;
+    },
+    nextPage: function nextPage() {
+      this.step++;
+    },
+    prevPage: function prevPage() {
+      this.step--;
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/BookContentComponent.vue?vue&type=script&lang=js&":
 /*!***************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/BookContentComponent.vue?vue&type=script&lang=js& ***!
@@ -6973,6 +7286,7 @@ window.Vue = (__webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js
 Vue.component('steps-component', (__webpack_require__(/*! ./components/StepsComponent.vue */ "./resources/js/components/StepsComponent.vue")["default"]));
 Vue.component('book-content-component', (__webpack_require__(/*! ./components/BookContentComponent.vue */ "./resources/js/components/BookContentComponent.vue")["default"]));
 Vue.component('edit-book-content-component', (__webpack_require__(/*! ./components/EditBookContentComponent.vue */ "./resources/js/components/EditBookContentComponent.vue")["default"]));
+Vue.component('add-book-message-component', (__webpack_require__(/*! ./components/AddBookMessageComponent.vue */ "./resources/js/components/AddBookMessageComponent.vue")["default"]));
 Vue.component(vform_src_components_bootstrap5__WEBPACK_IMPORTED_MODULE_4__.HasError.name, vform_src_components_bootstrap5__WEBPACK_IMPORTED_MODULE_4__.HasError);
 Vue.use(vue_loaders__WEBPACK_IMPORTED_MODULE_1__["default"]);
 Vue.use((vue_sweetalert2__WEBPACK_IMPORTED_MODULE_2___default()));
@@ -7002,7 +7316,7 @@ try {
 
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
@@ -60578,6 +60892,45 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/AddBookMessageComponent.vue":
+/*!*************************************************************!*\
+  !*** ./resources/js/components/AddBookMessageComponent.vue ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _AddBookMessageComponent_vue_vue_type_template_id_5a44e365___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AddBookMessageComponent.vue?vue&type=template&id=5a44e365& */ "./resources/js/components/AddBookMessageComponent.vue?vue&type=template&id=5a44e365&");
+/* harmony import */ var _AddBookMessageComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AddBookMessageComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/AddBookMessageComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _AddBookMessageComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AddBookMessageComponent_vue_vue_type_template_id_5a44e365___WEBPACK_IMPORTED_MODULE_0__.render,
+  _AddBookMessageComponent_vue_vue_type_template_id_5a44e365___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/AddBookMessageComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/BookContentComponent.vue":
 /*!**********************************************************!*\
   !*** ./resources/js/components/BookContentComponent.vue ***!
@@ -60772,6 +61125,22 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 if (false) { var api; }
 component.options.__file = "resources/js/components/StepsComponent.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/AddBookMessageComponent.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/AddBookMessageComponent.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AddBookMessageComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AddBookMessageComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AddBookMessageComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AddBookMessageComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -61075,6 +61444,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _vue_loader_lib_loaders_templateLoader_js_vue_loader_options_vue_loader_lib_index_js_vue_loader_options_vue_upload_drop_images_vue_vue_type_template_id_69bb59a3_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _vue_loader_lib_loaders_templateLoader_js_vue_loader_options_vue_loader_lib_index_js_vue_loader_options_vue_upload_drop_images_vue_vue_type_template_id_69bb59a3_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../vue-loader/lib/index.js??vue-loader-options!./vue-upload-drop-images.vue?vue&type=template&id=69bb59a3&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/vue-upload-drop-images/dist/vue-upload-drop-images.vue?vue&type=template&id=69bb59a3&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/AddBookMessageComponent.vue?vue&type=template&id=5a44e365&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/components/AddBookMessageComponent.vue?vue&type=template&id=5a44e365& ***!
+  \********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddBookMessageComponent_vue_vue_type_template_id_5a44e365___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddBookMessageComponent_vue_vue_type_template_id_5a44e365___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddBookMessageComponent_vue_vue_type_template_id_5a44e365___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AddBookMessageComponent.vue?vue&type=template&id=5a44e365& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AddBookMessageComponent.vue?vue&type=template&id=5a44e365&");
 
 
 /***/ }),
@@ -61743,6 +62129,279 @@ var render = function () {
       ),
     ]
   )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AddBookMessageComponent.vue?vue&type=template&id=5a44e365&":
+/*!***********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AddBookMessageComponent.vue?vue&type=template&id=5a44e365& ***!
+  \***********************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.loading
+    ? _c("loader-component")
+    : _c("div", { staticClass: "book-message row" }, [
+        _vm.step == 1
+          ? _c(
+              "div",
+              { staticClass: "row justify-content-center book-create__row" },
+              [
+                _c("div", { staticClass: "col-md-11 book-create__co" }, [
+                  _c("div", { staticClass: "book-create__col--content" }, [
+                    _c("div", { staticClass: "book-create__header" }, [
+                      _c("div", { staticClass: "book-create__header--step" }, [
+                        _c("i", {
+                          staticClass: "fa fa-gift",
+                          attrs: { "aria-hidden": "true" },
+                        }),
+                      ]),
+                      _vm._v(" "),
+                      _c("span", [_vm._v("Step 1: Select message template")]),
+                    ]),
+                  ]),
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "col-md-11 row mt-3" },
+                  _vm._l(_vm.templates, function (template, i) {
+                    return _c("div", { key: i, staticClass: "col-md-3" }, [
+                      _c("div", { staticClass: "book-create__template" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.template,
+                              expression: "form.template",
+                            },
+                          ],
+                          staticClass: "book-create__template--input",
+                          attrs: {
+                            type: "radio",
+                            name: "template",
+                            id: "template-" + i,
+                          },
+                          domProps: {
+                            value: template.id,
+                            checked: _vm._q(_vm.form.template, template.id),
+                          },
+                          on: {
+                            change: function ($event) {
+                              return _vm.$set(_vm.form, "template", template.id)
+                            },
+                          },
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "label",
+                          {
+                            staticClass:
+                              "book-create__template--lable shadow-sm",
+                            attrs: { for: "template-" + i },
+                          },
+                          [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "book-create__template--lable--top",
+                              },
+                              [
+                                _c("img", {
+                                  staticClass:
+                                    "book-create__template--lable--top_img",
+                                  attrs: { src: template.image.url, alt: "" },
+                                }),
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "book-create__template--lable--content",
+                              },
+                              [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "book-create__template--lable--content_header",
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                " +
+                                        _vm._s(template.name) +
+                                        "\n                            "
+                                    ),
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "book-create__template--lable--content_description",
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                " +
+                                        _vm._s(template.description) +
+                                        "\n                            "
+                                    ),
+                                  ]
+                                ),
+                              ]
+                            ),
+                          ]
+                        ),
+                      ]),
+                    ])
+                  }),
+                  0
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-10" }, [
+                  _c("div", { staticClass: "book-create__btns" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-block btn-lg btn__primary mt-3",
+                        attrs: { disabled: !_vm.form.template },
+                        on: { click: _vm.nextPage },
+                      },
+                      [
+                        _vm._v(
+                          "\n                    Next\n                    "
+                        ),
+                        _c("i", {
+                          staticClass: "fa fa-arrow-right ms-2",
+                          attrs: { "aria-hidden": "true" },
+                        }),
+                      ]
+                    ),
+                  ]),
+                ]),
+              ]
+            )
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.step == 2
+          ? _c(
+              "div",
+              { staticClass: "row justify-content-center book-create__row" },
+              [
+                _c("div", { staticClass: "col-md-11 book-create__co" }, [
+                  _c("div", { staticClass: "book-create__col--content" }, [
+                    _c("div", { staticClass: "book-create__header" }, [
+                      _c("div", { staticClass: "book-create__header--step" }, [
+                        _c("i", {
+                          staticClass: "fa fa-envelope",
+                          attrs: { "aria-hidden": "true" },
+                        }),
+                      ]),
+                      _vm._v(" "),
+                      _c("span", [_vm._v("Step 2: Message details")]),
+                    ]),
+                  ]),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-8" }, [
+                  _c("div", { staticClass: "card p-2 px-5 text-start" }, [
+                    _c("div", { staticClass: "mb-3" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "form-label",
+                          attrs: { for: "relationship" },
+                        },
+                        [
+                          _vm._v(
+                            "What is your relationship with the book owner?"
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          name: "relationship",
+                          id: "relationship",
+                          "aria-describedby": "relationship",
+                          placeholder: "eg. Brother",
+                        },
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "small",
+                        {
+                          staticClass: "form-text text-muted",
+                          attrs: { id: "relationship" },
+                        },
+                        [
+                          _vm._v(
+                            "Examples friend, brother, mother, teacher etc."
+                          ),
+                        ]
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "mb-3" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "form-label",
+                          attrs: { for: "message" },
+                        },
+                        [_vm._v("Enter the massage")]
+                      ),
+                      _vm._v(" "),
+                      _c("textarea", {
+                        staticClass: "form-control",
+                        attrs: { name: "message", id: "message", rows: "3" },
+                      }),
+                    ]),
+                  ]),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-8" }, [
+                  _c("div", { staticClass: "book-create__btns" }, [
+                    _c(
+                      "button",
+                      { staticClass: "btn btn-block btn-lg btn__primary mt-3" },
+                      [
+                        _vm._v(
+                          "\n                    Save Message\n                   "
+                        ),
+                        _c("i", {
+                          staticClass: "fa fa-save ms-2",
+                          attrs: { "aria-hidden": "true" },
+                        }),
+                      ]
+                    ),
+                  ]),
+                ]),
+              ]
+            )
+          : _vm._e(),
+      ])
 }
 var staticRenderFns = []
 render._withStripped = true

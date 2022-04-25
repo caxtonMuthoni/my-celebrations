@@ -21,4 +21,8 @@ class Template extends Model
     public function image() {
         return $this->hasOne(Attachment::class, 'id', 'cover_image');
     }
+
+    public function template_file() {
+        return $this->hasOne(Attachment::class, 'id', 'template');
+    }
 }

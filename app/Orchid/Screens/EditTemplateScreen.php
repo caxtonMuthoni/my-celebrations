@@ -13,6 +13,7 @@ use Orchid\Screen\Fields\Upload;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Alert;
 use Orchid\Support\Facades\Layout;
+use ZipArchive;
 
 class EditTemplateScreen extends Screen
 {
@@ -103,6 +104,7 @@ class EditTemplateScreen extends Screen
 
     public function createOrUpdate(Template $template, Request $request)
     {
+        ini_set('max_execution_time', '0');
         $templateData = $request->get('template');
         foreach ($templateData['category_id'] as $catID) {
             $category = Category::find($catID);
@@ -112,14 +114,23 @@ class EditTemplateScreen extends Screen
                 $template->name = $templateData['name'];
                 $template->description = $templateData['description'];
                 $template->category_id = $category->id;
-                $template->save();
+                if ($template->save()) {
+                    $template = $template->refresh();
+                    $zipPhysicalPath = 'app/public/' . $template->template_file->physicalPath();                    
+                    $zipPath = storage_path($zipPhysicalPath);
+                    $zip = new ZipArchive;
+                    if ($zip->open($zipPath)) {
+                        $zip->extractTo('templates/book');
+                        $zip->close();
+                    }
+                }
             }
         }
 
         Alert::success('The template was uploaded successfully');
         return redirect()->route('platform.dashboard.template');
     }
-    
+
 
     public function remove(Template $template)
     {

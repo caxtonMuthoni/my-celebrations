@@ -1,21 +1,21 @@
 @extends('layouts.app')
 @section('content')
-<div class="book-read container">
-    <div class="text-right book-read__cta my-2">
-        <a href="{{route('book-message', $book->id)}}" class="btn btn-info me-4">
-            <i class="fa fa-envelope" aria-hidden="true"></i>
-            Add message</a>
+<div class="book-read">
+    <div class="container">
+        <div class="text-right book-read__cta my-2">
+            <button onclick="expandScreen()" id="expandButton" class="btn btn-secondary me-2"> <i class="fa fa-expand me-2" aria-hidden="true"></i> Full screen</button>
+            <a href="{{route('book-message', $id)}}" class="btn btn-info me-4">
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+                Add message</a>
 
-        <a href="{{route('book-images', $book->id)}}" class="btn btn-primary">
-            <i class="fa fa-image" aria-hidden="true"></i>
-            Add images</a>
+            <a href="{{route('book-images', $id)}}" class="btn btn-primary">
+                <i class="fa fa-image" aria-hidden="true"></i>
+                Add images</a>
+        </div>
     </div>
-    <div class="bg-white p-5">
-        <h2>{{$book->title}}</h2>
-        <h4> {{$book->cover_message}}</h4>
-    </div>
-    <div class="bg-white p-5">
-        {!! $book->content->content !!}
+    <div id="mybook" class="container px-5" style="height: 100%; min-height:500px;">
+        <iframe class="bg-white" width="100%" style="min-height:500px;" height="100%" src="{{'http://127.0.0.1:8080?id='.$id}}" frameborder="0"></iframe>
     </div>
 </div>
+
 @endsection

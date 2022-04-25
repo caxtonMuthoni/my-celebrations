@@ -50,7 +50,7 @@ class BookController extends Controller
         $book->published = false;
         $book->accepting_message = filter_var($request->accepting_message, FILTER_VALIDATE_BOOLEAN);
         $book->cover_image = $fileUrl;
-        if($book->save()) {
+        if ($book->save()) {
             $book = $book->refresh();
             return response()->json([
                 'status' => true,
@@ -60,12 +60,14 @@ class BookController extends Controller
         }
     }
 
-    public function bookContent($id) {
+    public function bookContent($id)
+    {
         $book = Book::with('bookImages')->find($id);
         return view('book.content', compact('book', 'id'));
     }
 
-    public function myBooks() {
+    public function myBooks()
+    {
         $books = Auth::user()->books;
         return view('book.mybooks', compact('books'));
     }
@@ -84,21 +86,30 @@ class BookController extends Controller
         return view('book.edit', compact('book', 'content'));
     }
 
-    public function publicBooks(){
+    public function publicBooks()
+    {
         $books = Book::where('public', 1)->latest()->paginate();
         return view('book.public-books', compact('books'));
     }
 
-    public function readBook($id) {
-          $book = Book::with('content')->find($id);
-          return view('book.book-read', compact('book'));
+    public function readBook($id)
+    {
+        return view('book.book-read', compact('id'));
     }
 
-    public function bookMessage ($id) {
+    public function readBookContentApi($id)
+    {
+        $book = Book::with('content', 'bookImages')->find($id);
+        return $book;
+    }
+
+    public function bookMessage($id)
+    {
         return view('book.message');
     }
 
-    public function bookImages ($id) {
+    public function bookImages($id)
+    {
         return view('book.images');
     }
 

@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-6 auth-card__container">
+        <div class="col-md-7 auth-card__container">
             <div class="auth-card shadow-sm">
                 <div class="auth-card__header">
                     <div class="fas fa-edit text__primary mb-2"></div>
@@ -27,7 +27,8 @@
                             </div>
                         </div>
 
-                        <div class="mb-3">
+                        <div class="row col-md-12">
+                        <div class="mb-3 col-md-6">
                             <label for="email" class="">{{ __('Email Address') }}</label>
 
                             <div class="">
@@ -41,7 +42,7 @@
                             </div>
                         </div>
 
-                        <div class="mb-3">
+                        <div class="mb-3 col-md-6">
                             <label for="phonenumber" class="">{{ __('Your phone number') }}</label>
 
                             <div class="">
@@ -54,8 +55,10 @@
                                 @enderror
                             </div>
                         </div>
+                        </div>
 
-                        <div class="mb-3">
+                        <div class="col-md-12 row">
+                        <div class="mb-3 col-md-6">
                             <label for="password" class="">{{ __('Password') }}</label>
 
                             <div class="">
@@ -69,12 +72,13 @@
                             </div>
                         </div>
 
-                        <div class="mb-3">
+                        <div class="mb-3 col-md-6">
                             <label for="password-confirm" class="">{{ __('Confirm Password') }}</label>
 
                             <div class="">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
+                        </div>
                         </div>
 
                         <div class="mb-0">
@@ -85,6 +89,12 @@
                             </div>
                         </div>
                     </form>
+                    <div class="dropdown-divider mt-2"></div>
+                    <div class="mt-3 auth-card__socials">
+                        <a href="{{ url('auth/google') }}" class="btn">
+                            <img src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png" style="margin-left: 3em;">
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

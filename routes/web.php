@@ -2,7 +2,12 @@
 
 use App\Http\Controllers\BillingController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\SocialiteCOntroller;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,10 +27,31 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Mail verification
+Route::get('/email/verify', function () {
+    return view('auth.verify');
+})->middleware('auth')->name('verification.notice');
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+    return redirect('/home');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+ 
+    return back()->with('resent', 'Verification link sent!');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.resend');
+
+// Socialite
+
+Route::get('auth/google', [SocialiteCOntroller::class, 'redirectToGoogle']);
+Route::get('auth/google/callback', [SocialiteCOntroller::class, 'handleGoogleCallback']);
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware(['verified', 'auth']);
 
 Route::group([
-    'middleware' => 'auth',
+    'middleware' => ['auth', 'verified'],
     'prefix' => 'book'
 ], function() {
       Route::get('create', [BookController::class, 'create'])->name('book-create');
@@ -40,9 +66,14 @@ Route::group([
 
 
 Route::group([
-    'middleware' => 'auth',
+    'middleware' => ['auth', 'verified'],
     'prefix' => 'billing'
 ], function() {
       Route::get('plans', [BillingController::class, 'plans'])->name('billing-plans');
       Route::get('payments/{id}', [BillingController::class, 'payments'])->name('billing-payments');
+});
+
+
+Route::get('template', function() {
+    return File::get(public_path() . '\templates\book\dist\index.html?id=1');
 });

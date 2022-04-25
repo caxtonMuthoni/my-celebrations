@@ -11359,6 +11359,11 @@ textarea.form-control-lg {
   justify-content: center;
   flex-direction: column;
 }
+.auth-card__socials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 .stats-cards {
   margin-bottom: 50px;
@@ -11868,6 +11873,34 @@ body {
   margin-top: 20px;
   font-size: 20px;
   font-weight: bold;
+}
+
+.verify-card {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 350px;
+}
+.verify-card__icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #8E59CF;
+  color: #fff;
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.verify-card__body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .table__item {
