@@ -30,13 +30,16 @@ Route::group([
 ], function() {
     Route::get('categories', [CategoryController::class, 'index']);
     Route::get('templates', [TemplateController::class, 'index']);
+    Route::get('templates/messages', [TemplateController::class, 'messages']);
     Route::post('book', [BookController::class, 'store']);
     Route::post('bookcontent', [BookContentController::class, 'store']);
     Route::post('bookcontent/update', [BookContentController::class, 'update']);
     Route::post('bookimages', [BookImageController::class ,'store']);
     Route::delete('bookimage/{id}', [BookImageController::class, 'destroy']);
     Route::delete('bookmessage/{id}', [BookMessageController::class, 'destroy']);
-
+    Route::post('message', [BookMessageController::class, 'store']);
+    Route::post('togglebookstatus/{id}', [BookMessageController::class, 'toggleMessageStatus']);
+    Route::post('togglebookimagestatus/{id}', [BookImageController::class, 'toggleImageStatus']);
 });
 
 

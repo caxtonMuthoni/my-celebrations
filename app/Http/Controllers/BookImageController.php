@@ -6,6 +6,7 @@ use App\Helpers\FileOperationUtil;
 use App\Models\BookImage;
 use App\Http\Requests\StoreBookImageRequest;
 use App\Http\Requests\UpdateBookImageRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -51,6 +52,7 @@ class BookImageController extends Controller
                 $bookImage->user_id = $userId;
                 $bookImage->book_id = $bookId;
                 $bookImage->image = $url;
+                $bookImage->published = true;
                 $bookImage->save();
             }
 
@@ -64,6 +66,55 @@ class BookImageController extends Controller
                 'message' => 'An error occurred.'
             ]);
         }
+    }
+
+    public function friendImageUpload(Request $request)
+    {
+        $this->validate($request, [
+            'image' => 'required | file | mimes:png,jpg,jpeg,svg',
+            'book_id' => 'required | integer'
+        ]);
+
+        try {
+            $bookId = $request->book_id;
+            $userId = Auth::id();
+            $image = $request->file('image');
+
+            $fileUploadUtil = new FileOperationUtil($image, 'book-images');
+            $path = $fileUploadUtil->uploadFile();
+            $url = env('APP_URL') . Storage::url('book-images/' . $path);
+
+            $bookImage = new BookImage();
+            $bookImage->user_id = $userId;
+            $bookImage->book_id = $bookId;
+            $bookImage->image = str_replace(' ', '%20', $url);
+            $bookImage->published = false;
+            $bookImage->save();
+            return redirect()->route('book-read', ['id' => $bookId])->with('success', 'The image was uploaded successfully');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', 'The image could not be uploaded');
+        }
+    }
+
+    public function toggleImageStatus($id)
+    {
+        $bookImage = BookImage::find($id);
+
+        if ($bookImage) {
+            $bookImage->published = !$bookImage->published;
+
+            if ($bookImage->save()) {
+                return response()->json([
+                    'status' => true,
+                    'message' => 'Image status was updated successfully'
+                ]);
+            }
+        }
+
+        return response()->json([
+            'status' => false,
+            'message' => 'Image status could not be updated successfully'
+        ]);
     }
 
     /**

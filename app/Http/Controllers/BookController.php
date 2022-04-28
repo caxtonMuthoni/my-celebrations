@@ -88,7 +88,7 @@ class BookController extends Controller
 
     public function publicBooks()
     {
-        $books = Book::where('public', 1)->latest()->paginate();
+        $books = Book::where([['public', 1], ['published', true]])->latest()->paginate();
         return view('book.public-books', compact('books'));
     }
 
@@ -100,18 +100,33 @@ class BookController extends Controller
 
     public function readBookContentApi($id)
     {
-        $book = Book::with('content', 'bookImages')->find($id);
+        $book = Book::with(['content', 'bookImages' => function($query) {
+            $query->where('published', true);
+        }])->find($id);
         return $book;
+    }
+
+    public function publishBook($id) {
+        $book = Book::where([['user_id', Auth::id()], ['id', $id]])->first();
+        if(isset($book)) {
+            $book->published = !$book->published;
+            $book->save();
+
+            return redirect()->back()->with('success', 'The book was published successfully');
+        }
+
+        return redirect()->back()->with('error', 'The book could not be published published, try again later');
+
     }
 
     public function bookMessage($id)
     {
-        return view('book.message');
+        return view('book.message', compact('id'));
     }
 
     public function bookImages($id)
     {
-        return view('book.images');
+        return view('book.images', compact('id'));
     }
 
     /**

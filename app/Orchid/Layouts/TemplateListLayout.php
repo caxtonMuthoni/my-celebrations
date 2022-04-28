@@ -36,6 +36,7 @@ class TemplateListLayout extends Table
             }),
             TD::make('name', 'Template Name'),
             TD::make('description', 'Template Description'),
+            TD::make('template_type', 'Template Type'),
             TD::make('created_at', 'Created')->render(function (Template $template) {
                 $createdAt = Carbon::parse($template->created_at);
                 return $createdAt->format(DateFormatter::defaultDateFormat());

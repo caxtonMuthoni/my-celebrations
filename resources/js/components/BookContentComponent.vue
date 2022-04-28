@@ -57,6 +57,13 @@
                     >
                 </div>
             </div>
+
+             <div class="col-md-2 text-center">
+                <div class="book-content__nav my-auto" style="">
+                    <a :href="`/book/books/read/${book.id}`" class="btn btn-success">Save and preview</a>
+                </div>
+            </div>
+            
         </div>
         <div v-if="selectedTab == 1" class="col-md-9">
             Add book content

@@ -43,6 +43,7 @@ class BookMessageController extends Controller
             $bookMessage->user_id = Auth::id();
             $bookMessage->book_id = $request->book_id;
             $bookMessage->relationship = $request->relationship;
+            $bookMessage->template_id = $request->template;
             $bookMessage->save();
             return response()->json([
                 'status' => true,
@@ -54,6 +55,27 @@ class BookMessageController extends Controller
                 'message' => 'An error occurred.'
             ]);
         }
+    }
+
+
+    public function toggleMessageStatus($id){
+        $bookMessage = BookMessage::find($id);
+
+        if($bookMessage) {
+              $bookMessage->public = !$bookMessage->public;
+
+              if($bookMessage->save()) {
+                return response()->json([
+                    'status' => true,
+                    'message' => 'Message status was updated successfully'
+                ]);
+              }
+        }
+
+        return response()->json([
+            'status' => false,
+            'message' => 'Message status could not be updated successfully'
+        ]);
     }
 
     /**

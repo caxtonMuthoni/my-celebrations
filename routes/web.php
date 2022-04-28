@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BillingController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\BookImageController;
 use App\Http\Controllers\SocialiteCOntroller;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
@@ -62,6 +63,8 @@ Route::group([
       Route::get('books/read/{id}', [BookController::class, 'readBook'])->name('book-read');
       Route::get('books/message/{id}', [BookController::class, 'bookMessage'])->name('book-message');
       Route::get('books/images/{id}', [BookController::class, 'bookImages'])->name('book-images');
+      Route::post('/upload/bookimage', [BookImageController::class, 'friendImageUpload'])->name('friend-upload-image');
+      Route::get('publish/book/{id}', [BookController::class, 'publishBook'])->name('publish-book');
 });
 
 
@@ -71,9 +74,4 @@ Route::group([
 ], function() {
       Route::get('plans', [BillingController::class, 'plans'])->name('billing-plans');
       Route::get('payments/{id}', [BillingController::class, 'payments'])->name('billing-payments');
-});
-
-
-Route::get('template', function() {
-    return File::get(public_path() . '\templates\book\dist\index.html?id=1');
 });

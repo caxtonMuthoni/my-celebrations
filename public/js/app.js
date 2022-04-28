@@ -5514,6 +5514,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 
 
 
@@ -5523,13 +5525,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     SearchComponent: _SearchComponent_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
     LoaderComponent: _LoaderComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
+  props: {
+    bookId: {
+      type: Number,
+      required: true
+    }
+  },
   data: function data() {
     return {
-      step: 2,
+      step: 1,
       templates: [],
       form: new vform__WEBPACK_IMPORTED_MODULE_3__["default"]({
         message: null,
-        template: null
+        template: null,
+        relationship: null,
+        book_id: null
       }),
       loading: false
     };
@@ -5580,7 +5590,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context2.prev = 0;
                 _context2.next = 3;
-                return axios.get("/api/celebrations/templates");
+                return axios.get("/api/celebrations/templates/messages");
 
               case 3:
                 response = _context2.sent;
@@ -5601,7 +5611,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee2, null, [[0, 7]]);
       }))();
     },
-    createBook: function createBook() {
+    createMessage: function createMessage() {
       var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
@@ -5612,35 +5622,36 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context3.prev = 0;
                 _this3.loading = true;
-                _context3.next = 4;
-                return _this3.form.post("/api/celebrations/book");
+                _this3.form.book_id = _this3.bookId;
+                _context3.next = 5;
+                return _this3.form.post("/api/celebrations/message");
 
-              case 4:
+              case 5:
                 response = _context3.sent;
                 responseData = response.data;
 
                 if (!responseData.status) {
-                  _context3.next = 11;
+                  _context3.next = 12;
                   break;
                 }
 
                 _utils_toast__WEBPACK_IMPORTED_MODULE_4__["default"].fire({
                   icon: "success",
-                  text: "Your book was created successfully"
+                  text: "Your message was added successfully"
                 });
-                location.href = "/book/content/".concat(responseData.id);
-                _context3.next = 12;
+                location.href = "/book/books/read/".concat(_this3.bookId);
+                _context3.next = 13;
                 break;
-
-              case 11:
-                throw "error occured";
 
               case 12:
-                _context3.next = 17;
+                throw "error occured";
+
+              case 13:
+                _context3.next = 18;
                 break;
 
-              case 14:
-                _context3.prev = 14;
+              case 15:
+                _context3.prev = 15;
                 _context3.t0 = _context3["catch"](0);
 
                 _this3.$swal.fire({
@@ -5649,17 +5660,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   text: "Oops! There was an error when uploading data, Please try again."
                 });
 
-              case 17:
-                _context3.prev = 17;
+              case 18:
+                _context3.prev = 18;
                 _this3.loading = false;
-                return _context3.finish(17);
+                return _context3.finish(18);
 
-              case 20:
+              case 21:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, null, [[0, 14, 17, 20]]);
+        }, _callee3, null, [[0, 15, 18, 21]]);
       }))();
     },
     handleFile: function handleFile(event) {
@@ -5705,6 +5716,13 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -6305,6 +6323,52 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -6397,7 +6461,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         this.selectedTab = params.tab;
       }
     },
-    uploadImages: function uploadImages() {
+    toggleBookStatus: function toggleBookStatus(id) {
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
@@ -6407,40 +6471,38 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.prev = 0;
-                _this.loading = true;
-                _this.imageUploadForm.book_id = _this.book.id;
-                _context.next = 5;
-                return _this.imageUploadForm.post("/api/celebrations/bookimages");
+                _context.next = 3;
+                return axios.post("/api/celebrations/togglebookstatus/" + id);
 
-              case 5:
+              case 3:
                 response = _context.sent;
                 responseData = response.data;
 
                 if (!responseData.status) {
-                  _context.next = 13;
+                  _context.next = 11;
                   break;
                 }
 
                 _utils_toast__WEBPACK_IMPORTED_MODULE_4__["default"].fire({
                   icon: "success",
-                  text: "Your images were uploaded successfully"
+                  text: "The message was updated successfully"
                 });
 
-                _this.changeQueryParams(3);
+                _this.changeQueryParams(4);
 
                 location.reload();
-                _context.next = 14;
+                _context.next = 12;
                 break;
 
-              case 13:
+              case 11:
                 throw "error occured";
 
-              case 14:
-                _context.next = 20;
+              case 12:
+                _context.next = 18;
                 break;
 
-              case 16:
-                _context.prev = 16;
+              case 14:
+                _context.prev = 14;
                 _context.t0 = _context["catch"](0);
                 console.log(_context.t0);
 
@@ -6450,20 +6512,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   text: "Oops! There was an error when uploading data, Please try again."
                 });
 
-              case 20:
-                _context.prev = 20;
-                _this.loading = false;
-                return _context.finish(20);
-
-              case 23:
+              case 18:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 16, 20, 23]]);
+        }, _callee, null, [[0, 14]]);
       }))();
     },
-    deleteMessage: function deleteMessage(id) {
+    toggleImageStatus: function toggleImageStatus(id) {
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
@@ -6473,62 +6530,56 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.prev = 0;
-                _this2.loading = true;
-                _context2.next = 4;
-                return axios["delete"]("/api/celebrations/bookmessage/".concat(id));
+                _context2.next = 3;
+                return axios.post("/api/celebrations/togglebookimagestatus/" + id);
 
-              case 4:
+              case 3:
                 response = _context2.sent;
                 responseData = response.data;
 
                 if (!responseData.status) {
-                  _context2.next = 12;
+                  _context2.next = 11;
                   break;
                 }
 
                 _utils_toast__WEBPACK_IMPORTED_MODULE_4__["default"].fire({
                   icon: "success",
-                  text: "Your message deleted successfully"
+                  text: "The image was updated successfully"
                 });
 
-                _this2.changeQueryParams(4);
+                _this2.changeQueryParams(3);
 
                 location.reload();
-                _context2.next = 13;
+                _context2.next = 12;
                 break;
 
-              case 12:
+              case 11:
                 throw "error occured";
 
-              case 13:
-                _context2.next = 19;
+              case 12:
+                _context2.next = 18;
                 break;
 
-              case 15:
-                _context2.prev = 15;
+              case 14:
+                _context2.prev = 14;
                 _context2.t0 = _context2["catch"](0);
                 console.log(_context2.t0);
 
                 _this2.$swal.fire({
                   icon: "error",
                   title: "An error occurred",
-                  text: "Oops! There was an error when deleting data, Please try again."
+                  text: "Oops! There was an error when uploading data, Please try again."
                 });
 
-              case 19:
-                _context2.prev = 19;
-                _this2.loading = false;
-                return _context2.finish(19);
-
-              case 22:
+              case 18:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, null, [[0, 15, 19, 22]]);
+        }, _callee2, null, [[0, 14]]);
       }))();
     },
-    deleteImage: function deleteImage(id) {
+    uploadImages: function uploadImages() {
       var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
@@ -6539,15 +6590,146 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context3.prev = 0;
                 _this3.loading = true;
-                _context3.next = 4;
-                return axios["delete"]("/api/celebrations/bookimage/".concat(id));
+                _this3.imageUploadForm.book_id = _this3.book.id;
+                _context3.next = 5;
+                return _this3.imageUploadForm.post("/api/celebrations/bookimages");
 
-              case 4:
+              case 5:
                 response = _context3.sent;
                 responseData = response.data;
 
                 if (!responseData.status) {
-                  _context3.next = 12;
+                  _context3.next = 13;
+                  break;
+                }
+
+                _utils_toast__WEBPACK_IMPORTED_MODULE_4__["default"].fire({
+                  icon: "success",
+                  text: "Your images were uploaded successfully"
+                });
+
+                _this3.changeQueryParams(3);
+
+                location.reload();
+                _context3.next = 14;
+                break;
+
+              case 13:
+                throw "error occured";
+
+              case 14:
+                _context3.next = 20;
+                break;
+
+              case 16:
+                _context3.prev = 16;
+                _context3.t0 = _context3["catch"](0);
+                console.log(_context3.t0);
+
+                _this3.$swal.fire({
+                  icon: "error",
+                  title: "An error occurred",
+                  text: "Oops! There was an error when uploading data, Please try again."
+                });
+
+              case 20:
+                _context3.prev = 20;
+                _this3.loading = false;
+                return _context3.finish(20);
+
+              case 23:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, null, [[0, 16, 20, 23]]);
+      }))();
+    },
+    deleteMessage: function deleteMessage(id) {
+      var _this4 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+        var response, responseData;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.prev = 0;
+                _this4.loading = true;
+                _context4.next = 4;
+                return axios["delete"]("/api/celebrations/bookmessage/".concat(id));
+
+              case 4:
+                response = _context4.sent;
+                responseData = response.data;
+
+                if (!responseData.status) {
+                  _context4.next = 12;
+                  break;
+                }
+
+                _utils_toast__WEBPACK_IMPORTED_MODULE_4__["default"].fire({
+                  icon: "success",
+                  text: "Your message deleted successfully"
+                });
+
+                _this4.changeQueryParams(4);
+
+                location.reload();
+                _context4.next = 13;
+                break;
+
+              case 12:
+                throw "error occured";
+
+              case 13:
+                _context4.next = 19;
+                break;
+
+              case 15:
+                _context4.prev = 15;
+                _context4.t0 = _context4["catch"](0);
+                console.log(_context4.t0);
+
+                _this4.$swal.fire({
+                  icon: "error",
+                  title: "An error occurred",
+                  text: "Oops! There was an error when deleting data, Please try again."
+                });
+
+              case 19:
+                _context4.prev = 19;
+                _this4.loading = false;
+                return _context4.finish(19);
+
+              case 22:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, null, [[0, 15, 19, 22]]);
+      }))();
+    },
+    deleteImage: function deleteImage(id) {
+      var _this5 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
+        var response, responseData;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                _context5.prev = 0;
+                _this5.loading = true;
+                _context5.next = 4;
+                return axios["delete"]("/api/celebrations/bookimage/".concat(id));
+
+              case 4:
+                response = _context5.sent;
+                responseData = response.data;
+
+                if (!responseData.status) {
+                  _context5.next = 12;
                   break;
                 }
 
@@ -6556,41 +6738,41 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   text: "Your image was deleted successfully"
                 });
 
-                _this3.changeQueryParams(3);
+                _this5.changeQueryParams(3);
 
                 location.reload();
-                _context3.next = 13;
+                _context5.next = 13;
                 break;
 
               case 12:
                 throw "error occured";
 
               case 13:
-                _context3.next = 19;
+                _context5.next = 19;
                 break;
 
               case 15:
-                _context3.prev = 15;
-                _context3.t0 = _context3["catch"](0);
-                console.log(_context3.t0);
+                _context5.prev = 15;
+                _context5.t0 = _context5["catch"](0);
+                console.log(_context5.t0);
 
-                _this3.$swal.fire({
+                _this5.$swal.fire({
                   icon: "error",
                   title: "An error occurred",
                   text: "Oops! There was an error when deleting data, Please try again."
                 });
 
               case 19:
-                _context3.prev = 19;
-                _this3.loading = false;
-                return _context3.finish(19);
+                _context5.prev = 19;
+                _this5.loading = false;
+                return _context5.finish(19);
 
               case 22:
               case "end":
-                return _context3.stop();
+                return _context5.stop();
             }
           }
-        }, _callee3, null, [[0, 15, 19, 22]]);
+        }, _callee5, null, [[0, 15, 19, 22]]);
       }))();
     },
     setUpInitialBookData: function setUpInitialBookData() {
@@ -6602,46 +6784,46 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
     },
     updateBookContent: function updateBookContent() {
-      var _this4 = this;
+      var _this6 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
-        var _this4$book$content, response, responseData;
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
+        var _this6$book$content, response, responseData;
 
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
           while (1) {
-            switch (_context4.prev = _context4.next) {
+            switch (_context6.prev = _context6.next) {
               case 0:
-                _context4.prev = 0;
-                _this4.loading = true;
-                console.log(_this4.book);
-                _this4.form.book_id = (_this4$book$content = _this4.book.content) === null || _this4$book$content === void 0 ? void 0 : _this4$book$content.id;
+                _context6.prev = 0;
+                _this6.loading = true;
+                console.log(_this6.book);
+                _this6.form.book_id = (_this6$book$content = _this6.book.content) === null || _this6$book$content === void 0 ? void 0 : _this6$book$content.id;
 
-                if (!_this4.form.book_id) {
-                  _context4.next = 10;
+                if (!_this6.form.book_id) {
+                  _context6.next = 10;
                   break;
                 }
 
-                _context4.next = 7;
-                return _this4.form.post("/api/celebrations/bookcontent/update");
+                _context6.next = 7;
+                return _this6.form.post("/api/celebrations/bookcontent/update");
 
               case 7:
-                response = _context4.sent;
-                _context4.next = 14;
+                response = _context6.sent;
+                _context6.next = 14;
                 break;
 
               case 10:
-                _this4.form.book_id = _this4.book.id;
-                _context4.next = 13;
-                return _this4.form.post("/api/celebrations/bookcontent");
+                _this6.form.book_id = _this6.book.id;
+                _context6.next = 13;
+                return _this6.form.post("/api/celebrations/bookcontent");
 
               case 13:
-                response = _context4.sent;
+                response = _context6.sent;
 
               case 14:
                 responseData = response.data;
 
                 if (!responseData.status) {
-                  _context4.next = 21;
+                  _context6.next = 21;
                   break;
                 }
 
@@ -6650,41 +6832,41 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   text: "Your book was updated successfully"
                 });
 
-                _this4.changeQueryParams(2);
+                _this6.changeQueryParams(2);
 
                 location.reload();
-                _context4.next = 22;
+                _context6.next = 22;
                 break;
 
               case 21:
                 throw "error occured";
 
               case 22:
-                _context4.next = 28;
+                _context6.next = 28;
                 break;
 
               case 24:
-                _context4.prev = 24;
-                _context4.t0 = _context4["catch"](0);
-                console.log(_context4.t0);
+                _context6.prev = 24;
+                _context6.t0 = _context6["catch"](0);
+                console.log(_context6.t0);
 
-                _this4.$swal.fire({
+                _this6.$swal.fire({
                   icon: "error",
                   title: "An error occurred",
                   text: "Oops! There was an error when uploading data, Please try again."
                 });
 
               case 28:
-                _context4.prev = 28;
-                _this4.loading = false;
-                return _context4.finish(28);
+                _context6.prev = 28;
+                _this6.loading = false;
+                return _context6.finish(28);
 
               case 31:
               case "end":
-                return _context4.stop();
+                return _context6.stop();
             }
           }
-        }, _callee4, null, [[0, 24, 28, 31]]);
+        }, _callee6, null, [[0, 24, 28, 31]]);
       }))();
     }
   }
@@ -62339,6 +62521,14 @@ var render = function () {
                       ),
                       _vm._v(" "),
                       _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.relationship,
+                            expression: "form.relationship",
+                          },
+                        ],
                         staticClass: "form-control",
                         attrs: {
                           type: "text",
@@ -62346,6 +62536,19 @@ var render = function () {
                           id: "relationship",
                           "aria-describedby": "relationship",
                           placeholder: "eg. Brother",
+                        },
+                        domProps: { value: _vm.form.relationship },
+                        on: {
+                          input: function ($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.form,
+                              "relationship",
+                              $event.target.value
+                            )
+                          },
                         },
                       }),
                       _vm._v(" "),
@@ -62374,8 +62577,25 @@ var render = function () {
                       ),
                       _vm._v(" "),
                       _c("textarea", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.message,
+                            expression: "form.message",
+                          },
+                        ],
                         staticClass: "form-control",
                         attrs: { name: "message", id: "message", rows: "3" },
+                        domProps: { value: _vm.form.message },
+                        on: {
+                          input: function ($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.form, "message", $event.target.value)
+                          },
+                        },
                       }),
                     ]),
                   ]),
@@ -62385,7 +62605,10 @@ var render = function () {
                   _c("div", { staticClass: "book-create__btns" }, [
                     _c(
                       "button",
-                      { staticClass: "btn btn-block btn-lg btn__primary mt-3" },
+                      {
+                        staticClass: "btn btn-block btn-lg btn__primary mt-3",
+                        on: { click: _vm.createMessage },
+                      },
                       [
                         _vm._v(
                           "\n                    Save Message\n                   "
@@ -62522,6 +62745,19 @@ var render = function () {
                   attrs: { for: "bookMessages" },
                 },
                 [_vm._v("Book Gallery")]
+              ),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-2 text-center" }, [
+            _c("div", { staticClass: "book-content__nav my-auto" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-success",
+                  attrs: { href: "/book/books/read/" + _vm.book.id },
+                },
+                [_vm._v("Save and preview")]
               ),
             ]),
           ]),
@@ -62722,7 +62958,7 @@ var render = function () {
             ]),
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-md-3 text-center" }, [
+          _c("div", { staticClass: "col-md-2 text-center" }, [
             _c("div", { staticClass: "book-content__nav" }, [
               _c("input", {
                 directives: [
@@ -62754,7 +62990,7 @@ var render = function () {
             ]),
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-md-3 text-center" }, [
+          _c("div", { staticClass: "col-md-2 text-center" }, [
             _c("div", { staticClass: "book-content__nav" }, [
               _c("input", {
                 directives: [
@@ -62786,7 +63022,7 @@ var render = function () {
             ]),
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-md-3 text-center" }, [
+          _c("div", { staticClass: "col-md-2 text-center" }, [
             _c("div", { staticClass: "book-content__nav" }, [
               _c("input", {
                 directives: [
@@ -62814,6 +63050,19 @@ var render = function () {
                   attrs: { for: "bookMessages" },
                 },
                 [_vm._v("Book Messages")]
+              ),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-2 text-center" }, [
+            _c("div", { staticClass: "book-content__nav my-auto" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-success",
+                  attrs: { href: "/book/books/read/" + _vm.book.id },
+                },
+                [_vm._v("Save and preview")]
               ),
             ]),
           ]),
@@ -62901,52 +63150,97 @@ var render = function () {
                   }),
                   _vm._v(" "),
                   _vm._l(_vm.bookImages, function (image, imageIndex) {
-                    return _c(
-                      "div",
-                      {
-                        key: imageIndex,
-                        staticClass: "book-content__image",
-                        style: {
-                          backgroundImage: "url(" + image.image + ")",
-                          width: "300px",
-                          height: "200px",
-                        },
-                        on: {
-                          click: function ($event) {
-                            _vm.index = imageIndex
+                    return _c("div", { key: imageIndex }, [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "book-content__image",
+                          style: {
+                            backgroundImage: "url(" + image.image + ")",
+                            width: "300px",
+                            height: "200px",
                           },
-                        },
-                      },
-                      [
-                        _c(
-                          "button",
-                          {
-                            directives: [
-                              {
-                                name: "tooltip",
-                                rawName: "v-tooltip.top",
-                                value: "Delete this image",
-                                expression: "'Delete this image'",
-                                modifiers: { top: true },
-                              },
-                            ],
-                            staticClass:
-                              "btn btn-outline-danger btn-sm book-content__image--btn",
-                            on: {
-                              click: function ($event) {
-                                return _vm.deleteImage(image.id)
-                              },
+                          on: {
+                            click: function ($event) {
+                              _vm.index = imageIndex
                             },
                           },
-                          [
-                            _c("i", {
-                              staticClass: "fa fa-trash",
-                              attrs: { "aria-hidden": "true" },
-                            }),
-                          ]
-                        ),
-                      ]
-                    )
+                        },
+                        [
+                          _c(
+                            "div",
+                            { staticClass: "book-content__image--bt p-2" },
+                            [
+                              !image.published
+                                ? _c(
+                                    "button",
+                                    {
+                                      staticClass: "btn btn-sm btn__primary",
+                                      on: {
+                                        click: function ($event) {
+                                          $event.preventDefault()
+                                          $event.stopPropagation()
+                                          return _vm.toggleImageStatus(image.id)
+                                        },
+                                      },
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                            Publicize\n                        "
+                                      ),
+                                    ]
+                                  )
+                                : _c(
+                                    "button",
+                                    {
+                                      staticClass: "btn btn-sm btn-warning",
+                                      on: {
+                                        click: function ($event) {
+                                          $event.preventDefault()
+                                          $event.stopPropagation()
+                                          return _vm.toggleImageStatus(image.id)
+                                        },
+                                      },
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                            Privatize\n                        "
+                                      ),
+                                    ]
+                                  ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  directives: [
+                                    {
+                                      name: "tooltip",
+                                      rawName: "v-tooltip.top",
+                                      value: "Delete this image",
+                                      expression: "'Delete this image'",
+                                      modifiers: { top: true },
+                                    },
+                                  ],
+                                  staticClass:
+                                    "btn btn-outline-danger btn-sm book-content__image--btn",
+                                  on: {
+                                    click: function ($event) {
+                                      return _vm.deleteImage(image.id)
+                                    },
+                                  },
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "fa fa-trash",
+                                    attrs: { "aria-hidden": "true" },
+                                  }),
+                                ]
+                              ),
+                            ]
+                          ),
+                        ]
+                      ),
+                    ])
                   }),
                 ],
                 2
@@ -63000,21 +63294,60 @@ var render = function () {
                         ]),
                         _vm._v(" "),
                         _c(
-                          "button",
-                          {
-                            staticClass:
-                              "btn btn-outline-danger btn-sm book-content__message--btn",
-                            on: {
-                              click: function ($event) {
-                                return _vm.deleteMessage(message.id)
-                              },
-                            },
-                          },
+                          "div",
+                          { staticClass: "book-content__message--btn" },
                           [
-                            _c("i", {
-                              staticClass: "fa fa-trash",
-                              attrs: { "aria-hidden": "true" },
-                            }),
+                            !message.public
+                              ? _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-sm btn__primary",
+                                    on: {
+                                      click: function ($event) {
+                                        return _vm.toggleBookStatus(message.id)
+                                      },
+                                    },
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                            Publicize\n                        "
+                                    ),
+                                  ]
+                                )
+                              : _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-sm btn-warning",
+                                    on: {
+                                      click: function ($event) {
+                                        return _vm.toggleBookStatus(message.id)
+                                      },
+                                    },
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                            Privatize\n                        "
+                                    ),
+                                  ]
+                                ),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-outline-danger btn-sm",
+                                on: {
+                                  click: function ($event) {
+                                    return _vm.deleteMessage(message.id)
+                                  },
+                                },
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "fa fa-trash",
+                                  attrs: { "aria-hidden": "true" },
+                                }),
+                              ]
+                            ),
                           ]
                         ),
                       ]

@@ -31,7 +31,7 @@
                 </div>
             </div>
 
-            <div class="col-md-3 text-center">
+            <div class="col-md-2 text-center">
                 <div class="book-content__nav">
                     <input
                         v-model="selectedTab"
@@ -46,7 +46,7 @@
                 </div>
             </div>
 
-            <div class="col-md-3 text-center">
+            <div class="col-md-2 text-center">
                 <div class="book-content__nav">
                     <input
                         v-model="selectedTab"
@@ -61,7 +61,7 @@
                 </div>
             </div>
 
-            <div class="col-md-3 text-center">
+            <div class="col-md-2 text-center">
                 <div class="book-content__nav">
                     <input
                         v-model="selectedTab"
@@ -73,6 +73,12 @@
                     <label class="book-content__nav--label" for="bookMessages"
                         >Book Messages</label
                     >
+                </div>
+            </div>
+
+            <div class="col-md-2 text-center">
+                <div class="book-content__nav my-auto" style="">
+                    <a :href="`/book/books/read/${book.id}`" class="btn btn-success">Save and preview</a>
                 </div>
             </div>
         </div>
@@ -112,23 +118,45 @@
                     @close="index = null"
                 ></gallery>
                 <div
-                    class="book-content__image"
                     v-for="(image, imageIndex) in bookImages"
                     :key="imageIndex"
-                    @click="index = imageIndex"
-                    :style="{
-                        backgroundImage: 'url(' + image.image + ')',
-                        width: '300px',
-                        height: '200px',
-                    }"
                 >
-                    <button
-                        @click="deleteImage(image.id)"
-                        v-tooltip.top="'Delete this image'"
-                        class="btn btn-outline-danger btn-sm book-content__image--btn"
+                    <div
+                        class="book-content__image"
+                        @click="index = imageIndex"
+                        :style="{
+                            backgroundImage: 'url(' + image.image + ')',
+                            width: '300px',
+                            height: '200px',
+                        }"
                     >
-                        <i class="fa fa-trash" aria-hidden="true"></i>
-                    </button>
+                        <div class="book-content__image--bt p-2">
+
+                             <button
+                                v-if="!image.published"
+                                class="btn btn-sm btn__primary"
+                                @click.prevent.stop="toggleImageStatus(image.id)"
+                            >
+                                Publicize
+                            </button>
+
+                            <button
+                                v-else
+                                class="btn btn-sm btn-warning"
+                                @click.prevent.stop="toggleImageStatus(image.id)"
+                            >
+                                Privatize
+                            </button>
+
+                            <button
+                                @click="deleteImage(image.id)"
+                                v-tooltip.top="'Delete this image'"
+                                class="btn btn-outline-danger btn-sm book-content__image--btn"
+                            >
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -155,12 +183,30 @@
                                 }}</cite>
                             </figcaption>
                         </figure>
-                        <button
-                            @click="deleteMessage(message.id)"
-                            class="btn btn-outline-danger btn-sm book-content__message--btn"
-                        >
-                            <i class="fa fa-trash" aria-hidden="true"></i>
-                        </button>
+                        <div class="book-content__message--btn">
+                            <button
+                                v-if="!message.public"
+                                class="btn btn-sm btn__primary"
+                                @click="toggleBookStatus(message.id)"
+                            >
+                                Publicize
+                            </button>
+
+                            <button
+                                v-else
+                                class="btn btn-sm btn-warning"
+                                @click="toggleBookStatus(message.id)"
+                            >
+                                Privatize
+                            </button>
+
+                            <button
+                                @click="deleteMessage(message.id)"
+                                class="btn btn-outline-danger btn-sm"
+                            >
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -269,6 +315,58 @@ export default {
             }
         },
 
+        async toggleBookStatus(id) {
+            try {
+                const response = await axios.post(
+                    "/api/celebrations/togglebookstatus/" + id
+                );
+                const responseData = response.data;
+                if (responseData.status) {
+                    Toast.fire({
+                        icon: "success",
+                        text: "The message was updated successfully",
+                    });
+                    this.changeQueryParams(4);
+                    location.reload();
+                } else {
+                    throw "error occured";
+                }
+            } catch (error) {
+                console.log(error);
+                this.$swal.fire({
+                    icon: "error",
+                    title: "An error occurred",
+                    text: "Oops! There was an error when uploading data, Please try again.",
+                });
+            }
+        },
+
+         async toggleImageStatus(id) {
+            try {
+                const response = await axios.post(
+                    "/api/celebrations/togglebookimagestatus/" + id
+                );
+                const responseData = response.data;
+                if (responseData.status) {
+                    Toast.fire({
+                        icon: "success",
+                        text: "The image was updated successfully",
+                    });
+                    this.changeQueryParams(3);
+                    location.reload();
+                } else {
+                    throw "error occured";
+                }
+            } catch (error) {
+                console.log(error);
+                this.$swal.fire({
+                    icon: "error",
+                    title: "An error occurred",
+                    text: "Oops! There was an error when uploading data, Please try again.",
+                });
+            }
+        },
+
         async uploadImages() {
             try {
                 this.loading = true;
@@ -370,13 +468,13 @@ export default {
                 this.loading = true;
                 console.log(this.book);
                 this.form.book_id = this.book.content?.id;
-                let response
+                let response;
                 if (this.form.book_id) {
                     response = await this.form.post(
                         "/api/celebrations/bookcontent/update"
                     );
                 } else {
-                    this.form.book_id = this.book.id
+                    this.form.book_id = this.book.id;
                     response = await this.form.post(
                         "/api/celebrations/bookcontent"
                     );
@@ -388,8 +486,8 @@ export default {
                         icon: "success",
                         text: "Your book was updated successfully",
                     });
-                    this.changeQueryParams(2)
-                    location.reload()
+                    this.changeQueryParams(2);
+                    location.reload();
                 } else {
                     throw "error occured";
                 }

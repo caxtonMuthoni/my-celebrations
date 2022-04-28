@@ -15,7 +15,11 @@ class TemplateController extends Controller
      */
     public function index()
     {
-        return Template::with('image')->latest()->get();
+        return Template::with('image')->where('template_type', 'book')->latest()->get();
+    }
+
+    public function messages() {
+        return Template::with('image')->where('template_type', 'message')->latest()->get();
     }
 
     /**

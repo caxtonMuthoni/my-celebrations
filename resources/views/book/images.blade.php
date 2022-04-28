@@ -1,7 +1,8 @@
 @extends('layouts.app')
 @section('content')
 <div class="book-message container">
-    <form>
+    <form action="{{route('friend-upload-image')}}" method="POST" enctype="multipart/form-data">
+        @csrf
         <div class="row justify-content-center book-create__row">
             <div class="col-md-11 book-create__co">
                 <div class="book-create__col--content">
@@ -19,7 +20,9 @@
                         <label for="image" class="form-label">Add an image to the book gallery.</label>
                         <input type="file" class="form-control" name="image" id="image" aria-describedby="relationship" placeholder="eg. Brother">
                     </div>
+                    <input hidden type="text" name="book_id" value="{{$id}}">
                 </div>
+
             </div>
 
             <div class="col-md-8">

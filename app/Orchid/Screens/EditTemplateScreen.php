@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Relation;
+use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Fields\TextArea;
 use Orchid\Screen\Fields\Upload;
 use Orchid\Screen\Screen;
@@ -86,7 +87,12 @@ class EditTemplateScreen extends Screen
                     Input::make('template.name')->type('text')->title('Template name')->help('What is the template\'s title? '),
                     TextArea::make('template.description')->type('text')
                         ->title('Template description')->help('Tell us more about the template? ')
-                        ->rows(8),
+                        ->rows(4),
+                    Select::make('template.template_type')->options([
+                        'message' => 'message',
+                        'book' => 'book'
+                    ])->title('Select the template type.')
+                        ->help('What does the template support, books or messages'),
                     Relation::make('template.category_id')
                         ->fromModel(Category::class, 'name')
                         ->title('Template book category')
@@ -113,18 +119,19 @@ class EditTemplateScreen extends Screen
                 $template->cover_image = $templateData['cover_image'][0];
                 $template->name = $templateData['name'];
                 $template->description = $templateData['description'];
+                $template->template_type = $templateData['template_type'];
                 $template->category_id = $category->id;
                 if ($template->save()) {
                     $template = $template->refresh();
-                    $zipPhysicalPath = 'app/public/' . $template->template_file->physicalPath();                    
+                    $zipPhysicalPath = 'app/public/' . $template->template_file->physicalPath();
                     $zipPath = storage_path($zipPhysicalPath);
                     $zip = new ZipArchive;
                     $time = time();
-                    $path = 'templates/book/'. $time;
+                    $path = 'templates/book/' . $time;
                     if ($zip->open($zipPath)) {
-                        $uploaded = $zip->extractTo('templates/book/'. $time);
-                        if($uploaded) {
-                            $url = env('APP_URL') .'/' . $path . "/dist/index.html";
+                        $uploaded = $zip->extractTo('templates/book/' . $time);
+                        if ($uploaded) {
+                            $url = env('APP_URL') . '/' . $path . "/dist/index.html";
                             $template->template_url = $url;
                             $template->save();
                         }

@@ -93,7 +93,7 @@
                 <div class="card p-2 px-5 text-start">
                     <div class="mb-3">
                       <label for="relationship" class="form-label">What is your relationship with the book owner?</label>
-                      <input type="text"
+                      <input v-model="form.relationship" type="text"
                         class="form-control" name="relationship" id="relationship" aria-describedby="relationship" placeholder="eg. Brother">
                       <small id="relationship" class="form-text text-muted">Examples friend, brother, mother, teacher etc.</small>
                     </div>
@@ -102,6 +102,7 @@
                             >Enter the massage</label
                         >
                         <textarea
+                           v-model="form.message"
                             class="form-control"
                             name="message"
                             id="message"
@@ -115,6 +116,7 @@
                 <div class="book-create__btns">
                     <button
                         class="btn btn-block btn-lg btn__primary mt-3"
+                        @click="createMessage"
                     >
                         Save Message
                        <i class="fa fa-save ms-2" aria-hidden="true"></i>
@@ -133,12 +135,21 @@ import Toast from "../utils/toast";
 
 export default {
     components: { SearchComponent, LoaderComponent },
+    props: {
+        bookId: {
+            type: Number,
+            required: true
+        }
+    },
+
     data: () => ({
-        step: 2,
+        step: 1,
         templates: [],
         form: new Form({
             message: null,
             template: null,
+            relationship: null,
+            book_id: null,
         }),
         loading: false,
     }),
@@ -156,24 +167,25 @@ export default {
     methods: {
         async fetchTemplates() {
             try {
-                const response = await axios.get("/api/celebrations/templates");
+                const response = await axios.get("/api/celebrations/templates/messages");
                 this.templates = response.data;
             } catch (e) {
                 throw e;
             }
         },
 
-        async createBook() {
+        async createMessage() {
             try {
                 this.loading = true;
-                const response = await this.form.post("/api/celebrations/book");
+                this.form.book_id = this.bookId
+                const response = await this.form.post("/api/celebrations/message");
                 const responseData = response.data;
                 if (responseData.status) {
                     Toast.fire({
                         icon: "success",
-                        text: "Your book was created successfully",
+                        text: "Your message was added successfully",
                     });
-                    location.href = `/book/content/${responseData.id}`;
+                    location.href = `/book/books/read/${this.bookId}`;
                 } else {
                     throw "error occured";
                 }
