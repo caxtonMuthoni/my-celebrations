@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,5 +29,24 @@ class HomeController extends Controller
         ];
 
         return view('home', compact('data'));
+    }
+
+    // Home
+
+    public function home() {
+        $books = Book::with('user')->where('public', true)->latest()->take(4)->get();
+        return view('home.welcome', compact('books'));
+    }
+
+    public function aboutUs() {
+        return view('home.about');
+    }
+
+    public function faqs() {
+        return view('home.faqs');
+    }
+
+    public function pricing() {
+        return view('home.pricing');
     }
 }

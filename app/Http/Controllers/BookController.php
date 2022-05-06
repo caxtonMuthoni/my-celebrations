@@ -100,15 +100,18 @@ class BookController extends Controller
 
     public function readBookContentApi($id)
     {
-        $book = Book::with(['content', 'bookImages' => function($query) {
+        $book = Book::with(['content', 'bookMessages.user', 'bookMessages'  => function ($query) {
+            $query->where('public', true);
+        },  'bookImages' => function ($query) {
             $query->where('published', true);
         }])->find($id);
         return $book;
     }
 
-    public function publishBook($id) {
+    public function publishBook($id)
+    {
         $book = Book::where([['user_id', Auth::id()], ['id', $id]])->first();
-        if(isset($book)) {
+        if (isset($book)) {
             $book->published = !$book->published;
             $book->save();
 
@@ -116,7 +119,6 @@ class BookController extends Controller
         }
 
         return redirect()->back()->with('error', 'The book could not be published published, try again later');
-
     }
 
     public function bookMessage($id)

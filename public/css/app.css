@@ -11311,7 +11311,7 @@ textarea.form-control-lg {
 }
 
 .text__primary {
-  color: #8E59CF !important;
+  color: #258EC9 !important;
 }
 .text__dark {
   color: #303030 !important;
@@ -11329,12 +11329,12 @@ textarea.form-control-lg {
 }
 
 .btn__primary {
-  background-color: #8E59CF;
+  background-color: #258EC9;
   color: #f7f7f7;
   transition: all 0.5s;
 }
 .btn__primary:hover {
-  background-color: #8145c9;
+  background-color: #217fb3;
   color: #fff;
 }
 
@@ -11383,7 +11383,7 @@ textarea.form-control-lg {
 }
 .stats-card__icon {
   font-size: 30px;
-  color: #9b6dd5;
+  color: #2f9cd9;
   margin-bottom: 15px;
 }
 .stats-card__value {
@@ -11413,7 +11413,7 @@ textarea.form-control-lg {
   position: absolute;
   top: 10px;
   left: 10px;
-  background-color: #8E59CF;
+  background-color: #258EC9;
   color: #fff;
   font-size: 10px;
   padding: 2px 4px;
@@ -11467,9 +11467,14 @@ body {
 }
 .celebration__navbar--logo {
   color: #303030;
+  height: 70px;
+}
+.celebration__navbar--logo--img {
+  display: block;
+  height: 100%;
 }
 .celebration__navbar--logo-color {
-  color: #8E59CF;
+  color: #258EC9;
 }
 .celebration__navbar--contents {
   height: 100%;
@@ -11522,8 +11527,8 @@ body {
   display: none;
 }
 .book-content__nav--input:checked ~ .book-content__nav--label {
-  border: 2px solid #8E59CF;
-  color: #8E59CF;
+  border: 2px solid #258EC9;
+  color: #258EC9;
   font-weight: bold;
 }
 .book-content__nav--label {
@@ -11614,8 +11619,8 @@ body {
   height: 40px;
   width: 40px;
   background-color: #f8fafc;
-  color: #8E59CF;
-  border: 1px solid #8E59CF;
+  color: #258EC9;
+  border: 1px solid #258EC9;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -11686,7 +11691,7 @@ body {
 }
 .book-create__template--input:checked ~ .book-create__template--lable {
   background-color: #eaeefa;
-  border: 2px solid #8E59CF;
+  border: 2px solid #258EC9;
 }
 .book-create__category {
   display: flex;
@@ -11721,14 +11726,14 @@ body {
   background-color: rgba(0, 0, 0, 0.85);
 }
 .book-create__category--input:checked ~ .book-create__category--lable {
-  border: 2px solid #8E59CF;
+  border: 2px solid #258EC9;
 }
 .book-create__category--input:checked ~ .book-create__category--lable .book-create__category--text {
   background-color: rgba(247, 247, 247, 0.95);
-  color: #8E59CF !important;
+  color: #258EC9 !important;
 }
 .book-create__category--input:checked ~ .book-create__category--lable .book-create__category--text .book-create__category--text--inner {
-  color: #8E59CF !important;
+  color: #258EC9 !important;
 }
 .book-create__category--text {
   color: transparent;
@@ -11863,7 +11868,7 @@ body {
 }
 .billing-payment__card:hover {
   transform: scale(1.01);
-  border: 1px solid #8E59CF !important;
+  border: 1px solid #258EC9 !important;
 }
 .billing-payment__img {
   width: 100%;
@@ -11891,7 +11896,7 @@ body {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background-color: #8E59CF;
+  background-color: #258EC9;
   color: #fff;
   font-size: 30px;
   display: flex;

@@ -3,6 +3,7 @@
 use App\Http\Controllers\BillingController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\BookImageController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SocialiteCOntroller;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
@@ -22,9 +23,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'home']);
+Route::get('/about-us', [HomeController::class, 'aboutUs'])->name('about-us');
+Route::get('/pricing', [HomeController::class, 'pricing'])->name('pricing');
+Route::get('/faqs', [HomeController::class, 'faqs'])->name('faqs');
 
 Auth::routes();
 

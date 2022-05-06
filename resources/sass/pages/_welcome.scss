@@ -19,6 +19,11 @@ body {
 
         &--logo {
             color: $color-dark;
+            height: 70px;
+            &--img {
+                display: block;
+                height: 100%;
+            }
             &-color {
                 color: $color-primary;
             }

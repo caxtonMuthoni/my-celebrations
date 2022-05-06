@@ -28,8 +28,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white">
             <div class="container">
                 <a href="/" class="celebration__navbar--logo heading heading--5 navbar-brand special__header">
-                    <i class="fa fa-book me-1" aria-hidden="true"></i>
-                    My<span class="celebration__navbar--logo-color">Celebration</span>Books
+                    <img class="celebration__navbar--logo--img" src="{{asset('images/branding/logo.jpeg')}}" alt="">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
