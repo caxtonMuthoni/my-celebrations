@@ -74,8 +74,8 @@
             <div class="col-md-3 col-sm-6">
                 <!-- WORK THUMB -->
                 <div class="work-thumb">
-                    <a href="{{asset('images/team/john.jpg')}}" class="image-popup">
-                        <img src="{{asset('images/team/john.jpg')}}" class="img-responsive" alt="Work">
+                    <a href="{{asset('images/team/John.jpg')}}" class="image-popup">
+                        <img src="{{asset('images/team/John.jpg')}}" class="img-responsive" alt="Work">
 
                         <div class="work-info">
                             <h3>John Doe</h3>
@@ -117,8 +117,8 @@
             <div class="col-md-3 col-sm-6">
                 <!-- WORK THUMB -->
                 <div class="work-thumb">
-                    <a href="{{asset('images/team/jane.jpg')}}" class="image-popup">
-                        <img src="{{asset('images/team/jane.jpg')}}" class="img-responsive" alt="Work">
+                    <a href="{{asset('images/team/Jane.jpg')}}" class="image-popup">
+                        <img src="{{asset('images/team/Jane.jpg')}}" class="img-responsive" alt="Work">
 
                         <div class="work-info">
                             <h3>Jane Doe</h3>
