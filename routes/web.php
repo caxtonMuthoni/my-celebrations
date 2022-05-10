@@ -5,6 +5,8 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\BookImageController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SocialiteCOntroller;
+use App\Payment\MpesaSubscription;
+use App\Payment\PaypalSubscription;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -42,7 +44,7 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
 
 Route::post('/email/verification-notification', function (Request $request) {
     $request->user()->sendEmailVerificationNotification();
- 
+
     return back()->with('resent', 'Verification link sent!');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.resend');
 
@@ -56,24 +58,29 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::group([
     'middleware' => ['auth', 'verified'],
     'prefix' => 'book'
-], function() {
-      Route::get('create', [BookController::class, 'create'])->name('book-create');
-      Route::get('content/{id}', [BookController::class, 'bookContent'])->name('book-content');
-      Route::get('mybooks', [BookController::class, 'myBooks'])->name('my-books');
-      Route::get('book/{book}', [BookController::class, 'show'])->name('book-show');
-      Route::get('books/public', [BookController::class, 'publicBooks'])->name('book-public-show');
-      Route::get('books/read/{id}', [BookController::class, 'readBook'])->name('book-read');
-      Route::get('books/message/{id}', [BookController::class, 'bookMessage'])->name('book-message');
-      Route::get('books/images/{id}', [BookController::class, 'bookImages'])->name('book-images');
-      Route::post('/upload/bookimage', [BookImageController::class, 'friendImageUpload'])->name('friend-upload-image');
-      Route::get('publish/book/{id}', [BookController::class, 'publishBook'])->name('publish-book');
+], function () {
+    Route::get('create', [BookController::class, 'create'])->name('book-create');
+    Route::get('content/{id}', [BookController::class, 'bookContent'])->name('book-content');
+    Route::get('mybooks', [BookController::class, 'myBooks'])->name('my-books');
+    Route::get('book/{book}', [BookController::class, 'show'])->name('book-show');
+    Route::get('books/public', [BookController::class, 'publicBooks'])->name('book-public-show');
+    Route::get('books/read/{id}', [BookController::class, 'readBook'])->name('book-read');
+    Route::get('books/message/{id}', [BookController::class, 'bookMessage'])->name('book-message');
+    Route::get('books/images/{id}', [BookController::class, 'bookImages'])->name('book-images');
+    Route::post('/upload/bookimage', [BookImageController::class, 'friendImageUpload'])->name('friend-upload-image');
+    Route::get('publish/book/{id}', [BookController::class, 'publishBook'])->name('publish-book');
 });
 
 
 Route::group([
     'middleware' => ['auth', 'verified'],
     'prefix' => 'billing'
-], function() {
-      Route::get('plans', [BillingController::class, 'plans'])->name('billing-plans');
-      Route::get('payments/{id}', [BillingController::class, 'payments'])->name('billing-payments');
+], function () {
+    Route::get('plans', [BillingController::class, 'plans'])->name('billing-plans');
+    Route::get('payments/{id}', [BillingController::class, 'payments'])->name('billing-payments');
+    Route::get('mpesa/{id}', [BillingController::class, 'mpesaView'])->name('billing-mpesa');
+    Route::get('pin/mpesa/{id}', [BillingController::class, 'mpesaPopUp'])->name('billing-mpesapopup');
+    Route::get('confirm/mpesa/{id}', [BillingController::class, 'mpesaConfirmTransaction'])->name('billing-mpesa-confirm');
+    Route::post('mpesa/stkpush', [BillingController::class, 'payWithMpesa'])->name('billing-with-mpesa');
 });
+

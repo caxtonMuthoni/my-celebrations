@@ -6,10 +6,10 @@
             <h4 class="heading">Select your payment method</h4>
         </div>
         <div class="col-md-4">
-            <div class="card billing-payment__card p-5 shadow-sm">
+            <a href="{{route('billing-mpesa', $id)}}" class="card billing-payment__card p-5 shadow-sm">
                 <img src="{{asset('images/payments/mpesa.png')}}" alt="" class="billing-payment__img">
                 <div class="billing-payment__type">MPESA</div>
-            </div>
+            </a>
         </div>
 
         <div class="col-md-4">

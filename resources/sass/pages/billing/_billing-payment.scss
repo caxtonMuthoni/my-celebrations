@@ -5,6 +5,8 @@
         cursor: pointer;
         justify-content: center;
         transition: all .5s;
+        text-decoration: none;
+        color: $color-dark;
 
         &:hover {
             transform: scale(1.01);

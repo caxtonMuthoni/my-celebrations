@@ -178,7 +178,8 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         Mailjet\LaravelMailjet\MailjetServiceProvider::class,
-
+        \Safaricom\Mpesa\MpesaServiceProvider::class,
+        Srmklive\PayPal\Providers\PayPalServiceProvider::class,
     ],
 
     /*
@@ -194,6 +195,8 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         'Mailjet' => Mailjet\LaravelMailjet\Facades\Mailjet::class,
+        'Mpesa'=> \Safaricom\Mpesa\MpesaServiceProvider::class,
+        'PayPal' => Srmklive\PayPal\Facades\PayPal::class,
     ])->toArray(),
 
 ];

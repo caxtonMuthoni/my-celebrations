@@ -6,6 +6,7 @@ use App\Http\Controllers\BookImageController;
 use App\Http\Controllers\BookMessageController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TemplateController;
+use App\Payment\MpesaSubscription;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -44,3 +45,10 @@ Route::group([
 
 
 Route::get('books/{id}', [BookController::class, 'readBookContentApi']);
+
+// callbacks
+Route::group([
+    'prefix' => 'billing'
+], function () {
+    Route::post('/callback/mpesa', [MpesaSubscription::class, 'callback'])->name('billing-mpesa-callback');
+});

@@ -97,6 +97,20 @@
             </div>
         </nav>
 
+        <div class="container">
+            <div class="row justify-content-center my-2">
+                <div class="col-md-6">
+                    @if(session('success'))
+                    <div class="alert alert-success">{{session('success')}}</div>
+                    @endif
+
+                    @if(session('error'))
+                    <div class="alert alert-danger">{{session('error')}}</div>
+                    @endif
+                </div>
+            </div>
+        </div>
+
         <main class="py-4">
             @yield('content')
         </main>
