@@ -70,7 +70,7 @@ class BillingController extends Controller
 
     public function mpesaConfirmTransaction($id)
     {
-        $trascationComplete = Transaction::where('MerchantRequestID', $id)->value('is-complete');
+        $trascationComplete = Transaction::where('MerchantRequestID', $id)->value('is_complete');
         if ($trascationComplete) {
             return redirect()->route('home')->with('success', 'The trasaction was completed successfully.');
         }
