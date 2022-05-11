@@ -59,7 +59,13 @@ Route::group([
     'middleware' => ['auth', 'verified'],
     'prefix' => 'book'
 ], function () {
-    Route::get('create', [BookController::class, 'create'])->name('book-create');
+
+    Route::group([
+        'middleware' => ['subscriber']
+    ], function() {
+        Route::get('create', [BookController::class, 'create'])->name('book-create');
+    });
+
     Route::get('content/{id}', [BookController::class, 'bookContent'])->name('book-content');
     Route::get('mybooks', [BookController::class, 'myBooks'])->name('my-books');
     Route::get('book/{book}', [BookController::class, 'show'])->name('book-show');
@@ -82,5 +88,7 @@ Route::group([
     Route::get('pin/mpesa/{id}', [BillingController::class, 'mpesaPopUp'])->name('billing-mpesapopup');
     Route::get('confirm/mpesa/{id}', [BillingController::class, 'mpesaConfirmTransaction'])->name('billing-mpesa-confirm');
     Route::post('mpesa/stkpush', [BillingController::class, 'payWithMpesa'])->name('billing-with-mpesa');
-});
 
+    Route::get('paypal/view/{id}', [BillingController::class, 'paypalView'])->name('billing-paypal-view');
+
+});

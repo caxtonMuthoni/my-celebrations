@@ -7,6 +7,7 @@ use App\Http\Controllers\BookMessageController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TemplateController;
 use App\Payment\MpesaSubscription;
+use App\Payment\PaypalSubscription;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -28,14 +29,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group([
     'prefix' => 'celebrations',
     'middleware' => 'auth:api'
-], function() {
+], function () {
     Route::get('categories', [CategoryController::class, 'index']);
     Route::get('templates', [TemplateController::class, 'index']);
     Route::get('templates/messages', [TemplateController::class, 'messages']);
     Route::post('book', [BookController::class, 'store']);
     Route::post('bookcontent', [BookContentController::class, 'store']);
     Route::post('bookcontent/update', [BookContentController::class, 'update']);
-    Route::post('bookimages', [BookImageController::class ,'store']);
+    Route::post('bookimages', [BookImageController::class, 'store']);
     Route::delete('bookimage/{id}', [BookImageController::class, 'destroy']);
     Route::delete('bookmessage/{id}', [BookMessageController::class, 'destroy']);
     Route::post('message', [BookMessageController::class, 'store']);
@@ -46,9 +47,17 @@ Route::group([
 
 Route::get('books/{id}', [BookController::class, 'readBookContentApi']);
 
+Route::group([
+    'prefix' => 'billing',
+    'middleware' => 'auth:api',
+], function () {
+    Route::post('/add/subscription', [PaypalSubscription::class, 'addPayPalSubscription']);
+});
+
 // callbacks
 Route::group([
     'prefix' => 'billing'
 ], function () {
     Route::post('/callback/mpesa', [MpesaSubscription::class, 'callback'])->name('billing-mpesa-callback');
 });
+

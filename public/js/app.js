@@ -6895,6 +6895,173 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/PaypalComponent.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/PaypalComponent.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _utils_toast__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/toast */ "./resources/js/utils/toast.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+// import image from "../assets/lamp.png"
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "Paypal",
+  props: {
+    plan: {
+      type: Object,
+      required: true
+    }
+  },
+  data: function data() {
+    return {
+      loaded: false,
+      paidFor: false,
+      product: {
+        price: 0,
+        description: "",
+        name: ""
+      }
+    };
+  },
+  mounted: function mounted() {
+    this.product.price = this.plan.cost;
+    this.product.description = this.plan.description;
+    this.product.name = this.plan.name;
+    var script = document.createElement("script");
+    script.src = "https://www.paypal.com/sdk/js?client-id=AYn-c3yy63pYMKIQScM4wQs9Rhb1xX6xlabGCrorVRrgF1hIjDBXjs1BsPI2PFOVVl26_k2Xu37zqBPa";
+    script.addEventListener("load", this.setLoaded);
+    document.body.appendChild(script);
+  },
+  methods: {
+    setLoaded: function setLoaded() {
+      var _this = this;
+
+      this.loaded = true;
+      window.paypal.Buttons({
+        createOrder: function createOrder(data, actions) {
+          return actions.order.create({
+            purchase_units: [{
+              description: _this.product.description,
+              amount: {
+                currency_code: "USD",
+                value: _this.product.price
+              }
+            }],
+            application_context: {
+              shipping_preference: "NO_SHIPPING"
+            }
+          });
+        },
+        onApprove: function () {
+          var _onApprove = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(data, actions) {
+            var order;
+            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+              while (1) {
+                switch (_context.prev = _context.next) {
+                  case 0:
+                    _context.next = 2;
+                    return actions.order.capture();
+
+                  case 2:
+                    order = _context.sent;
+                    _this.paidFor = true;
+                    console.log(order, data);
+                    _context.next = 7;
+                    return _this.addSubscription(order.id, order.status);
+
+                  case 7:
+                  case "end":
+                    return _context.stop();
+                }
+              }
+            }, _callee);
+          }));
+
+          function onApprove(_x, _x2) {
+            return _onApprove.apply(this, arguments);
+          }
+
+          return onApprove;
+        }(),
+        onError: function onError(err) {
+          console.log(err);
+        }
+      }).render(this.$refs.paypal);
+    },
+    addSubscription: function addSubscription(orderId, status) {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var data, response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                data = {
+                  order_id: orderId,
+                  plan_id: _this2.plan.id,
+                  status: status
+                };
+                _context2.next = 4;
+                return axios.post("/api/billing/add/subscription", data);
+
+              case 4:
+                response = _context2.sent;
+
+                if (response.data.status) {
+                  _utils_toast__WEBPACK_IMPORTED_MODULE_1__["default"].fire({
+                    icon: "success",
+                    text: "Subscription added successfully"
+                  });
+                  location.href = "/home";
+                } else {
+                  _utils_toast__WEBPACK_IMPORTED_MODULE_1__["default"].fire({
+                    icon: "error",
+                    text: "Opps!, an error occurred please try again"
+                  });
+                }
+
+                _context2.next = 11;
+                break;
+
+              case 8:
+                _context2.prev = 8;
+                _context2.t0 = _context2["catch"](0);
+                console.log(_context2.t0);
+
+              case 11:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[0, 8]]);
+      }))();
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/SearchComponent.vue?vue&type=script&lang=js&":
 /*!**********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/SearchComponent.vue?vue&type=script&lang=js& ***!
@@ -7469,6 +7636,7 @@ Vue.component('steps-component', (__webpack_require__(/*! ./components/StepsComp
 Vue.component('book-content-component', (__webpack_require__(/*! ./components/BookContentComponent.vue */ "./resources/js/components/BookContentComponent.vue")["default"]));
 Vue.component('edit-book-content-component', (__webpack_require__(/*! ./components/EditBookContentComponent.vue */ "./resources/js/components/EditBookContentComponent.vue")["default"]));
 Vue.component('add-book-message-component', (__webpack_require__(/*! ./components/AddBookMessageComponent.vue */ "./resources/js/components/AddBookMessageComponent.vue")["default"]));
+Vue.component('paypal-component', (__webpack_require__(/*! ./components/PaypalComponent.vue */ "./resources/js/components/PaypalComponent.vue")["default"]));
 Vue.component(vform_src_components_bootstrap5__WEBPACK_IMPORTED_MODULE_4__.HasError.name, vform_src_components_bootstrap5__WEBPACK_IMPORTED_MODULE_4__.HasError);
 Vue.use(vue_loaders__WEBPACK_IMPORTED_MODULE_1__["default"]);
 Vue.use((vue_sweetalert2__WEBPACK_IMPORTED_MODULE_2___default()));
@@ -61232,6 +61400,45 @@ component.options.__file = "resources/js/components/LoaderComponent.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/PaypalComponent.vue":
+/*!*****************************************************!*\
+  !*** ./resources/js/components/PaypalComponent.vue ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _PaypalComponent_vue_vue_type_template_id_3f2b52a2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PaypalComponent.vue?vue&type=template&id=3f2b52a2& */ "./resources/js/components/PaypalComponent.vue?vue&type=template&id=3f2b52a2&");
+/* harmony import */ var _PaypalComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PaypalComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/PaypalComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _PaypalComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _PaypalComponent_vue_vue_type_template_id_3f2b52a2___WEBPACK_IMPORTED_MODULE_0__.render,
+  _PaypalComponent_vue_vue_type_template_id_3f2b52a2___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/PaypalComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/SearchComponent.vue":
 /*!*****************************************************!*\
   !*** ./resources/js/components/SearchComponent.vue ***!
@@ -61371,6 +61578,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LoaderComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./LoaderComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/LoaderComponent.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LoaderComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/PaypalComponent.vue?vue&type=script&lang=js&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/PaypalComponent.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PaypalComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./PaypalComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/PaypalComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PaypalComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -61694,6 +61917,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LoaderComponent_vue_vue_type_template_id_0ccf4ce2_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LoaderComponent_vue_vue_type_template_id_0ccf4ce2_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./LoaderComponent.vue?vue&type=template&id=0ccf4ce2&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/LoaderComponent.vue?vue&type=template&id=0ccf4ce2&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/PaypalComponent.vue?vue&type=template&id=3f2b52a2&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/PaypalComponent.vue?vue&type=template&id=3f2b52a2& ***!
+  \************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PaypalComponent_vue_vue_type_template_id_3f2b52a2___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PaypalComponent_vue_vue_type_template_id_3f2b52a2___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PaypalComponent_vue_vue_type_template_id_3f2b52a2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./PaypalComponent.vue?vue&type=template&id=3f2b52a2& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/PaypalComponent.vue?vue&type=template&id=3f2b52a2&");
 
 
 /***/ }),
@@ -63393,6 +63633,31 @@ var render = function () {
     ],
     1
   )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/PaypalComponent.vue?vue&type=template&id=3f2b52a2&":
+/*!***************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/PaypalComponent.vue?vue&type=template&id=3f2b52a2& ***!
+  \***************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [_c("div", { ref: "paypal" })])
 }
 var staticRenderFns = []
 render._withStripped = true

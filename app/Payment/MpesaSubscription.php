@@ -18,10 +18,10 @@ class MpesaSubscription
         $PartyA = $phonenumber;
         $PartyB = '174379';
         $PhoneNumber = $phonenumber;
-        $CallBackURL = route('billing-mpesa-callback');
-        $AccountReference = '87688864';
-        $TransactionDesc = 'Testing';
-        $Remarks = 'Testing again';
+        $CallBackURL = 'http://mycelebrationbooks.com/api/billing/callback/mpesa';
+        $AccountReference = 'MyCelebrationBooks.com';
+        $TransactionDesc = 'Subscription';
+        $Remarks = 'Plan Subscription';
         $stkPushSimulation = $mpesa->STKPushSimulation(
             $BusinessShortCode,
             $LipaNaMpesaPasskey,

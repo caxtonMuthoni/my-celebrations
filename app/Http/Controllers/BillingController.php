@@ -77,6 +77,12 @@ class BillingController extends Controller
 
         return redirect()->back()->with('error', 'The transaction is yet to be completed, please wait for a few minutes.');
     }
-}
 
-// { "MerchantRequestID":"98422-37744695-1", "CheckoutRequestID":"ws_CO_10052022120347811743751575", "ResponseCode": "0", "ResponseDescription":"Success. Request accepted for processing", "CustomerMessage":"Success. Request accepted for processing" }
+
+    // paypal
+
+    public function paypalView($id) {
+        $plan = SubscriptionPlan::find($id);
+        return view('billing.paypal', compact('plan'));
+    }
+}

@@ -16,6 +16,7 @@ Vue.component('steps-component', require('./components/StepsComponent.vue').defa
 Vue.component('book-content-component', require('./components/BookContentComponent.vue').default);
 Vue.component('edit-book-content-component', require('./components/EditBookContentComponent.vue').default);
 Vue.component('add-book-message-component', require('./components/AddBookMessageComponent.vue').default);
+Vue.component('paypal-component', require('./components/PaypalComponent.vue').default);
 
 
 Vue.component(HasError.name, HasError);

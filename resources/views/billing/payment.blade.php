@@ -12,18 +12,18 @@
             </a>
         </div>
 
-        <div class="col-md-4">
+        <!-- <div class="col-md-4">
             <div class="card billing-payment__card p-5 shadow-sm">
                 <img src="{{asset('images/payments/visa.png')}}" alt="" class="billing-payment__img">
                 <div class="billing-payment__type">VISA & MASTER CARD</div>
             </div>
-        </div>
+        </div> -->
 
         <div class="col-md-4">
-            <div class="card billing-payment__card p-5 shadow-sm">
+            <a href="{{route('billing-paypal-view', $id)}}" class="card billing-payment__card p-5 shadow-sm">
                 <img src="{{asset('images/payments/paypal.png')}}" alt="" class="billing-payment__img">
-                <div class="billing-payment__type">PAYPAL</div>
-            </div>
+                <div class="billing-payment__type">PAYPAL & CARDS</div>
+            </a>
         </div>
     </div>
 </div>
