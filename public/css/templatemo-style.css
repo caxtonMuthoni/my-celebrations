@@ -1088,3 +1088,65 @@ http://www.templatemo.com/tm-509-hydro
   .border-tab:hover {
     border-color: #0575E6 !important;
   }
+
+  .billing-plan__card {
+    display: flex;
+    width: 100%;
+    background-color: #fff;
+    flex-direction: column;
+    border-radius: 5px;
+    border: 1px solid #dfdfdf;
+}
+
+
+  .billing-plan__header {
+    display: flex;
+    padding: 20px;
+    justify-content: space-around;
+}
+
+
+.billing-plan__content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-top: 1px solid #e9e9e9;
+}
+
+.billing-plan__header--icon {
+  height: 40px;
+  width: 40px;
+  background: rgba(101, 226, 172, 0.5);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.billing-plan__header--title {
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.billing-plan__content--item {
+  display: flex;
+  margin-top: 5px;
+  align-items: center;
+}
+
+.billing-plan__cta {
+  border-top: 1px solid #e9e9e9;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.billing-plan__cta--amount {
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}

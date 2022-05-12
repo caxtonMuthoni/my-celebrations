@@ -17,6 +17,8 @@
 
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="{{ asset('css/templatemo-style.css') }}">
+      <!-- Styles -->
+      <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
 </head>
 
 <body>
@@ -51,7 +53,7 @@
                 <ul class="nav navbar-nav navbar-nav-first">
                     <li><a href="/" class="smoothScroll">Home</a></li>
                     <li><a href="{{route('about-us')}}" class="smoothScroll">About</a></li>
-                    <li><a href="#blog" class="smoothScroll">Public books</a></li>
+                    <li><a href="{{route('book-public-show')}}" class="smoothScroll">Public books</a></li>
                     <li><a href="{{route('pricing')}}" class="smoothScroll">Pricing</a></li>
                     <li><a href="{{route('faqs')}}" class="smoothScroll">FAQs</a></li>
                     <li><a href="#contact" class="smoothScroll">Contacts</a></li>
