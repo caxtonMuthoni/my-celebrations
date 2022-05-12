@@ -34,7 +34,12 @@
                 </div>
                 <div class="billing-plan__cta">
                     <div class="billing-plan__cta--amount">
-                        KSH {{ $plan->cost }} <span class="billing-plan__cta--amount--period">/ {{ $plan->days_to_expiry }} days</span>
+                        KSH {{ $plan->cost }} <span class="billing-plan__cta--amount--period">/ {{ $plan->days_to_expiry }} day
+                            @if($plan->days_to_expiry > 1)
+                            s
+                            @endif
+
+                        </span>
                     </div>
                     <div class="billing-plan__cta--btn">
                         <a href="{{route('billing-payments', $plan->id)}}" class="btn btn__primary">Choose Plan</a>
