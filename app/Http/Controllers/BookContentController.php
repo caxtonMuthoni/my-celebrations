@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\BookPDFGenerator;
 use App\Models\BookContent;
 use App\Http\Requests\StoreBookContentRequest;
 use App\Http\Requests\UpdateBookContentRequest;
@@ -42,6 +43,7 @@ class BookContentController extends Controller
         $bookContent->book_id = $request->book_id;
         $bookContent->page = $request->page;
         if($bookContent->save()) {
+            BookPDFGenerator::generatePDF($request->book_id);
             return response()->json([
                 'status' => true,
                 'message' => "The book content was uploaded"
@@ -90,6 +92,7 @@ class BookContentController extends Controller
         // $bookContent->book_id = $request->book_id;
         $bookContent->page = $request->page;
         if($bookContent->save()) {
+            BookPDFGenerator::generatePDF($request->book_id);
             return response()->json([
                 'status' => true,
                 'message' => "The book content was uploaded"

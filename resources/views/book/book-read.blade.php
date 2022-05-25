@@ -30,10 +30,10 @@
             @endif
         </div>
     </div>
-    <div class="book container">
+    <div class="book container px-5">
         <div class="book__cover-page">
             <div class="book__image">
-                <img src="{{$book->image}}" alt="" class="book__image--photo">
+                <img src="{{$book->image}}" style="max-width: 200px;" alt="" class="book__image--photo">
             </div>
             <h1 class="book__title">{{$book->title}}</h1>
             <h4 class="book__cover-message">
@@ -47,7 +47,7 @@
             <h4 class="book__images--title">Book Gallery</h4>
             @foreach($book->bookImages as $image)
             <div class="book__images--image" style="margin-bottom: 30px;">
-                <img src="{{$image->image}}" alt="" class="book__images--photo">
+                <img src="{{$image->image}}" style="max-width: 400px;" alt="" class="book__images--photo">
                 <caption>{{$image->caption}}</caption>
             </div>
             @endforeach

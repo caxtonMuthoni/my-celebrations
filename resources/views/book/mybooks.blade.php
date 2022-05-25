@@ -51,7 +51,7 @@
                     </td>
                     <td>
                         <span class="table__item">
-                            <a href="" class="btn btn-sm btn-info"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                            <a href="{{route('readBookPDf', $book->id)}}" class="btn btn-sm btn-info"><i class="fa fa-eye" aria-hidden="true"></i></a>
                         </span>
                     </td>
                     <td>

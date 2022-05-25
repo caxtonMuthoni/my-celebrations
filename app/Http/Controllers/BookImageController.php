@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\BookPDFGenerator;
 use App\Helpers\FileOperationUtil;
 use App\Models\BookImage;
 use App\Http\Requests\StoreBookImageRequest;
@@ -56,6 +57,8 @@ class BookImageController extends Controller
                 $bookImage->save();
             }
 
+            BookPDFGenerator::generatePDF($request->book_id);
+
             return response()->json([
                 'status' => true,
                 'message' => 'Images were uploaded successfully'
@@ -105,6 +108,7 @@ class BookImageController extends Controller
             $bookImage->published = !$bookImage->published;
 
             if ($bookImage->save()) {
+                BookPDFGenerator::generatePDF($bookImage->book_id);
                 return response()->json([
                     'status' => true,
                     'message' => 'Image status was updated successfully'
@@ -170,6 +174,8 @@ class BookImageController extends Controller
             }
 
             $bookImage->delete();
+
+            BookPDFGenerator::generatePDF($id);
 
             return response()->json([
                 'status' => true,

@@ -2,6 +2,10 @@
 /public/hot
 /public/storage
 /public/templates
+/public/books
+/public/css/dev
+/public/css/book
+/public/css/message
 /storage/*.key
 /vendor
 .env

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\BookPDFGenerator;
 use App\Models\BookMessage;
 use App\Http\Requests\StoreBookMessageRequest;
 use App\Http\Requests\UpdateBookMessageRequest;
@@ -65,6 +66,7 @@ class BookMessageController extends Controller
               $bookMessage->public = !$bookMessage->public;
 
               if($bookMessage->save()) {
+                BookPDFGenerator::generatePDF($bookMessage->book_id);
                 return response()->json([
                     'status' => true,
                     'message' => 'Message status was updated successfully'

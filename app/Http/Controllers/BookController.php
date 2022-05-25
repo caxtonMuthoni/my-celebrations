@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\BookPDFGenerator;
 use App\Helpers\FileOperationUtil;
 use App\Models\Book;
 use App\Http\Requests\StoreBookRequest;
@@ -163,7 +164,7 @@ class BookController extends Controller
         if (isset($book)) {
             $book->published = !$book->published;
             $book->save();
-            $this->printBook($id);
+            BookPDFGenerator::generatePDF($id);
 
             return redirect()->back()->with('success', 'The book was published successfully');
         }
