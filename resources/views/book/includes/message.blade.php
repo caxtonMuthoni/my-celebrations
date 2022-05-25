@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="{{asset('css/dev/message/template1/index.css')}}" media="all">
 <div class="book__messages--container">
     <p class="book__messages--message">
         {{$message->message}}

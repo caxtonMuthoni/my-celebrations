@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{public_path() . $book->template->template_url . '/index.css'}}" media="all">
+    <!-- <link rel="stylesheet" href="{{public_path() . '/css/dev/book/template2/index.css'}}" media="all"> -->
     <title>{{$book->title}}</title>
     <style>
         .new-page {
@@ -20,10 +21,12 @@
             <div class="book__image">
                 <img src="{{public_path() . substr($book->image, strlen(env('APP_URL')))}}" alt="" class="book__image--photo">
             </div>
-            <h1 class="book__title">{{$book->title}} Endless</h1>
-            <h5 class="book__cover-message">
-                {{$book->cover_message}}
-            </h5>
+            <div class="book__cover-content">
+                <h1 class="book__title">{{$book->title}}</h1>
+                <h5 class="book__cover-message">
+                    {{$book->cover_message}}
+                </h5>
+            </div>
         </div>
         <div class="new-page"></div>
         <div class="book__content">

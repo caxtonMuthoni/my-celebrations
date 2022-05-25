@@ -89,11 +89,11 @@ class EditTemplateScreen extends Screen
                     TextArea::make('template.description')->type('text')
                         ->title('Template description')->help('Tell us more about the template? ')
                         ->rows(4),
-                    Select::make('template.template_type')->options([
-                        'message' => 'message',
-                        'book' => 'book'
-                    ])->title('Select the template type.')
-                        ->help('What does the template support, books or messages'),
+                    // Select::make('template.template_type')->options([
+                    //     'message' => 'message',
+                    //     'book' => 'book'
+                    // ])->title('Select the template type.')
+                    //     ->help('What does the template support, books or messages'),
                     Relation::make('template.category_id')
                         ->fromModel(Category::class, 'name')
                         ->title('Template book category')
@@ -121,7 +121,8 @@ class EditTemplateScreen extends Screen
                 $template->cover_image = $templateData['cover_image'][0];
                 $template->name = $templateData['name'];
                 $template->description = $templateData['description'];
-                $template->template_type = $templateData['template_type'];
+                $template->template_type = 'book';
+                // $template->template_type = $templateData['template_type'];
                 $template->category_id = $category->id;
                 if ($template->save()) {
                     $template = $template->refresh();
@@ -130,7 +131,8 @@ class EditTemplateScreen extends Screen
                     $originalName = str_replace(".zip", '', $template->template_file->original_name);
                     $zip = new ZipArchive;
                     $time = time();
-                    $path = '/css/' . $templateData['template_type'] . '/';
+                    // $path = '/css/' . $templateData['template_type'] . '/';
+                    $path = '/css/book/';
                     if ($zip->open($zipPath)) {
                         $uploaded = $zip->extractTo(public_path() . $path . $time);
                         if ($uploaded) {
