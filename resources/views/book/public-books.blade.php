@@ -13,11 +13,11 @@
                 <div class="book-card__content">
                     <div class="book-card__content--header text-secondary">{{ $book->title }}</div>
                     <div class="book-card__content--description">
-                        {{ $book->cover_message }}
+                        {{ \Illuminate\Support\Str::limit($book->cover_message, 50, $end='...') }}
                     </div>
                 </div>
                 <div class="book-card__cta text-center p-2">
-                    <a href="{{route('book-read', $book->id)}}" class="btn btn-text text-uppercase text__primary">Read book</a>
+                    <a href="{{route('readBookPDf', $book->id)}}" class="btn btn-text text-uppercase text__primary">Read book</a>
                 </div>
             </div>
         </div>

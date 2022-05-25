@@ -9,6 +9,7 @@ use App\Payment\MpesaSubscription;
 use App\Payment\PaypalSubscription;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Mail;
@@ -75,6 +76,9 @@ Route::group([
     Route::get('books/images/{id}', [BookController::class, 'bookImages'])->name('book-images');
     Route::post('/upload/bookimage', [BookImageController::class, 'friendImageUpload'])->name('friend-upload-image');
     Route::get('publish/book/{id}', [BookController::class, 'publishBook'])->name('publish-book');
+    Route::get('/print/book/{id}', [BookController::class, 'printBook'])->name('print-book');
+    Route::get('/print/temp/{id}', [BookController::class, 'bookTemplateCreate'])->name('print-book-template');
+    Route::get('/book/pdf/read/{id}', [BookController::class, 'readBookPDf'])->name('readBookPDf');
 });
 
 
@@ -92,3 +96,8 @@ Route::group([
     Route::get('paypal/view/{id}', [BillingController::class, 'paypalView'])->name('billing-paypal-view');
 
 });
+
+// Route::get('test', function() {
+//     $date = Carbon::parse("2019-10-02 09:21:52");
+//     $date->isToday();
+// });

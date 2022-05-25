@@ -6,7 +6,11 @@ use App\Helpers\FileOperationUtil;
 use App\Models\Book;
 use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
+use App\Models\BookPdf;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Barryvdh\Snappy\Facades\SnappyPdf;
+// use niklasravnsborg\LaravelPdf\Facades\Pdf;
 
 class BookController extends Controller
 {
@@ -28,6 +32,17 @@ class BookController extends Controller
     public function create()
     {
         return view('book.create');
+    }
+
+    public function readBookPDf($id)
+    {
+        $book = Book::find($id);
+        $pdfurl =  BookPdf::where('book_id', $id)->value('pdfurl');
+        $builder = new \AshAllenDesign\ShortURL\Classes\Builder();
+
+        $shortURLObject = $builder->destinationUrl(route('readBookPDf', $id))->make();
+        $shorturl = $shortURLObject->default_short_url;
+        return view('book.book-pdf-read', compact('pdfurl', 'shorturl', 'book'));
     }
 
     /**
@@ -98,6 +113,40 @@ class BookController extends Controller
         return view('book.book-read', compact('id', 'book'));
     }
 
+    public function printBook($id)
+    {
+        
+        $book = Book::with(['template', 'content', 'bookMessages.user', 'bookMessages'  => function ($query) {
+            $query->where('public', true);
+        },  'bookImages' => function ($query) {
+            $query->where('published', true);
+        }])->find($id);
+
+        $data = ['book' => $book];
+        $pdf = SnappyPdf::loadView('book.book-print', $data)->setOption('page-height', '10');;
+        $bookName = $book->title . "_" . date('y-m-d') . '_' . time() . ".pdf";
+        $bookPath = 'books/pdfs/' . $bookName;
+        $pdf->save(public_path($bookPath));
+        $pdfUrl = env('APP_URL') . '/' . $bookPath;
+        // Save link
+        $bookPDF = BookPdf::where('book_id', $id)->first();
+        if (isset($bookPDF)) {
+            // Delete pdf
+            $file = public_path() . substr($bookPDF->pdfurl, strlen(env('APP_URL')));
+            if (File::exists($file)) {
+                File::delete($file);
+            }
+        } else {
+            $bookPDF = new BookPdf();
+        }
+
+        $bookPDF->book_id = $id;
+        $bookPDF->pdfurl = $pdfUrl;
+        $bookPDF->save();
+
+        return view('book.book-print', compact('id', 'book'));
+    }
+
     public function readBookContentApi($id)
     {
         $book = Book::with(['content', 'bookMessages.user', 'bookMessages'  => function ($query) {
@@ -114,6 +163,7 @@ class BookController extends Controller
         if (isset($book)) {
             $book->published = !$book->published;
             $book->save();
+            $this->printBook($id);
 
             return redirect()->back()->with('success', 'The book was published successfully');
         }
@@ -163,5 +213,14 @@ class BookController extends Controller
     public function destroy(Book $book)
     {
         //
+    }
+
+    public function bookTemplateCreate($id) {
+        $book = Book::with(['template', 'content', 'bookMessages.user', 'bookMessages'  => function ($query) {
+            $query->where('public', true);
+        },  'bookImages' => function ($query) {
+            $query->where('published', true);
+        }])->find($id);
+        return view('book.book-template', compact('id', 'book'));
     }
 }

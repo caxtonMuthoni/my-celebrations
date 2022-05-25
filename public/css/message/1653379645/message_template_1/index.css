@@ -1,0 +1,38 @@
+.book__messages--container {
+    width: 60%;
+    margin: 20px auto;
+    display: -webkit-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    border: 1px solid rgba(88, 95, 102, 0.4);
+    border-radius: 10px;
+    flex-direction: column;
+}
+
+.book__messages--message {
+    font-size: 25px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+}
+
+.book__messages--message::after {
+    content: '';
+    height: 100px;
+    width: 100px;
+    background-image: url('./images/flower1.png');
+    background-position: center;
+    background-size: contain;
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 10px;
+}
+
+.book__messages--cta {
+    font-weight: bold;
+    font-size: 13px;
+    text-align: center;
+    width: 100%;
+}

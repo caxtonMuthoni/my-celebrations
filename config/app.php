@@ -180,6 +180,7 @@ return [
         Mailjet\LaravelMailjet\MailjetServiceProvider::class,
         \Safaricom\Mpesa\MpesaServiceProvider::class,
         Srmklive\PayPal\Providers\PayPalServiceProvider::class,
+        Barryvdh\Snappy\ServiceProvider::class,
     ],
 
     /*
@@ -195,8 +196,10 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         'Mailjet' => Mailjet\LaravelMailjet\Facades\Mailjet::class,
-        'Mpesa'=> \Safaricom\Mpesa\MpesaServiceProvider::class,
+        'Mpesa' => \Safaricom\Mpesa\MpesaServiceProvider::class,
         'PayPal' => Srmklive\PayPal\Facades\PayPal::class,
+        'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
+        'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
     ])->toArray(),
 
 ];

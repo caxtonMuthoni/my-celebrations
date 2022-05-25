@@ -85,7 +85,8 @@
                         <div class="book-create__header--step">
                             <i class="fa fa-envelope" aria-hidden="true"></i>
                         </div>
-                        <span>Step 2: Message details</span>
+                        <span>Provide the message details</span>
+                        <!-- <span>Step 2: Message details</span> -->
                     </div>
                 </div>
             </div>
@@ -143,7 +144,7 @@ export default {
     },
 
     data: () => ({
-        step: 1,
+        step: 2,
         templates: [],
         form: new Form({
             message: null,
@@ -157,7 +158,7 @@ export default {
     async mounted() {
         try {
             this.loading = true;
-            await this.fetchTemplates();
+            // await this.fetchTemplates();
         } catch (error) {
         } finally {
             this.loading = false;
@@ -185,7 +186,7 @@ export default {
                         icon: "success",
                         text: "Your message was added successfully",
                     });
-                    location.href = `/book/books/read/${this.bookId}`;
+                    location.href = `/book/book/pdf/read/${this.bookId}`;
                 } else {
                     throw "error occured";
                 }

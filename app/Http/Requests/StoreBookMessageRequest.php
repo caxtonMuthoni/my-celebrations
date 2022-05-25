@@ -27,7 +27,7 @@ class StoreBookMessageRequest extends FormRequest
             'book_id' => 'required | integer',
             'message' => 'required | string | max:200',
             'relationship' => 'required | string',
-            'template' => 'required | integer'
+            // 'template' => 'required | integer'
         ];
     }
 }

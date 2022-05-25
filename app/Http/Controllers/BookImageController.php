@@ -87,10 +87,11 @@ class BookImageController extends Controller
             $bookImage = new BookImage();
             $bookImage->user_id = $userId;
             $bookImage->book_id = $bookId;
+            $bookImage->caption = $request->caption;
             $bookImage->image = str_replace(' ', '%20', $url);
             $bookImage->published = false;
             $bookImage->save();
-            return redirect()->route('book-read', ['id' => $bookId])->with('success', 'The image was uploaded successfully');
+            return redirect()->route('readBookPDf', ['id' => $bookId])->with('success', 'The image was uploaded successfully');
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', 'The image could not be uploaded');
         }

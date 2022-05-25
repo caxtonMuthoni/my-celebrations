@@ -5,6 +5,7 @@ namespace App\Orchid\Screens;
 use App\Models\Category;
 use App\Models\Template;
 use Illuminate\Http\Request;
+use InvalidArgumentException;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Relation;
@@ -112,6 +113,7 @@ class EditTemplateScreen extends Screen
     {
         ini_set('max_execution_time', '0');
         $templateData = $request->get('template');
+
         foreach ($templateData['category_id'] as $catID) {
             $category = Category::find($catID);
             if (isset($category)) {
@@ -125,13 +127,20 @@ class EditTemplateScreen extends Screen
                     $template = $template->refresh();
                     $zipPhysicalPath = 'app/public/' . $template->template_file->physicalPath();
                     $zipPath = storage_path($zipPhysicalPath);
+                    $originalName = str_replace(".zip", '', $template->template_file->original_name);
                     $zip = new ZipArchive;
                     $time = time();
-                    $path = 'templates/book/' . $time;
+                    $path = '/css/' . $templateData['template_type'] . '/';
                     if ($zip->open($zipPath)) {
-                        $uploaded = $zip->extractTo('templates/book/' . $time);
+                        $uploaded = $zip->extractTo(public_path() . $path . $time);
                         if ($uploaded) {
-                            $url = env('APP_URL') . '/' . $path . "/dist/index.html";
+                            // Delete the previous
+                            $deletePath = public_path() . $template->template_url;
+                            if (file_exists($deletePath)) {
+                                $this->deleteDir($deletePath);
+                            }
+
+                            $url = $path . $time . '/' . $originalName;
                             $template->template_url = $url;
                             $template->save();
                         }
@@ -152,5 +161,22 @@ class EditTemplateScreen extends Screen
             Alert::success('The template was deleted successfully');
             return redirect()->route('platform.dashboard.template');
         }
+    }
+
+    public static function deleteDir($path)
+    {
+        if (is_dir($path) === true) {
+            $files = array_diff(scandir($path), array('.', '..'));
+
+            foreach ($files as $file) {
+                self::deleteDir(realpath($path) . '/' . $file);
+            }
+
+            return rmdir($path);
+        } else if (is_file($path) === true) {
+            return unlink($path);
+        }
+
+        return false;
     }
 }

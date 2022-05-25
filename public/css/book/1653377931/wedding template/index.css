@@ -1,0 +1,99 @@
+body {
+    padding: 0 !important;
+    background-size: cover;
+    background-color: #fafafa;
+}
+
+.book {
+   margin: 0;
+   padding: 0;
+}
+
+.book__cover-page {
+    width: 100%;
+    padding: 40% 0;
+    background-image:  -webkit-linear-gradient(hsla(49, 99%, 46%, 0.761), rgba(209, 126, 48, 0.637)), url('./images/flowers.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    display: -webkit-flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+
+.book__image {
+    /* margin-top: 50px; */
+}
+
+.book__image--photo {
+    border-radius: 50%;
+    margin: 0 auto;
+    display: block;
+    height: 350px;
+    width: 350px;
+}
+
+.book__title {
+    margin: 0 auto;
+    display: block;
+    width: 50%;
+    text-align: center;
+    margin-top: 25px;
+    color: #fff;
+    font-size: 30px !important;
+}
+
+.book__cover-message {
+    margin: 0 auto;
+    display: block;
+    width: 50%;
+    text-align: center;
+    margin-top: 20px;
+    color: #fff;
+    font-size: 25px !important;
+}
+
+.book__content {
+    padding: 20px;
+    display: block;
+}
+
+.book__images {
+    padding: 20px;
+}
+
+.book__images--image {
+    max-width: 50% !important;
+    height: auto;
+    overflow: hidden;
+    object-fit: contain;
+    object-position: center;
+}
+
+.book__images--photo {
+    object-fit: contain;
+    object-position: center;
+    width: 100%;
+}
+
+.book__messages {
+    padding: 20px;
+    display: block;
+}
+
+/* Typography */
+h1, h2,h3, h4, h5 {
+    font-weight: bold;
+    font-family: monospace;
+    color: rgb(138, 111, 37);
+}
+
+p, span {
+    font-weight: lighter !important;
+    line-height: 150%;
+    font-size: 17px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: rgb(87, 68, 50);
+}
