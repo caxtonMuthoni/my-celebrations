@@ -68,7 +68,10 @@ class BookPDFGenerator
         $table->addRow();
         $cell = $table->addCell();
         $doc = new DOMDocument();
-        $doc->loadHTML($book->content->content);
+        $content = $book->content->content;
+        $content = htmlspecialchars_decode($content);
+        $content = str_replace(' & ', ' and ', $content);
+        $doc->loadHTML($content);
         Html::addHtml($cell, $doc->saveXML(), true);
         $templateProcesser->setComplexBlock('content', $table);
 
@@ -104,21 +107,25 @@ class BookPDFGenerator
         }
 
 
-        $file = $book->title . "_" . date('y-m-d') . '_' . time() . ".pdf";;
-        $templateProcesser->saveAs($file);
+        $file = $book->title . "_" . date('y-m-d') . '_' . time();
+        $file = str_replace(' ', '_', $file);
+        ob_clean();
+        $templateProcesser->saveAs($file . ".docx");
         return $file;
     }
 
     private static function convertDocxToPDF($file)
     {
-        
+
         $bookPath = './books/pdfs/';
+        $command = "soffice  --headless --convert-to pdf --outdir " . $bookPath . " " . $file . ".docx";
         // Execute command(Libreoffice)
-        $convert = shell_exec("soffice  --headless --convert-to pdf --outdir ".$bookPath . " ". $file);
+        $convert = shell_exec($command);
         if ($convert) {
-            unlink($file);
-            return "books/pdfs/$file";
+            unlink($file . ".docx");
+            return "books/pdfs/$file" . ".pdf";
         } else {
+            unlink($file . ".docx");
             return false;
         }
     }
