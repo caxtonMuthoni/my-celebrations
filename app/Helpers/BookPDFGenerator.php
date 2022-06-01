@@ -114,7 +114,6 @@ class BookPDFGenerator
         $file = str_replace(' ', '_', $file);
         ob_clean();
         $templateProcesser->saveAs($file . ".docx");
-        dd($file);
         return $file;
     }
 
@@ -125,6 +124,7 @@ class BookPDFGenerator
         $command = "soffice  --headless --convert-to pdf --outdir " . $bookPath . " " . $file . ".docx";
         // Execute command(Libreoffice)
         $convert = shell_exec($command);
+        dd($convert);
         if ($convert) {
             unlink($file . ".docx");
             return "books/pdfs/$file" . ".pdf";
