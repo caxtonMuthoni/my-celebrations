@@ -1,10 +1,12 @@
 <?php
 
+use App\Helpers\BookPDFGenerator;
 use App\Http\Controllers\BillingController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\BookImageController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SocialiteCOntroller;
+use App\Models\Book;
 use App\Payment\MpesaSubscription;
 use App\Payment\PaypalSubscription;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -97,7 +99,13 @@ Route::group([
 
 });
 
-// Route::get('test', function() {
-//     $date = Carbon::parse("2019-10-02 09:21:52");
-//     $date->isToday();
-// });
+Route::get('test', function() {
+    BookPDFGenerator::generatePDF(2);
+    $book = Book::with(['user', 'template.template_file', 'content', 'bookMessages.user', 'bookMessages'  => function ($query) {
+        $query->where('public', true);
+    },  'bookImages' => function ($query) {
+        $query->where('published', true);
+    }])->find(2);
+
+    return $book;
+});

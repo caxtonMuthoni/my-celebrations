@@ -122,38 +122,38 @@ class EditTemplateScreen extends Screen
                 $template->name = $templateData['name'];
                 $template->description = $templateData['description'];
                 $template->template_type = 'book';
+                $template->template_url = $templateData['template'][0];
                 // $template->template_type = $templateData['template_type'];
                 $template->category_id = $category->id;
                 if ($template->save()) {
-                    $template = $template->refresh();
-                    $zipPhysicalPath = 'app/public/' . $template->template_file->physicalPath();
-                    $zipPath = storage_path($zipPhysicalPath);
-                    $originalName = str_replace(".zip", '', $template->template_file->original_name);
-                    $zip = new ZipArchive;
-                    $time = time();
-                    // $path = '/css/' . $templateData['template_type'] . '/';
-                    $path = '/css/book/';
-                    if ($zip->open($zipPath)) {
-                        $uploaded = $zip->extractTo(public_path() . $path . $time);
-                        if ($uploaded) {
-                            // Delete the previous
-                            $deletePath = public_path() . $template->template_url;
-                            if (file_exists($deletePath)) {
-                                $this->deleteDir($deletePath);
-                            }
+                    Alert::success('The template was uploaded successfully');
+                    return redirect()->route('platform.dashboard.template');
+                    // $template = $template->refresh();
+                    // $zipPhysicalPath = 'app/public/' . $template->template_file->physicalPath();
+                    // $zipPath = storage_path($zipPhysicalPath);
+                    // $originalName = str_replace(".zip", '', $template->template_file->original_name);
+                    // $zip = new ZipArchive;
+                    // $time = time();
+                    // // $path = '/css/' . $templateData['template_type'] . '/';
+                    // $path = '/css/book/';
+                    // if ($zip->open($zipPath)) {
+                    //     $uploaded = $zip->extractTo(public_path() . $path . $time);
+                    //     if ($uploaded) {
+                    //         // Delete the previous
+                    //         $deletePath = public_path() . $template->template_url;
+                    //         if (file_exists($deletePath)) {
+                    //             $this->deleteDir($deletePath);
+                    //         }
 
-                            $url = $path . $time . '/' . $originalName;
-                            $template->template_url = $url;
-                            $template->save();
-                        }
-                        $zip->close();
-                    }
+                    //         $url = $path . $time . '/' . $originalName;
+                    //         $template->template_url = $url;
+                    //         $template->save();
+                    //     }
+                    //     $zip->close();
+                    // }
                 }
             }
         }
-
-        Alert::success('The template was uploaded successfully');
-        return redirect()->route('platform.dashboard.template');
     }
 
 
