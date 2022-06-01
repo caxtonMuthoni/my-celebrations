@@ -123,7 +123,7 @@ class BookPDFGenerator
         $bookPath = './books/pdfs/';
         $command = "libreoffice  --headless --convert-to pdf --outdir " . $bookPath . " " . $file . ".docx";
         // Execute command(Libreoffice)
-        $convert = exec($command);
+        $convert = exec($command. '2>&1');
         dd($convert);
         if ($convert) {
             unlink($file . ".docx");
