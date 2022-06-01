@@ -64,6 +64,8 @@ class BookPDFGenerator
         $templateProcesser->setValue('title', $book->title);
         $templateProcesser->setValue('cover_message', $book->cover_message);
         $templateProcesser->setValue('author', $book->user->name);
+        // set error level
+        $internalErrors = libxml_use_internal_errors(true);
         $table = new Table();
         $table->addRow();
         $cell = $table->addCell();
@@ -74,6 +76,7 @@ class BookPDFGenerator
         $doc->loadHTML($content);
         Html::addHtml($cell, $doc->saveXML(), true);
         $templateProcesser->setComplexBlock('content', $table);
+        libxml_use_internal_errors($internalErrors);
 
         // book images
         $images = $book->bookImages;
