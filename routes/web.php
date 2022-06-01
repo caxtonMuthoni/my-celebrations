@@ -100,12 +100,12 @@ Route::group([
 });
 
 Route::get('test', function() {
-    BookPDFGenerator::generatePDF(2);
+    BookPDFGenerator::generatePDF(7);
     $book = Book::with(['user', 'template.template_file', 'content', 'bookMessages.user', 'bookMessages'  => function ($query) {
         $query->where('public', true);
     },  'bookImages' => function ($query) {
         $query->where('published', true);
-    }])->find(2);
+    }])->find(7);
 
     return $book;
 });
