@@ -114,6 +114,7 @@ class BookPDFGenerator
         $file = str_replace(' ', '_', $file);
         ob_clean();
         $templateProcesser->saveAs($file . ".docx");
+        dd($file);
         return $file;
     }
 
