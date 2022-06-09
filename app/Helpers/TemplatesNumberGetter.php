@@ -11,7 +11,7 @@ class TemplatesNumberGetter
     public static function getNumberOfTemplates()
     {
         $userSubscription = Subscriber::with('subscriptionPlan')->where([['user_id', Auth::id()], ['is_active', true]])->first();
-        $userSubscriptionName = $userSubscription->subscriptionPlan->name;
+        $userSubscriptionName = $userSubscription?->subscriptionPlan?->name;
 
         if (isset($userSubscription) && isset($userSubscriptionName)) {
             $userSubscriptionName = strtolower($userSubscriptionName);
