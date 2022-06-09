@@ -13,7 +13,7 @@
             </div>
         </div> -->
         <div class="col-md-9 mb-3 row bg-white p-2">
-            <div class="col-md-3 text-center">
+            <div class="col-md-3 col-sm-6 mb-2 col-xs-6 col text-center">
                 <div class="book-content__nav">
                     <input
                         v-model="selectedTab"
@@ -28,7 +28,7 @@
                 </div>
             </div>
 
-            <div class="col-md-2 text-center">
+            <div class="col-md-2 col-sm-6 mb-2 col-xs-6 col text-center">
                 <div class="book-content__nav">
                     <input
                         v-model="selectedTab"
@@ -43,7 +43,7 @@
                 </div>
             </div>
 
-            <div class="col-md-2 text-center">
+            <div class="col-md-2 col-sm-6 mb-2 col-xs-6 col text-center">
                 <div class="book-content__nav">
                     <input
                         v-model="selectedTab"

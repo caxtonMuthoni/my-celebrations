@@ -88,6 +88,11 @@ class BookController extends Controller
         return view('book.mybooks', compact('books'));
     }
 
+    public function bookEditView($id) {
+        $book = Book::find($id);
+        return view('book.detailedit', compact('book'));
+    } 
+
 
     /**
      * Display the specified resource.
@@ -111,7 +116,10 @@ class BookController extends Controller
     public function readBook($id)
     {
         $book = Book::with('template')->find($id);
-        return view('book.book-read', compact('id', 'book'));
+        $book = Book::find($id);
+        $pdfurl =  BookPdf::where('book_id', $id)->value('pdfurl');
+        $shorturl = 'none';
+        return view('book.book-read', compact('pdfurl', 'shorturl', 'id', 'book'));
     }
 
     public function printBook($id)
@@ -200,9 +208,16 @@ class BookController extends Controller
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateBookRequest $request, Book $book)
+    public function update(UpdateBookRequest $request, $id)
     {
-        //
+        $book = Book::where([['user_id', Auth::id()], ['id', $id]])->first();
+        $book->title = $request->title;
+        $book->cover_message = $request->cover_message;
+        $book->public = $request->public ?? 0;
+        $book->accepting_message = $request->accepting_message ?? 0;
+        if($book->save()) {
+            return redirect()->route('my-books')->with('success', 'The book was updated successfully.');
+        }
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\TemplatesNumberGetter;
 use App\Models\Template;
 use App\Http\Requests\StoreTemplateRequest;
 use App\Http\Requests\UpdateTemplateRequest;
@@ -13,9 +14,10 @@ class TemplateController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($category)
     {
-        return Template::with('image')->where('template_type', 'book')->latest()->get();
+        $numberOfTemplates = TemplatesNumberGetter::getNumberOfTemplates();
+        return Template::with('image')->where([['template_type', 'book'], ['category_id', $category]])->latest()->take($numberOfTemplates)->get();
     }
 
     public function messages() {

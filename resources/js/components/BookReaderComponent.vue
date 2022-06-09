@@ -1,6 +1,6 @@
 <template>
-    <div class="container w-100">
-        <div class="row">
+    <div class="w-100">
+        <div v-if="shorturl !== 'none'" class="row cta_bar">
             <div class="col-sm-7 col-md-7">
                 <h4>{{ book.title }}</h4>
             </div>
@@ -29,7 +29,7 @@
                 >
             </div>
         </div>
-        <div id="pdfvuerdiv" class="pdfvuerclas">
+        <div id="pdfvuerdiv" class="pdfvuerclas bg-dark container">
             <div id="pdfvuer">
                 <div
                     id="buttons"
@@ -40,7 +40,7 @@
                         Back
                     </a>
                     <a class="ui active item">
-                        {{ page }} / {{ numPages ? numPages : "∞" }}
+                        {{ page }} / {{ numPages ? numPages : "Loading" }}
                     </a>
                     <a class="item" @click="page < numPages ? page++ : 1">
                         Forward
@@ -185,6 +185,11 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="col-md-4 mt-2">
+                                <input hidden id="linkInput" type="text" :value="shorturl">
+                                <a href="#" class="btn btn-outline-info mt-2 btn-lg" @click.prevent="copyTextToClipboard">Copy Link</a>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -203,6 +208,8 @@
 </template>
 <script>
 import pdfvuer from "pdfvuer";
+import Toast from '../utils/toast';
+
 
 export default {
     components: {
@@ -338,12 +345,34 @@ export default {
                 elem.msRequestFullscreen();
             }
         },
+
+        copyTextToClipboard() {
+            var copyText = document.getElementById("linkInput");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); 
+            navigator.clipboard.writeText(copyText.value);
+            Toast.fire({
+                title: 'Success',
+                text: 'Link copied to clipboard',
+                icon: 'info'
+            })
+        },
     },
 };
 </script>
 <style src="pdfvuer/dist/pdfvuer.css"></style>
 <style lang="css" scoped>
 @import "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.9/semantic.min.css";
+.cta_bar {
+    border-bottom: 1px solid rgba(192, 192, 192, 0.229);
+    padding: 20px;
+    padding-top: 0 !important;
+}
+.pdfvuerclas {
+    padding: 20px 10%;
+    margin-top: 20px;
+    border-radius: 5px;
+}
 #buttons {
     margin-left: 0 !important;
     margin-right: 0 !important;

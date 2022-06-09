@@ -31,7 +31,7 @@ Route::group([
     'middleware' => 'auth:api'
 ], function () {
     Route::get('categories', [CategoryController::class, 'index']);
-    Route::get('templates', [TemplateController::class, 'index']);
+    Route::get('templates/{id}', [TemplateController::class, 'index']);
     Route::get('templates/messages', [TemplateController::class, 'messages']);
     Route::post('book', [BookController::class, 'store']);
     Route::post('bookcontent', [BookContentController::class, 'store']);

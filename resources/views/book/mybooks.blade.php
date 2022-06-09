@@ -13,8 +13,8 @@
                 <th>Access</th>
                 <th>Status</th>
                 <th>Accepting Messages</th>
-                <th>View</th>
-                <th>Edit</th>
+                <th>Edit Details</th>
+                <th>Edit Content</th>
             </thead>
             <tbody>
                 @foreach($books as $key => $book)
@@ -51,12 +51,14 @@
                     </td>
                     <td>
                         <span class="table__item">
-                            <a href="{{route('readBookPDf', $book->id)}}" class="btn btn-sm btn-info"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                            <a href="{{route('edit-book-details', $book->id)}}" class="btn btn-sm btn__primary">
+                                <i class="fa fa-edit" aria-hidden="true"></i>
+                            </a>
                         </span>
                     </td>
                     <td>
                         <span class="table__item">
-                            <a href="{{route('book-show', $book->id)}}" class="btn btn-sm btn-primary">
+                            <a href="{{route('book-show', $book->id)}}" class="btn btn-sm btn-info">
                                 <i class="fa fa-edit" aria-hidden="true"></i>
                             </a>
                         </span>

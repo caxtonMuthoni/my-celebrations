@@ -81,17 +81,37 @@ class BookPDFGenerator
         // book images
         $images = $book->bookImages;
         if ($images) {
-            $templateProcesser->cloneBlock('book_image', count($images), true, true);
-            foreach ($images as $key => $image) {
+            $images = $images->toArray();
+            $imageChunks = array_chunk($images, 2);
+            $templateProcesser->cloneBlock('book_image', count($imageChunks), true, true);
+            foreach ($imageChunks as $key => $image) {
                 $templateProcesser->setImageValue(
                     "book_image_photo#" . $key + 1,
                     array(
-                        'path' => self::getImageRelativePathFromURL($image['image']),
-                        'width' => 500,
-                        'height' => 500
+                        'path' => self::getImageRelativePathFromURL($image[0]['image']),
+                        'width' => 200,
+                        'height' => 200
                     )
                 );
-                $templateProcesser->setValue("book_image_caption#" . $key + 1, ($key + 1) . ": " . $image['caption']);
+
+                $templateProcesser->setValue("book_image_caption#" . $key + 1, $image[0]['caption']);
+                if (count($image) > 1) {
+                    $templateProcesser->setImageValue(
+                        "book_image_photo_left#" . $key + 1,
+                        array(
+                            'path' => self::getImageRelativePathFromURL($image[1]['image']),
+                            'width' => 300,
+                            'height' => 300
+                        )
+                    );
+                    $templateProcesser->setValue("book_image_caption_left#" . $key + 1, $image[1]['caption']);
+                } else {
+                    $templateProcesser->setValue(
+                        "book_image_photo_left#" . $key + 1,
+                       ' '
+                    );
+                    $templateProcesser->setValue("book_image_caption_left#" . $key + 1, ' ');
+                }
             }
         }
 
@@ -104,8 +124,8 @@ class BookPDFGenerator
                     "book_message#" . $key + 1,
                     $message->message
                 );
-                $templateProcesser->setValue("book_message_user#" . $key + 1, ($key + 1) . ": " . $message['user']['name']);
-                $templateProcesser->setValue("book_message_relationship#" . $key + 1, ($key + 1) . ": " . $message['relationship']);
+                $templateProcesser->setValue("book_message_user#" . $key + 1,  $message['user']['name']);
+                $templateProcesser->setValue("book_message_relationship#" . $key + 1,  $message['relationship']);
             }
         }
 

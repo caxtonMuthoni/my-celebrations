@@ -1,6 +1,7 @@
 <?php
 
 use App\Helpers\BookPDFGenerator;
+use App\Helpers\TemplatesNumberGetter;
 use App\Http\Controllers\BillingController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\BookImageController;
@@ -81,6 +82,8 @@ Route::group([
     Route::get('/print/book/{id}', [BookController::class, 'printBook'])->name('print-book');
     Route::get('/print/temp/{id}', [BookController::class, 'bookTemplateCreate'])->name('print-book-template');
     Route::get('/book/pdf/read/{id}', [BookController::class, 'readBookPDf'])->name('readBookPDf');
+    Route::get('/book/edit/details/{id}', [BookController::class, 'bookEditView'])->name('edit-book-details');
+    Route::post('/book/update/details/{id}', [BookController::class, 'update'])->name('update-book-details');
 });
 
 

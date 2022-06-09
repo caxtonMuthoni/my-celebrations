@@ -114,9 +114,14 @@ class EditTemplateScreen extends Screen
         ini_set('max_execution_time', '0');
         $templateData = $request->get('template');
 
+
         foreach ($templateData['category_id'] as $catID) {
             $category = Category::find($catID);
             if (isset($category)) {
+                $template = Template::where([['id', $template->id], ['category_id', $catID]])->first();
+                if(!isset($template)) {
+                    $template = new Template();
+                }
                 $template->template = $templateData['template'][0];
                 $template->cover_image = $templateData['cover_image'][0];
                 $template->name = $templateData['name'];
@@ -125,35 +130,11 @@ class EditTemplateScreen extends Screen
                 $template->template_url = $templateData['template'][0];
                 // $template->template_type = $templateData['template_type'];
                 $template->category_id = $category->id;
-                if ($template->save()) {
-                    Alert::success('The template was uploaded successfully');
-                    return redirect()->route('platform.dashboard.template');
-                    // $template = $template->refresh();
-                    // $zipPhysicalPath = 'app/public/' . $template->template_file->physicalPath();
-                    // $zipPath = storage_path($zipPhysicalPath);
-                    // $originalName = str_replace(".zip", '', $template->template_file->original_name);
-                    // $zip = new ZipArchive;
-                    // $time = time();
-                    // // $path = '/css/' . $templateData['template_type'] . '/';
-                    // $path = '/css/book/';
-                    // if ($zip->open($zipPath)) {
-                    //     $uploaded = $zip->extractTo(public_path() . $path . $time);
-                    //     if ($uploaded) {
-                    //         // Delete the previous
-                    //         $deletePath = public_path() . $template->template_url;
-                    //         if (file_exists($deletePath)) {
-                    //             $this->deleteDir($deletePath);
-                    //         }
-
-                    //         $url = $path . $time . '/' . $originalName;
-                    //         $template->template_url = $url;
-                    //         $template->save();
-                    //     }
-                    //     $zip->close();
-                    // }
-                }
+                $template->save();
             }
         }
+        Alert::success('The template was uploaded successfully');
+        return redirect()->route('platform.dashboard.template');
     }
 
 

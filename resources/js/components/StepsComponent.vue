@@ -48,6 +48,7 @@
             </div>
             <div class="col-md-10">
                 <div class="book-create__btns">
+                    <div>&nbsp;</div>
                     <button
                         :disabled="!form.category"
                         class="btn btn-block btn-lg btn__primary mt-3"
@@ -121,6 +122,7 @@
             </div>
             <div class="col-md-10">
                 <div class="book-create__btns">
+                    <button class="btn btn-secondary btn-lg mt-3" @click="prevPage"><i class="fa fa-arrow-left me-2" aria-hidden="true"></i> Back</button>
                     <button
                         class="btn btn-block btn-lg btn__primary mt-3"
                         :disabled="!form.template"
@@ -245,6 +247,7 @@
             </div>
             <div class="col-md-10">
                 <div class="book-create__btns">
+                    <button class="btn btn-secondary btn-lg mt-3" @click="prevPage"> <i class="fa fa-arrow-left me-2" aria-hidden="true"></i> Back</button>
                     <button
                         class="btn btn-block btn-lg btn__primary mt-3"
                         @click="createBook"
@@ -267,7 +270,7 @@
 import LoaderComponent from "./LoaderComponent.vue";
 import SearchComponent from "./SearchComponent.vue";
 import Form from "vform";
-import Toast from '../utils/toast';
+import Toast from "../utils/toast";
 
 export default {
     components: { SearchComponent, LoaderComponent },
@@ -291,7 +294,7 @@ export default {
         try {
             this.loading = true;
             await this.fetchCategories();
-            await this.fetchTemplates();
+            // await this.fetchTemplates();
         } catch (error) {
         } finally {
             this.loading = false;
@@ -312,7 +315,9 @@ export default {
 
         async fetchTemplates() {
             try {
-                const response = await axios.get("/api/celebrations/templates");
+                const response = await axios.get(
+                    "/api/celebrations/templates/" + this.form.category
+                );
                 this.templates = response.data;
             } catch (e) {
                 throw e;
@@ -349,7 +354,12 @@ export default {
             this.form.cover_image = file;
         },
 
-        nextPage() {
+        async nextPage() {
+            if (this.step === 1) {
+                this.loading = true
+                await this.fetchTemplates();
+                this.loading = false
+            }
             this.step++;
         },
 

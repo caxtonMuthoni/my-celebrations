@@ -25,7 +25,7 @@
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a href="/" class="celebration__navbar--logo heading heading--5 navbar-brand special__header">
                     <img class="celebration__navbar--logo--img" src="{{asset('images/branding/logo.jpeg')}}" alt="">
