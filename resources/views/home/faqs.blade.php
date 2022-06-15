@@ -41,40 +41,21 @@
                 </div>
             </div>
 
+            @foreach($faqs as $key=>$faq)
             <div class="col-md-10 border-tab">
                 <p>
-                <div class=" p-2" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                    How many books can create per day ?
+                <div class=" p-2" data-toggle="collapse" href="#collapseExample-{{$key}}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                   {{$faq['question']}}
                 </div>
 
                 </p>
-                <div class="collapse" id="collapseExample">
+                <div class="collapse" id="collapseExample-{{$key}}">
                     <div class="card card-body">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                    {{$faq['answer']}}
                     </div>
                 </div>
             </div>
-
-            <div class="col-md-10 border-tab">
-                <p>
-                <div class=" p-2" data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample">
-                    Will my books be deleted ?
-                </div>
-
-                </p>
-                <div class="collapse" id="collapseExample2">
-                    <div class="card card-body">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero sapiente libero nihil minus consequuntur,
-                         eum facere dolores, quae provident nulla ad a non dolor culpa deleniti voluptatem reiciendis iusto 
-                         officia. Temporibus vel quia architecto a ab atque omnis autem cumque itaque voluptatum ea amet 
-                         ipsum voluptatibus et reiciendis molestiae dolor error iure, commodi sunt blanditiis delectus, 
-                         mollitia pariatur! Excepturi accusantium laudantium porro eos unde atque vel quas soluta ratione. 
-                         Et facilis ullam, vero quaerat fugit dolores libero laborum. Rem corrupti eius unde odit. 
-                         Perspiciatis
-                         laudantium dicta explicabo non fugit illum quae fuga aut nemo, quasi nostrum beatae soluta magni eos!
-                    </div>
-                </div>
-            </div>
+            @endforeach
 
 
 
