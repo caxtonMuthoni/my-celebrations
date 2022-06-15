@@ -34,7 +34,7 @@ export default {
         this.product.name = this.plan.name;
         const script = document.createElement("script");
         script.src =
-            "https://www.paypal.com/sdk/js?client-id=AYn-c3yy63pYMKIQScM4wQs9Rhb1xX6xlabGCrorVRrgF1hIjDBXjs1BsPI2PFOVVl26_k2Xu37zqBPa";
+            "https://www.paypal.com/sdk/js?client-id=AfCssC84gb7JlxRQg5TNYxREoR1AnyUkBmJQPLPplyBg1MkwhZwgLzeweA6gv4iHaEmITqloIZlNDfIf";
         script.addEventListener("load", this.setLoaded);
         document.body.appendChild(script);
     },
