@@ -51,7 +51,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('book-public-show')}}">{{ __('Books') }}</a>
+                            <a class="nav-link" href="{{route('book-public-show')}}">{{ __('Public Books') }}</a>
                         </li>
 
                     </ul>

@@ -7,10 +7,17 @@ use App\Helpers\FileOperationUtil;
 use App\Models\Book;
 use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
+use App\Mail\BookTransferMail;
 use App\Models\BookPdf;
+use App\Models\BookTransfer;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Barryvdh\Snappy\Facades\SnappyPdf;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+
 // use niklasravnsborg\LaravelPdf\Facades\Pdf;
 
 class BookController extends Controller
@@ -238,5 +245,65 @@ class BookController extends Controller
             $query->where('published', true);
         }])->find($id);
         return view('book.book-template', compact('id', 'book'));
+    }
+
+
+    public function bookTransferView($id) {
+        return view('book.book-transfer', compact('id'));
+    }
+
+    public function transferBookRequest(Request $request, $id) {
+
+        // validation
+        $this->validate($request, [
+            'email' => 'required | email | exists:users'
+        ]);
+
+        if(Auth::user()->email ==  $request->email) {
+            return redirect()->back()->with('error', 'You can\'t transfer the book to your own account.');
+        }
+
+        $book = Book::where([['user_id', Auth::id()], ['id', $id]])->first();
+
+        if(isset($book)) {
+            $token  = time() * random_int(10, 1000);
+            $toUser = User::where('email', $request->email)->first();
+            $bookTransfer = new BookTransfer();
+            $bookTransfer->from_user_id = Auth::id();
+            $bookTransfer->to_user_id = $toUser->id;
+            $bookTransfer->transfer_token = $token;
+            $bookTransfer->book_id = $book->id;
+            $bookTransfer->save();
+
+            Mail::to($toUser->email)->send(new BookTransferMail($book, $toUser, $token));
+
+            // send mail
+            return redirect()->back()->with('success', 'The book transfer request was sent successfully');
+        }
+
+        return redirect()->back()->with('error', 'Sorry, the book does not exist.');
+
+    }
+
+    public function bookAcceptBook($token) {
+        $transfer = BookTransfer::where('transfer_token', $token)->first();
+
+        if(isset($transfer)) {
+
+            if($transfer->to_user_id != Auth::id()) {
+                return redirect()->route('home')->with('error', 'Oops! You are not allowed to complete this process.');
+            }
+
+            $book = Book::find($transfer->book_id);
+
+            if(isset($book)) {
+                $book->user_id = $transfer->to_user_id;
+                if($book->save()) {
+                    return redirect()->route('my-books')->with('success', 'The book was added to your books successfully.');
+                }
+            }
+
+        }
+        return redirect()->route('home')->with('error', 'Oops! an error occured during the process please try again later.');
     }
 }

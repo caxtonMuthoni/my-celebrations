@@ -79,7 +79,7 @@
             v-if="step == 2"
             class="row justify-content-center book-create__row"
         >
-         <div class="col-md-11 book-create__co">
+            <div class="col-md-11 book-create__co">
                 <div class="book-create__col--content">
                     <div class="book-create__header">
                         <div class="book-create__header--step">
@@ -91,24 +91,45 @@
                 </div>
             </div>
             <div class="col-md-8">
+                <div class="alert alert-info">
+                    NB. All the messages sent here will be reviewed by the owner
+                    of the book. Once the owner approves your message, it will
+                    be published to the book.
+                </div>
                 <div class="card p-2 px-5 text-start">
                     <div class="mb-3">
-                      <label for="relationship" class="form-label">What is your relationship with the book owner?</label>
-                      <input v-model="form.relationship" type="text"
-                        class="form-control" name="relationship" id="relationship" aria-describedby="relationship" placeholder="eg. Brother">
-                      <small id="relationship" class="form-text text-muted">Examples friend, brother, mother, teacher etc.</small>
+                        <label for="relationship" class="form-label"
+                            >What is your relationship with the book
+                            owner?</label
+                        >
+                        <input
+                            v-model="form.relationship"
+                            type="text"
+                            class="form-control"
+                            name="relationship"
+                            id="relationship"
+                            aria-describedby="relationship"
+                            placeholder="eg. Brother"
+                        />
+                        <small id="relationship" class="form-text text-muted"
+                            >Examples friend, brother, mother, teacher
+                            etc.</small
+                        >
                     </div>
                     <div class="mb-3">
                         <label for="message" class="form-label"
-                            >Enter the massage</label
+                            >Enter the message</label
                         >
                         <textarea
-                           v-model="form.message"
+                            v-model="form.message"
                             class="form-control"
                             name="message"
                             id="message"
                             rows="3"
                         ></textarea>
+                        <p class="form-text" :class="{'text-danger': form.message.length > maxCharacteres}">
+                            Maximum characters is {{maxCharacteres}} - {{form.message.length}} / {{maxCharacteres}}
+                        </p>
                     </div>
                 </div>
             </div>
@@ -118,9 +139,10 @@
                     <button
                         class="btn btn-block btn-lg btn__primary mt-3"
                         @click="createMessage"
+                        :disabled="form.message.length > maxCharacteres"
                     >
                         Save Message
-                       <i class="fa fa-save ms-2" aria-hidden="true"></i>
+                        <i class="fa fa-save ms-2" aria-hidden="true"></i>
                     </button>
                 </div>
             </div>
@@ -139,15 +161,16 @@ export default {
     props: {
         bookId: {
             type: Number,
-            required: true
-        }
+            required: true,
+        },
     },
 
     data: () => ({
         step: 2,
         templates: [],
+        maxCharacteres: 150,
         form: new Form({
-            message: null,
+            message: '',
             template: null,
             relationship: null,
             book_id: null,
@@ -168,7 +191,9 @@ export default {
     methods: {
         async fetchTemplates() {
             try {
-                const response = await axios.get("/api/celebrations/templates/messages");
+                const response = await axios.get(
+                    "/api/celebrations/templates/messages"
+                );
                 this.templates = response.data;
             } catch (e) {
                 throw e;
@@ -178,8 +203,10 @@ export default {
         async createMessage() {
             try {
                 this.loading = true;
-                this.form.book_id = this.bookId
-                const response = await this.form.post("/api/celebrations/message");
+                this.form.book_id = this.bookId;
+                const response = await this.form.post(
+                    "/api/celebrations/message"
+                );
                 const responseData = response.data;
                 if (responseData.status) {
                     Toast.fire({

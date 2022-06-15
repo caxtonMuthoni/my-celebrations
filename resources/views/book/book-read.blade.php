@@ -15,7 +15,11 @@
                 Add images</a>
 
             @else
-            <a href="{{route('book-show', $id)}}" class="btn btn-primary me-2">
+            <a href="{{route('book-transfer', $id)}}" class="btn btn-info me-2">
+                <i class="fa fa-cut me2" aria-hidden="true"></i>
+                Book Transfer</a>
+
+                <a href="{{route('book-show', $id)}}" class="btn btn-primary me-2">
                 <i class="fa fa-edit me-2" aria-hidden="true"></i>
                 Edit</a>
             @if(!$book->published)

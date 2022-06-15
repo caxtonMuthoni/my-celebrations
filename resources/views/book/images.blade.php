@@ -15,16 +15,20 @@
                 </div>
             </div>
             <div class="col-md-8">
+                <div class="alert alert-info">
+                    NB. All the images uploaded here will be reviewed by the owner
+                    of the book. Once the owner approves your images, they will
+                    be published to the book.
+                </div>
                 <div class="card p-5 text-start">
                     <div class="mb-3">
                         <label for="image" class="form-label">Add an image to the book gallery.</label>
                         <input type="file" class="form-control" name="image" id="image" aria-describedby="relationship" placeholder="eg. Brother">
                     </div>
                     <div class="mb-3">
-                      <label for="caption" class="form-label">Add image caption (Optional)</label>
-                      <input type="text"
-                        class="form-control" name="caption" id="caption" aria-describedby="caption" placeholder="">
-                      <small id="caption" class="form-text text-muted">This is an optional field</small>
+                        <label for="caption" class="form-label">Add image caption (Optional)</label>
+                        <input type="text" class="form-control" name="caption" id="caption" aria-describedby="caption" placeholder="">
+                        <small id="caption" class="form-text text-muted">This is an optional field</small>
                     </div>
                     <input hidden type="text" name="book_id" value="{{$id}}">
                 </div>
@@ -40,6 +44,6 @@
                 </div>
             </div>
         </div>
-</form>
+    </form>
 </div>
 @endsection

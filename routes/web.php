@@ -84,6 +84,9 @@ Route::group([
     Route::get('/book/pdf/read/{id}', [BookController::class, 'readBookPDf'])->name('readBookPDf');
     Route::get('/book/edit/details/{id}', [BookController::class, 'bookEditView'])->name('edit-book-details');
     Route::post('/book/update/details/{id}', [BookController::class, 'update'])->name('update-book-details');
+    Route::get('/book/transfer/{id}', [BookController::class, 'bookTransferView'])->name('book-transfer');
+    Route::get('/book/accept/transfer/{token}', [BookController::class, 'bookAcceptBook'])->name('accept_book_transfer');
+    Route::post('/book/request/transfer/{id}', [BookController::class, 'transferBookRequest'])->name('book-request-transfer');
 });
 
 
