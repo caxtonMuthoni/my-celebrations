@@ -1,42 +1,51 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url("https://fonts.googleapis.com/css?family=Nunito");
 
 // Variables
-@import 'variables';
+@import "variables";
 
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
+@import "~bootstrap/scss/bootstrap";
 
-@import './base/typography';
+@import "./base/typography";
 
-@import './components/btn';
-@import './components/auth-card';
-@import './components/stats-card';
-@import './components/book-card';
+@import "./components/btn";
+@import "./components/auth-card";
+@import "./components/stats-card";
+@import "./components/book-card";
 
-@import './pages/welcome';
-@import './pages/book-content';
-@import './pages/mybooks';
-@import './pages/book-create-steps/book-create';
-@import './pages/billing/billing-plans';
-@import './pages/billing/billing-payment';
+@import "./pages/welcome";
+@import "./pages/book-content";
+@import "./pages/mybooks";
+@import "./pages/book-create-steps/book-create";
+@import "./pages/billing/billing-plans";
+@import "./pages/billing/billing-payment";
 
-@import './pages/verify-card';
-
-
-
-
+@import "./pages/verify-card";
 
 .table {
     &__item {
-       height: 80px;
-       display: flex;
-       align-items: center;
+        height: 80px;
+        display: flex;
+        align-items: center;
     }
 }
-
 
 .add_msg_cta_bar {
     border-bottom: 1px solid rgba(201, 201, 201, 0.222);
     padding: 0 30px 10px 30px;
+}
+
+.main-app {
+    background: url("/images/bg/desktop_background.jpeg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100%;
+    width: 100vw;
+    height: 100vh;
+
+    @media screen and (max-width: 900px) {
+        background: url("/images/bg/mobile_background.jpeg");
+    }
 }

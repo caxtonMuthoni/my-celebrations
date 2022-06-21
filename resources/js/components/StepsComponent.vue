@@ -412,18 +412,18 @@ export default {
         handleFile(event) {
             const file = event.target.files[0];
             const size = file.size / 1024 / 1024 ;
-            if(size > 2) {
-                this.form.errors.set('cover_image', 'The selected image size is greator than 2MB.')
-                Toast.fire({
-                    title: 'File is too large',
-                    text: "Cover image must not be more than 2MB",
-                    icon: "info"
-                })
-            }
-            else {
+            // if(size > 2) {
+            //     this.form.errors.set('cover_image', 'The selected image size is greator than 2MB.')
+            //     Toast.fire({
+            //         title: 'File is too large',
+            //         text: "Cover image must not be more than 2MB",
+            //         icon: "info"
+            //     })
+            // }
+            // else {
                 this.form.errors.clear('cover_image')
                 this.form.cover_image = file;
-            }
+            // }
         },
 
         async nextPage() {

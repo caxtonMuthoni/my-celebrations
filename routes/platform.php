@@ -6,6 +6,7 @@ use App\Orchid\Screens\BooksScreen;
 use App\Orchid\Screens\CategoryScreen;
 use App\Orchid\Screens\DashboardScreen;
 use App\Orchid\Screens\EditCategoryScreen;
+use App\Orchid\Screens\EditFaqScreen;
 use App\Orchid\Screens\EditSubscriberScreen;
 use App\Orchid\Screens\EditSubscriptionFeaturesScreen;
 use App\Orchid\Screens\EditSubscriptionPlansScreen;
@@ -17,6 +18,7 @@ use App\Orchid\Screens\Examples\ExampleFieldsScreen;
 use App\Orchid\Screens\Examples\ExampleLayoutsScreen;
 use App\Orchid\Screens\Examples\ExampleScreen;
 use App\Orchid\Screens\Examples\ExampleTextEditorsScreen;
+use App\Orchid\Screens\FaqsScreen;
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
@@ -149,3 +151,6 @@ Route::screen('dashboard', DashboardScreen::class)
 
  Route::screen('subscriptions/features', SubscriptionFeaturesScreen::class)->name('platform.dashboard.subscription-features');
  Route::screen('subscriptions/feature/{plan?}', EditSubscriptionFeaturesScreen::class)->name('platform.dashboard.subscription-features-edit');
+
+ Route::screen('faqs', FaqsScreen::class)->name('platform.dashboard.faqs');
+ Route::screen('faq/{faq?}', EditFaqScreen::class)->name('platform.dashboard.faq-edit');

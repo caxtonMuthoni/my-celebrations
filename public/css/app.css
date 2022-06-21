@@ -11922,3 +11922,18 @@ body {
   border-bottom: 1px solid rgba(201, 201, 201, 0.222);
   padding: 0 30px 10px 30px;
 }
+
+.main-app {
+  background: url("/images/bg/desktop_background.jpeg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100%;
+  width: 100vw;
+  height: 100vh;
+}
+@media screen and (max-width: 900px) {
+  .main-app {
+    background: url("/images/bg/mobile_background.jpeg");
+  }
+}

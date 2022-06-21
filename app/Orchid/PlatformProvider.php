@@ -57,6 +57,11 @@ class PlatformProvider extends OrchidServiceProvider
                     Menu::make('Subscription Features')->icon('settings')->route('platform.dashboard.subscription-features'),
                 ]),
 
+            Menu::make('Faqs')
+                ->icon('book-open')
+                ->route('platform.dashboard.faqs'),
+
+
             Menu::make('Transactions')
                 ->icon('money')
                 ->route('platform.dashboard.transaction'),

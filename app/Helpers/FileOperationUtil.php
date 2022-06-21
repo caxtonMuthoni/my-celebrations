@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
 
 class FileOperationUtil
@@ -24,8 +25,9 @@ class FileOperationUtil
         // Filename To store
         $fileNameToStore = $filename . '_' . time() . '.' . $extension;
         // Upload Image
-        $path = $this->file->storeAs($this->folder, $fileNameToStore, 'public');
-
+        // $path = $this->file->storeAs($this->folder, $fileNameToStore, 'public');
+        $img = \Image::make($this->file)->encode('jpg', 10);
+        Storage::disk('public')->put("/$this->folder/$fileNameToStore", (string)$img);
         return $fileNameToStore;
     }
 
