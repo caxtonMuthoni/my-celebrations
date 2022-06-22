@@ -8,11 +8,9 @@
 
             <div class="col-md-6 col-sm-12">
                 <div class="home-info">
-                    <h1>Who are We ?</h1>
+                    <h1>About US ?</h1>
                     <p class="text-white">
-                        This is an online platform that allows people to capture and
-                        save special memories. From celebrations to holidays and special days such as weddings, father’s day, mother’s day and parties,
-                        we allow you to publish a story and upload photos to help you remember each event.
+                        My celebrations book is a service from Broaden Reach Online Services (BROS), an E-Commerce company committed to providing online solutions to every day needs. Our vision to be a globally recognized brand in digital document creation services. We stand for honesty, timeliness, efficiency, customer focus and integrity in our services to you, our customer. Welcome onboard, enjoy the ride.
                     </p>
                     <a href="#about" class="btn section-btn smoothScroll">Join US For Free!</a>
                 </div>

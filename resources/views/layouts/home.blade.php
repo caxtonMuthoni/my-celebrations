@@ -17,8 +17,8 @@
 
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="{{ asset('css/templatemo-style.css') }}">
-      <!-- Styles -->
-      <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
+    <!-- Styles -->
+    <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
 </head>
 
 <body>
@@ -54,7 +54,7 @@
                     <li><a href="/" class="smoothScroll">Home</a></li>
                     <li><a href="{{route('about-us')}}" class="smoothScroll">About</a></li>
                     <li><a href="{{route('book-public-show')}}" class="smoothScroll">Public books</a></li>
-                    <li><a href="{{route('pricing')}}" class="smoothScroll">Pricing</a></li>
+                    <li><a href="{{route('pricing')}}" class="smoothScroll">Plans</a></li>
                     <li><a href="{{route('faqs')}}" class="smoothScroll">FAQs</a></li>
                     <li><a href="#contact" class="smoothScroll">Contacts</a></li>
                 </ul>
@@ -153,7 +153,10 @@
                 <div class="col-md-5 col-sm-12">
                     <div class="footer-thumb footer-info">
                         <h2>My Celebration Books</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        <p>
+                            My celebrations book is a service from Broaden Reach Online Services (BROS),
+                            an E-Commerce company committed to providing online solutions to every day needs.
+                        </p>
                     </div>
                 </div>
 
@@ -161,10 +164,10 @@
                     <div class="footer-thumb">
                         <h2>Company</h2>
                         <ul class="footer-link">
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Join our team</a></li>
-                            <li><a href="#">Read Blog</a></li>
-                            <li><a href="#">Press</a></li>
+                            <li><a href="/">Home</a></li>
+                            <li><a href="{{route('about-us')}}">About Us</a></li>
+                            <li><a href="{{route('book-public-show')}}">Public Books</a></li>
+                            <li><a href="{{route('faqs')}}">Faqs</a></li>
                         </ul>
                     </div>
                 </div>
@@ -173,9 +176,11 @@
                     <div class="footer-thumb">
                         <h2>Services</h2>
                         <ul class="footer-link">
-                            <li><a href="#">Pricing</a></li>
-                            <li><a href="#">Documentation</a></li>
-                            <li><a href="#">Support</a></li>
+                            <li><a href="{{route('pricing')}}">Plans</a></li>
+                            <li><a href="#">contact us</a></li>
+                            <li><a href="#">Terms and conditions</a></li>
+                            <li><a href="#">Privacy policy</a></li>
+
                         </ul>
                     </div>
                 </div>
@@ -183,7 +188,8 @@
                 <div class="col-md-3 col-sm-4">
                     <div class="footer-thumb">
                         <h2>Find us</h2>
-                        <p>123 Grand Rama IX, <br> Krung Thep Maha Nakhon 10400</p>
+                        <p>Nairobi, <br> Nairobi Kenya</p>
+                        <p>info@mycelebrationbooks.com</p>
                     </div>
                 </div>
 
@@ -191,12 +197,12 @@
                     <div class="footer-bottom">
                         <div class="col-md-6 col-sm-5">
                             <div class="copyright-text">
-                                <p>Copyright &copy; 2017 Your Company</p>
+                                <p>Copyright &copy; {{date("Y")}} Mycelebrations.com</p>
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-7">
                             <div class="phone-contact">
-                                <p>Call us <span>+254743751575</span></p>
+                                <p>Call us/ whatsapp <span>+254768069134/+254738121484</span></p>
                             </div>
                             <ul class="social-icon">
                                 <li><a href="https://www.facebook.com/templatemo" class="fa fa-facebook-square" attr="facebook icon"></a></li>

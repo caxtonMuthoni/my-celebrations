@@ -10,13 +10,16 @@
                 <div class="home-info">
                     <h1>My Celebrations Book, where memories never fail</h1>
                     <p class="text-white">
-                        This is an online platform that allows people to capture and
-                        save special memories. From celebrations to holidays and special days such as weddings, father’s day, mother’s day and parties,
-                        we allow you to publish a story and upload photos to help you remember each event.
+                        We live our lives story by story through the memories we create.
+                        While it is important to preserve our most cherished memories,
+                        the human mind is limited. My celebrations book is now giving you an opportunity to capture,
+                        keep and share your happy moments in an online storage. From baby showers, to child naming ceremonies,
+                        rites of passage, birthdays, baptism, weddings, graduations, anniversaries,
+                        award ceremonies, trips, holidays and more, we shall help you keep your treasured memories safe.
                     </p>
                     <a href="{{route('book-create')}}" class="btn section-btn smoothScroll">Create new book</a>
                     <span>
-                        CALL US +254743751575
+                        CALL US +254768069134, +254738121484
                         <small>For any inquiry</small>
                     </span>
                 </div>
@@ -43,14 +46,17 @@
             <div class="col-md-5 col-sm-6">
                 <div class="about-info">
                     <div class="section-title">
-                        <h2>Let us introduce</h2>
+                        <h2>What you can do </h2>
                         <span class="line-bar">...</span>
                     </div>
-                    <p>We live our lives story by story through the memories we create.
-                        While it is important to preserve our most cherished memories, the human mind
-                        cannot remember forever. My celebrations book is now giving you an opportunity to capture, keep and share your happy moments in an online storage. </p>
+                    <p> My celebrations book has created a platform for you to capture your special moments forever. This will help you to </p>
                     <p>
-                        From baby showers, to child naming ceremonies, rites of passage, birthdays, baptism, weddings, graduations, anniversaries, award ceremonies, trips, holidays and more, we shall help you keep your treasured memories safe.
+                        1. Record your memories of each event <br>
+                        2. Upload the most important pictures <br>
+                        3. Invite others contribute to your story by sending messages such as
+                        birthday wishes, congratulations for wedding, graduations etc. They can also share photos alongside the messages <br>
+                        4. Download or print the book for a different form of storage or other uses.
+
                     </p>
                 </div>
             </div>
@@ -63,20 +69,21 @@
                     </div>
                     <ul class="px-0 mx-0" style="padding: 0;">
                         <ol class="px-0 mx-0" style="padding: 0;">
-                            <p> 1. Store your photos where they are always accessible</p>
+                            <p> 1. Establish a tradition of recording important events such as birthdays,
+                                wedding and anniversaries, graduation etc; all in one safe account!</p>
                         </ol>
                         <ol style="padding: 0;">
-                            <p>2. Let others contribute to your story</p>
+                            <p>2. Re-live your good times and the messages from loved ones.</p>
                         </ol>
                         <ol style="padding: 0;">
-                            <p>3. Re-live your good times</p>
+                            <p>3. Affordably keep your happy moments safe</p>
                         </ol>
-                        <ol style="padding: 0;">
+                        <!-- <ol style="padding: 0;">
                             <p>4. Affordably keep your happy moments safe</p>
                         </ol>
                         <ol style="padding: 0;">
                             <p>5. Travel in time</p>
-                        </ol>
+                        </ol> -->
                     </ul>
                 </div>
                 <!-- <div class="about-info skill-thumb">
@@ -140,8 +147,9 @@
                     <div class="media-body blog-info">
                         <!-- <small><i class="fa fa-clock-o"></i> December 22, 2017</small> -->
                         <h3><a href="#">The only memory that never fails.</a></h3>
-                        <p>The human memory fails as we age. However, the cloud neither fails nor forgets. Write down your story when it’s fresh in your memory then store it in the cloud.
-                            Mycelebrationsbook.com will keep it safe forever.</p>
+                        <p>The human memory fails as we age. However, the cloud neither fails nor forgets.
+                            Write down your story when it’s
+                            fresh in your memory then store it in the cloud. Mycelebrationsbook.com will keep it safe forever.</p>
 
                     </div>
                 </div>
