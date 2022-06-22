@@ -20,10 +20,7 @@ class EnsureUserIsAsubscriber
     public function handle(Request $request, Closure $next)
     {
         $subsbscription = Subscriber::with('subscriptionPlan')->where([['user_id', Auth::id()], ['is_active', true]])->first();
-        $books = 0;
-        if (isset($subsbscription)) {
-            $books = Book::where('user_id', Auth::id())->count();
-        }
+        $books = Book::where('user_id', Auth::id())->count();
 
         // first user
         if (!isset($subsbscription) && $books < 1) {
