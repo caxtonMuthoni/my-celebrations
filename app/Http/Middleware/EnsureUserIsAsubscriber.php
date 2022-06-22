@@ -22,15 +22,20 @@ class EnsureUserIsAsubscriber
         $subsbscription = Subscriber::with('subscriptionPlan')->where([['user_id', Auth::id()], ['is_active', true]])->first();
         $books = 0;
         if (isset($subsbscription)) {
-            $books = Book::where('user_id', Auth::id())->whereDate('created_at', '>=', $subsbscription->created_at)->count();
+            $books = Book::where('user_id', Auth::id())->count();
         }
+
+        // first user
         if (!isset($subsbscription) && $books < 1) {
             return $next($request);
         }
+
+        // user has used free plan
         if (!isset($subsbscription) && $books >= 1) {
             return redirect()->route('billing-plans')->with('error', 'Please subscribe in order to continue');
         }
 
+        // more books 
         if ($books >= $subsbscription->subscriptionPlan->total_number_books) {
             return redirect()->route('billing-plans')->with('error', 'You have reached the maximum number of books for your subscription.');
         }
