@@ -207,7 +207,9 @@ export default {
                 const response = await this.form.post(
                     "/api/celebrations/message"
                 );
+
                 const responseData = response.data;
+
                 if (responseData.status) {
                     Toast.fire({
                         icon: "success",
@@ -215,9 +217,14 @@ export default {
                     });
                     location.href = `/book/book/pdf/read/${this.bookId}`;
                 } else {
-                    throw "error occured";
+                    this.$swal.fire({
+                    icon: "error",
+                    title: "An error occurred",
+                    text: responseData.message,
+                });
                 }
             } catch (error) {
+                console.log(error);
                 this.$swal.fire({
                     icon: "error",
                     title: "An error occurred",

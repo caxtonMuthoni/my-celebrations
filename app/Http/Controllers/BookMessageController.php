@@ -6,6 +6,7 @@ use App\Helpers\BookPDFGenerator;
 use App\Models\BookMessage;
 use App\Http\Requests\StoreBookMessageRequest;
 use App\Http\Requests\UpdateBookMessageRequest;
+use App\Models\Book;
 use Illuminate\Support\Facades\Auth;
 
 class BookMessageController extends Controller
@@ -39,6 +40,13 @@ class BookMessageController extends Controller
     public function store(StoreBookMessageRequest $request)
     {
         try {
+            $book = Book::withCount('bookMessages')->with('subscriptionPlan')->findOrFail($request->book_id);
+            if($book->book_messages_count >= $book->subscriptionPlan->messages_per_book) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'You can and any more messages to this book'
+                ]);
+            }
             $bookMessage = new BookMessage();
             $bookMessage->message = $request->message;
             $bookMessage->user_id = Auth::id();
@@ -46,6 +54,12 @@ class BookMessageController extends Controller
             $bookMessage->relationship = $request->relationship;
             $bookMessage->template_id = $request->template;
             $bookMessage->save();
+
+            if($book->publish_messages_to_book) {
+                $bookMessage->public = true;
+                $bookMessage->save();
+                BookPDFGenerator::generatePDF($book->id);
+            }
             return response()->json([
                 'status' => true,
                 'message' => 'Message was sent successfully'

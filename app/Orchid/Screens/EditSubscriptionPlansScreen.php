@@ -8,6 +8,7 @@ use App\Models\SubscriptionPlanFeatures;
 use App\Orchid\Layouts\PlanSubscriptionFeaturesListLayout;
 use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Button;
+use Orchid\Screen\Fields\CheckBox;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\TextArea;
 use Orchid\Screen\Screen;
@@ -86,13 +87,19 @@ class EditSubscriptionPlansScreen extends Screen
                     Input::make('plan.name')->type('text')->title('Subscription plan name')->help('What is the plan\'s title? '),
                     TextArea::make('plan.description')->type('text')
                         ->title('Subscription plan description')->help('Tell us more about the plan? ')
-                        ->rows(7),
+                        ->rows(2),
+                    Input::make('plan.messages_per_book')->type('text')->title('Messages per book')->help('What is the plan\'s maximum messages per book? '),
+                    Input::make('plan.pictures_per_book')->type('text')->title('Pictures per book')->help('What is the plan\'s maximum number of pictures per book? '),
                 ]),
 
                 Layout::rows([
-                    Input::make('plan.days_to_expiry')->type('text')->title('Subscription plan active days')->help('What is the plan\'s total active days? '),
-                    Input::make('plan.cost')->type('text')->title('Subscription plan cost')->help('What is the plan\'s total cost? '),
-                    Input::make('plan.total_number_books')->type('text')->title('Subscription plan total books')->help('What is the plan\'s total books? '),
+                    Input::make('plan.available_templates')->type('text')->title('Available templates')->help('What is the plan\'s maximum number of templates available? '),
+                    Input::make('plan.cost')->type('text')->title('Subscription plan cost id USD')->help('What is the plan\'s total cost in USD? '),
+                    Input::make('plan.convertion_rate')->type('text')->title('Convertion rate for USD to KES')->help('What is the convertion rate the system uses to convert price from USD to KES? '),
+                    CheckBox::make('plan.can_tranfer_book')
+                        ->title('Can the user tranfer the book to other users ?')
+                        ->placeholder('Will the users be able to transfer the book to other users?')
+                        ->sendTrueOrFalse(),
                     Input::make('plan.id')->hidden()
                 ])
             ]),
@@ -108,8 +115,13 @@ class EditSubscriptionPlansScreen extends Screen
         $planData = $request->get('plan');
         $subscriptionPlan->name = $planData['name'];
         $subscriptionPlan->description = $planData['description'];
-        $subscriptionPlan->days_to_expiry = $planData['days_to_expiry'];
-        $subscriptionPlan->total_number_books = $planData['total_number_books'];
+        // $subscriptionPlan->days_to_expiry = $planData['days_to_expiry'];
+        // $subscriptionPlan->total_number_books = $planData['total_number_books'];
+        $subscriptionPlan->messages_per_book = $planData['messages_per_book'];
+        $subscriptionPlan->pictures_per_book = $planData['pictures_per_book'];
+        $subscriptionPlan->available_templates = $planData['available_templates'];
+        $subscriptionPlan->convertion_rate = $planData['convertion_rate'];
+        $subscriptionPlan->can_tranfer_book = $planData['can_tranfer_book'];
         $subscriptionPlan->cost = $planData['cost'];
         if ($subscriptionPlan->save()) {
             $subscriptionPlan = $subscriptionPlan->refresh();
@@ -141,7 +153,7 @@ class EditSubscriptionPlansScreen extends Screen
     {
         $planId = $request->get('plan')['id'];
         $subPlanFeature = SubscriptionPlanFeatures::where([['subscription_feature_id', $feature->id], ['subscription_plan_id', $planId]])->first();
-        if(isset($subPlanFeature)) {
+        if (isset($subPlanFeature)) {
             $subPlanFeature->delete();
             Alert::success('The subscription plan feature was removed successfully');
             return redirect()->route('platform.dashboard.subscription-plans-edit', $planId);

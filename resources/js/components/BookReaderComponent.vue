@@ -13,7 +13,9 @@
                     <i class="fa fa-expand me-2" aria-hidden="true"></i>
                     Fullscreen</a
                 >
+                
                 <a
+                  v-if="userid == book.user_id"
                     href="#"
                     class="btn btn__primary me-4"
                     @click.prevent="printPDF"
@@ -230,6 +232,11 @@ export default {
             type: Object,
             required: true,
         },
+
+        userid: {
+            type: Number,
+            required: true
+        }
     },
     data() {
         return {

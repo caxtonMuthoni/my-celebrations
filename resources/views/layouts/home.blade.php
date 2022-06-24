@@ -17,6 +17,7 @@
 
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="{{ asset('css/templatemo-style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/step.css') }}">
     <!-- Styles -->
     <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
 </head>
@@ -55,6 +56,7 @@
                     <li><a href="{{route('about-us')}}" class="smoothScroll">About</a></li>
                     <li><a href="{{route('book-public-show')}}" class="smoothScroll">Public books</a></li>
                     <li><a href="{{route('pricing')}}" class="smoothScroll">Plans</a></li>
+                    <li><a href="{{route('categories')}}" class="smoothScroll">Categories</a></li>
                     <li><a href="{{route('faqs')}}" class="smoothScroll">FAQs</a></li>
                     <li><a href="#contact" class="smoothScroll">Contacts</a></li>
                 </ul>
@@ -75,7 +77,21 @@
 
         </div>
     </section>
+    @if(session('success') || session('error'))
+    <section class="mt-5 w-100 container" style="margin-top: 40px;">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                @if(session('success'))
+                <div class="alert alert-success">{{session('success')}}</div>
+                @endif
 
+                @if(session('error'))
+                <div class="alert alert-danger">{{session('error')}}</div>
+                @endif
+            </div>
+        </div>
+    </section>
+    @endif
 
     @yield('content')
 
@@ -94,21 +110,22 @@
                 <div class="col-md-8 col-sm-8">
 
                     <!-- CONTACT FORM HERE -->
-                    <form id="contact-form" role="form" action="#" method="post">
+                    <form id="contact-form" role="form" action="{{route('contact-us-form')}}" method="post">
+                        @csrf
                         <div class="col-md-6 col-sm-6">
-                            <input type="text" class="form-control" placeholder="Full Name" id="cf-name" name="cf-name" required="">
+                            <input type="text" class="form-control" placeholder="Full Name" id="name" name="name" required="">
                         </div>
 
                         <div class="col-md-6 col-sm-6">
-                            <input type="email" class="form-control" placeholder="Your Email" id="cf-email" name="cf-email" required="">
+                            <input type="email" class="form-control" placeholder="Your Email" id="email" name="email" required="">
                         </div>
 
                         <div class="col-md-6 col-sm-6">
-                            <input type="tel" class="form-control" placeholder="Your Phone" id="cf-number" name="cf-number" required="">
+                            <input type="tel" class="form-control" placeholder="Your Phone" id="number" name="phone_number" required="">
                         </div>
 
                         <div class="col-md-6 col-sm-6">
-                            <select class="form-control" id="cf-budgets" name="cf-budgets">
+                            <select class="form-control" id="cf-budgets" name="reason">
                                 <option>Contact reason</option>
                                 <option>Can't create a book</option>
                                 <option>Can't upload book images</option>
@@ -118,7 +135,7 @@
                         </div>
 
                         <div class="col-md-12 col-sm-12">
-                            <textarea class="form-control" rows="6" placeholder="Your requirements" id="cf-message" name="cf-message" required=""></textarea>
+                            <textarea class="form-control" rows="6" placeholder="Your requirements" id="cf-message" name="message" required=""></textarea>
                         </div>
 
                         <div class="col-md-4 col-sm-12">
@@ -136,7 +153,7 @@
             3. Click "Share" and choose "Embed map" tab
             4. Copy only URL and paste it within the src="" field below
 	-->
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3647.3030413476204!2d100.5641230193719!3d13.757206847615207!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xf51ce6427b7918fc!2sG+Tower!5e0!3m2!1sen!2sth!4v1510722015945" allowfullscreen></iframe>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15955.364608344307!2d36.80127391953077!3d-1.2681032326610508!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f173c0a1f9de7%3A0xad2c84df1f7f2ec8!2sWestlands%2C%20Nairobi!5e0!3m2!1sen!2ske!4v1656073547817!5m2!1sen!2ske" width="600" height="450" style="border:0;" allowfullscreen="true" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </div>
 

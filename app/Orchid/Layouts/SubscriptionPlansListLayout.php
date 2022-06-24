@@ -30,13 +30,11 @@ class SubscriptionPlansListLayout extends Table
     {
         return [
             TD::make('name', 'Name'),
-            TD::make('description', 'Description'),
-            TD::make('days_to_expiry', 'Period(Days)'),
-            TD::make('total_number_books', 'Books'),
-            TD::make('cost', 'Total cost(KES)'),
-            TD::make('created_at', 'Created')->render(function (SubscriptionPlan $subscriptionPlan) {
-                $createdAt = Carbon::parse($subscriptionPlan->created_at);
-                return $createdAt->format(DateFormatter::defaultDateFormat());
+            // TD::make('description', 'Description'),
+            TD::make('convertion_rate', 'Convertion rate'),
+            TD::make('cost', 'Total Cost(USD)'),
+            TD::make('cost', 'Total cost(KES)')->render(function($plan) {
+                return $plan->cost * $plan->convertion_rate;
             }),
             TD::make('updated_at', 'Last edit')->render(function (SubscriptionPlan $subscriptionPlan) {
                 $updatedAt = Carbon::parse($subscriptionPlan->updated_at);

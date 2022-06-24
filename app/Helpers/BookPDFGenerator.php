@@ -50,91 +50,95 @@ class BookPDFGenerator
 
     private static function createDocx(Book $book)
     {
-        $template = public_path() . $book->template->template_file->relativeUrl;
-        $templateProcesser = new TemplateProcessor($template);
-        $templateProcesser->setImageValue(
-            'cover_image',
-            array(
-                'path' => self::getImageRelativePathFromURL($book->image),
-                'width' => 150,
-                'height' => 150,
-                'ratio' => false
-            )
-        );
-        $templateProcesser->setValue('title', $book->title);
-        $templateProcesser->setValue('cover_message', $book->cover_message);
-        $templateProcesser->setValue('author', $book->user->name);
-        // set error level
-        $internalErrors = libxml_use_internal_errors(true);
-        $table = new Table();
-        $table->addRow();
-        $cell = $table->addCell();
-        $doc = new DOMDocument();
-        $content = $book->content->content;
-        $content = htmlspecialchars_decode($content);
-        $content = str_replace(' & ', ' and ', $content);
-        $doc->loadHTML($content);
-        Html::addHtml($cell, $doc->saveXML(), true);
-        $templateProcesser->setComplexBlock('content', $table);
-        libxml_use_internal_errors($internalErrors);
+        try {
+            $template = public_path() . $book->template?->template_file?->relativeUrl;
+            $templateProcesser = new TemplateProcessor($template);
+            $templateProcesser->setImageValue(
+                'cover_image',
+                array(
+                    'path' => self::getImageRelativePathFromURL($book->image),
+                    'width' => 150,
+                    'height' => 150,
+                    'ratio' => false
+                )
+            );
+            $templateProcesser->setValue('title', $book->title);
+            $templateProcesser->setValue('cover_message', $book->cover_message);
+            $templateProcesser->setValue('author', $book->user->name);
+            // set error level
+            $internalErrors = libxml_use_internal_errors(true);
+            $table = new Table();
+            $table->addRow();
+            $cell = $table->addCell();
+            $doc = new DOMDocument();
+            $content = $book->content->content;
+            $content = htmlspecialchars_decode($content);
+            $content = str_replace(' & ', ' and ', $content);
+            $doc->loadHTML($content);
+            Html::addHtml($cell, $doc->saveXML(), true);
+            $templateProcesser->setComplexBlock('content', $table);
+            libxml_use_internal_errors($internalErrors);
 
-        // book images
-        $images = $book->bookImages;
-        if ($images) {
-            $images = $images->toArray();
-            $imageChunks = array_chunk($images, 2);
-            $templateProcesser->cloneBlock('book_image', count($imageChunks), true, true);
-            foreach ($imageChunks as $key => $image) {
-                $templateProcesser->setImageValue(
-                    "book_image_photo#" . $key + 1,
-                    array(
-                        'path' => self::getImageRelativePathFromURL($image[0]['image']),
-                        'width' => 200,
-                        'height' => 200
-                    )
-                );
-
-                $templateProcesser->setValue("book_image_caption#" . $key + 1, $image[0]['caption']);
-                if (count($image) > 1) {
+            // book images
+            $images = $book->bookImages;
+            if ($images) {
+                $images = $images->toArray();
+                $imageChunks = array_chunk($images, 2);
+                $templateProcesser->cloneBlock('book_image', count($imageChunks), true, true);
+                foreach ($imageChunks as $key => $image) {
                     $templateProcesser->setImageValue(
-                        "book_image_photo_left#" . $key + 1,
+                        "book_image_photo#" . $key + 1,
                         array(
-                            'path' => self::getImageRelativePathFromURL($image[1]['image']),
-                            'width' => 300,
-                            'height' => 300
+                            'path' => self::getImageRelativePathFromURL($image[0]['image']),
+                            'width' => 200,
+                            'height' => 200
                         )
                     );
-                    $templateProcesser->setValue("book_image_caption_left#" . $key + 1, $image[1]['caption']);
-                } else {
-                    $templateProcesser->setValue(
-                        "book_image_photo_left#" . $key + 1,
-                       ' '
-                    );
-                    $templateProcesser->setValue("book_image_caption_left#" . $key + 1, ' ');
+
+                    $templateProcesser->setValue("book_image_caption#" . $key + 1, $image[0]['caption']);
+                    if (count($image) > 1) {
+                        $templateProcesser->setImageValue(
+                            "book_image_photo_left#" . $key + 1,
+                            array(
+                                'path' => self::getImageRelativePathFromURL($image[1]['image']),
+                                'width' => 300,
+                                'height' => 300
+                            )
+                        );
+                        $templateProcesser->setValue("book_image_caption_left#" . $key + 1, $image[1]['caption']);
+                    } else {
+                        $templateProcesser->setValue(
+                            "book_image_photo_left#" . $key + 1,
+                            ' '
+                        );
+                        $templateProcesser->setValue("book_image_caption_left#" . $key + 1, ' ');
+                    }
                 }
             }
-        }
 
-        // book messages
-        $messages = $book->bookMessages;
-        if ($messages) {
-            $templateProcesser->cloneBlock('book_messages', count($messages), true, true);
-            foreach ($messages as $key => $message) {
-                $templateProcesser->setValue(
-                    "book_message#" . $key + 1,
-                    $message->message
-                );
-                $templateProcesser->setValue("book_message_user#" . $key + 1,  $message['user']['name']);
-                $templateProcesser->setValue("book_message_relationship#" . $key + 1,  $message['relationship']);
+            // book messages
+            $messages = $book->bookMessages;
+            if ($messages) {
+                $templateProcesser->cloneBlock('book_messages', count($messages), true, true);
+                foreach ($messages as $key => $message) {
+                    $templateProcesser->setValue(
+                        "book_message#" . $key + 1,
+                        $message->message
+                    );
+                    $templateProcesser->setValue("book_message_user#" . $key + 1,  $message['user']['name']);
+                    $templateProcesser->setValue("book_message_relationship#" . $key + 1,  $message['relationship']);
+                }
             }
+
+
+            $file = $book->title . "_" . date('y-m-d') . '_' . time();
+            $file = str_replace(' ', '_', $file);
+            ob_clean();
+            $templateProcesser->saveAs($file . ".docx");
+            return $file;
+        } catch (\Throwable $th) {
+            throw $th;
         }
-
-
-        $file = $book->title . "_" . date('y-m-d') . '_' . time();
-        $file = str_replace(' ', '_', $file);
-        ob_clean();
-        $templateProcesser->saveAs($file . ".docx");
-        return $file;
     }
 
     private static function convertDocxToPDF($file)

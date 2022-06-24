@@ -3,17 +3,33 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\PhoneSanitizer;
+use App\Models\Subscriber;
 use App\Models\SubscriptionPlan;
 use App\Models\Transaction;
 use App\Payment\MpesaSubscription;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class BillingController extends Controller
 {
     public function plans()
     {
-        $plans = SubscriptionPlan::with('features.featureDetails')->get();
+        if (Gate::allows('hasPlan')) {
+            $subscriber = Subscriber::where([['user_id', Auth::id()], ['is_active', true]])->first();
+            if(isset($subscriber)) {
+                $plans = SubscriptionPlan::with('features.featureDetails')->where('id', $subscriber->subscription_plan_id)->get();
+            } else {
+                $plans = SubscriptionPlan::with('features.featureDetails')->where('cost', '<=', 0)->get();
+            }
+        } else {
+            if (Gate::allows('free-subscription')) {
+                $plans = SubscriptionPlan::with('features.featureDetails')->get();
+            } else {
+                $plans = SubscriptionPlan::with('features.featureDetails')->where('cost', '>', 0)->get();
+            }
+        }
+
         return view('billing.plans', compact('plans'));
     }
 
@@ -38,7 +54,7 @@ class BillingController extends Controller
 
             $mpesaSubscription = new MpesaSubscription();
             $plan = SubscriptionPlan::find($request->plan_id);
-            $amount = $plan->cost;
+            $amount = $plan->cost * $plan->convertion_rate;
             $phoneNumber = substr(PhoneSanitizer::sanitize($request->phone_number), 1);
             $response = $mpesaSubscription->stkPush($phoneNumber, $amount);
             $merchantId = property_exists($response, 'MerchantRequestID');
@@ -81,7 +97,8 @@ class BillingController extends Controller
 
     // paypal
 
-    public function paypalView($id) {
+    public function paypalView($id)
+    {
         $plan = SubscriptionPlan::find($id);
         return view('billing.paypal', compact('plan'));
     }

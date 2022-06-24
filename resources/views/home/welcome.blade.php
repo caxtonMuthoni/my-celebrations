@@ -239,4 +239,84 @@
     </div>
 </section>
 
+<!-- WORK -->
+<section id="work" data-stellar-background-ratio="0.5">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-12 col-sm-12">
+                <div class="section-title">
+                    <h2>Ready to create your book?</h2>
+                    <span class="line-bar">...</span>
+                </div>
+                <p class="mt-5">You can save your memories in 4 simple steps;</p>
+            </div>
+
+            <div class="col-md-3 col-sm-6">
+                <div class="step">
+                    <div class="step__title">STEP 1</div>
+                    <div class="step__content">
+                        <div class="step__description">
+                            Create an account
+                        </div>
+                        <div class="step__icon">
+                            <i class="fa fa-edit" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6">
+                <div class="step">
+                    <div class="step__title">STEP 2</div>
+                    <div class="step__content">
+                        <div class="step__description">
+                            Select a subscription plan
+                        </div>
+                        <div class="step__icon">
+                            <i class="fa fa-money" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6">
+                <div class="step">
+                    <div class="step__title">STEP 3</div>
+                    <div class="step__content">
+                        <div class="step__description">
+                            Start writing and uploading your photos
+                        </div>
+                        <div class="step__icon">
+                            <i class="fa fa-book" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6">
+                <div class="step">
+                    <div class="step__title">STEP 4</div>
+                    <div class="step__content">
+                        <div class="step__description">
+                            Generate link to invite loved ones to send messages
+                        </div>
+                        <div class="step__icon">
+                           <i class="fa fa-share" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="text-center" style="margin-top: 30px;">
+                    <a href="{{ route('book-create') }}" class="btn btn-primary">Create your first book.</a>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</section>
+
 @endsection

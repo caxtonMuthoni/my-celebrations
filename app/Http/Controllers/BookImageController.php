@@ -7,6 +7,7 @@ use App\Helpers\FileOperationUtil;
 use App\Models\BookImage;
 use App\Http\Requests\StoreBookImageRequest;
 use App\Http\Requests\UpdateBookImageRequest;
+use App\Models\Book;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -44,6 +45,14 @@ class BookImageController extends Controller
         try {
             $bookId = $request->book_id;
             $userId = Auth::id();
+            $book = Book::withCount('bookImages')->with('subscriptionPlan')->findOrFail($request->book_id);
+            if($book->book_images_count >= $book->subscriptionPlan->pictures_per_book) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'You can and any more messages to this book'
+                ]);
+            }
+
             foreach ($request->images as $image) {
                 $fileUploadUtil = new FileOperationUtil($image, 'book-images');
                 $path = $fileUploadUtil->uploadFile();
@@ -79,6 +88,10 @@ class BookImageController extends Controller
         ]);
 
         try {
+            $book = Book::withCount('bookImages')->with('subscriptionPlan')->findOrFail($request->book_id);
+            if($book->book_images_count >= $book->subscriptionPlan->pictures_per_book) {
+                return redirect()->back()->with('error', 'Sorry, You can\'t upload more images for this book');
+            }
             $bookId = $request->book_id;
             $userId = Auth::id();
             $image = $request->file('image');
@@ -96,6 +109,7 @@ class BookImageController extends Controller
             $bookImage->save();
             return redirect()->route('readBookPDf', ['id' => $bookId])->with('success', 'The image was uploaded successfully');
         } catch (\Throwable $th) {
+            dd($th);
             return redirect()->back()->with('error', 'The image could not be uploaded');
         }
     }

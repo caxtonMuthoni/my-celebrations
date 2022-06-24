@@ -8,7 +8,7 @@
         <div class="col-md-6">
             <div class="card billing-payment__card p-5 shadow-sm">
                 <img src="{{asset('images/payments/mpesa.png')}}" alt="" class="billing-payment__img">
-                <div class="billing-payment__type">Pay KSH {{$plan->cost}} for plan {{$plan->name}}.</div>
+                <div class="billing-payment__type">Pay KSH {{$plan->cost * $plan->convertion_rate}} for plan {{$plan->name}}.</div>
                 <form action="{{route('billing-with-mpesa')}}" method="post">
                     @csrf
                     <div class="mb-3">

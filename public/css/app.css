@@ -11838,7 +11838,7 @@ body {
   font-size: 9px;
 }
 .billing-plan__content--description {
-  font-size: 13px;
+  font-size: 13px !important;
 }
 .billing-plan__cta {
   border-top: 1px solid #e9e9e9;
@@ -11936,4 +11936,9 @@ body {
   .main-app {
     background: url("/images/bg/mobile_background.jpeg");
   }
+}
+
+.nav-link {
+  font-weight: bold !important;
+  margin-right: 20px;
 }

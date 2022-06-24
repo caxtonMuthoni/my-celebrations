@@ -32,7 +32,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'home']);
 Route::get('/about-us', [HomeController::class, 'aboutUs'])->name('about-us');
 Route::get('/pricing', [HomeController::class, 'pricing'])->name('pricing');
+Route::get('categories', [HomeController::class, 'categories'])->name('categories');
 Route::get('/faqs', [HomeController::class, 'faqs'])->name('faqs');
+
+Route::post('/contactUs', [HomeController::class, 'contactUs'])->name('contact-us-form');
 
 Auth::routes();
 

@@ -219,7 +219,10 @@
                                 <span class="star star--6"></span>
                             </label>
                         </div>
-                        <div class="ms-3" :class="{'text-success': form.public}">
+                        <div
+                            class="ms-3"
+                            :class="{ 'text-success': form.public }"
+                        >
                             <label
                                 class="form-check-label"
                                 for="accept_message"
@@ -227,13 +230,41 @@
                                 Do you want this book to be public ?
                             </label>
                             <br />
-                            <small id="book-title" class="form-text" :class="{'text-success': form.public}"
+                            <small
+                                id="book-title"
+                                class="form-text"
+                                :class="{ 'text-success': form.public }"
                                 >Public books can be read by anyone who can
                                 access mycelebrationbooks.com</small
                             >
                         </div>
                     </div>
-
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="title" class="form-label"
+                            >Book cover message</label
+                        >
+                        <textarea
+                            v-model="form.cover_message"
+                            class="form-control form-control-lg"
+                            rows="4"
+                        ></textarea>
+                        <small
+                            id="book-title"
+                            class="form-text"
+                            :class="{
+                                'text-danger':
+                                    form.cover_message.length >
+                                    coverMessageCharacters,
+                            }"
+                            >What is your book's cover message ?
+                            {{ form.cover_message.length }}/{{
+                                coverMessageCharacters
+                            }}</small
+                        >
+                        <HasError :form="form" field="cover_message" />
+                    </div>
                     <div class="form-chec mt-4 switcher-container">
                         <div class="toggleWrapper">
                             <input
@@ -256,7 +287,10 @@
                                 <span class="star star--6"></span>
                             </label>
                         </div>
-                        <div class="ps-3" :class="{'text-success': form.accept_message}">
+                        <div
+                            class="ps-3"
+                            :class="{ 'text-success': form.accept_message }"
+                        >
                             <label
                                 class="form-check-label"
                                 for="accept_message"
@@ -264,37 +298,61 @@
                                 Do you want to accept messages ?
                             </label>
                             <br />
-                            <small id="book-title" class="form-text" :class="{'text-success': form.accept_message}"
+                            <small
+                                id="book-title"
+                                class="form-text"
+                                :class="{ 'text-success': form.accept_message }"
                                 >Other mycelebration books users can add
                                 messages to the book</small
                             >
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="mb-3">
-                        <label for="title" class="form-label"
-                            >Book cover message</label
-                        >
-                        <textarea
-                            v-model="form.cover_message"
-                            class="form-control form-control-lg"
-                            rows="8"
-                        ></textarea>
-                        <small
-                            id="book-title"
-                            class="form-text"
+                    <div v-if="form.accept_message" class="form-chec mt-4 switcher-container">
+                        <div class="toggleWrapper">
+                            <input
+                                v-model="form.publish_messages_to_book"
+                                type="checkbox"
+                                class="dn"
+                                id="publish_messages_to_book"
+                            />
+                            <label for="publish_messages_to_book" class="toggle">
+                                <span class="toggle__handler">
+                                    <span class="crater crater--1"></span>
+                                    <span class="crater crater--2"></span>
+                                    <span class="crater crater--3"></span>
+                                </span>
+                                <span class="star star--1"></span>
+                                <span class="star star--2"></span>
+                                <span class="star star--3"></span>
+                                <span class="star star--4"></span>
+                                <span class="star star--5"></span>
+                                <span class="star star--6"></span>
+                            </label>
+                        </div>
+                        <div
+                            class="ps-3"
                             :class="{
-                                'text-danger':
-                                    form.cover_message.length >
-                                    coverMessageCharacters,
+                                'text-success': form.publish_messages_to_book,
                             }"
-                            >What is your book's cover message ?
-                            {{ form.cover_message.length }}/{{
-                                coverMessageCharacters
-                            }}</small
                         >
-                        <HasError :form="form" field="cover_message" />
+                            <label
+                                class="form-check-label"
+                                for="publish_messages_to_book"
+                            >
+                                Allow direct publishing of messages to this book ?
+                            </label>
+                            <br />
+                            <small
+                                id="book-title"
+                                class="form-text"
+                                :class="{
+                                    'text-success':
+                                        form.publish_messages_to_book,
+                                }"
+                                >Messages will be added to the book without your
+                                approval.</small
+                            >
+                        </div>
                     </div>
                 </div>
             </div>
@@ -346,6 +404,7 @@ export default {
             public: false,
             title: null,
             cover_image: null,
+            publish_messages_to_book: false,
         }),
         loading: false,
     }),
@@ -396,7 +455,11 @@ export default {
                     });
                     location.href = `/book/content/${responseData.id}`;
                 } else {
-                    throw "error occured";
+                    this.$swal.fire({
+                        icon: "error",
+                        title: "An error occurred",
+                        text: responseData.message,
+                    });
                 }
             } catch (error) {
                 this.$swal.fire({
@@ -411,7 +474,7 @@ export default {
 
         handleFile(event) {
             const file = event.target.files[0];
-            const size = file.size / 1024 / 1024 ;
+            const size = file.size / 1024 / 1024;
             // if(size > 2) {
             //     this.form.errors.set('cover_image', 'The selected image size is greator than 2MB.')
             //     Toast.fire({
@@ -421,8 +484,8 @@ export default {
             //     })
             // }
             // else {
-                this.form.errors.clear('cover_image')
-                this.form.cover_image = file;
+            this.form.errors.clear("cover_image");
+            this.form.cover_image = file;
             // }
         },
 

@@ -41,7 +41,7 @@
 
             <div class="col-md-10 row justify-content-center">
                 @foreach($plans as $plan)
-                <div class="col-md-3 mt-3">
+                <div class="col-md-4 mt-3">
                     <div class="billing-plan__card shadow-sm">
                         <div class="billing-plan__header">
                             <div class="billing-plan__header--icon shadow-sm">
@@ -54,25 +54,47 @@
                         <div class="billing-plan__content">
                             <div class="billing-plan__content--item">
                                 <div class="billing-plan__content--icon">
-                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                    <i class="fa fa-check text-success" aria-hidden="true"></i>
                                 </div>
-                                <div class="billing-plan__content--description">Up to {{$plan->total_number_books}} books</div>
+                                <div style="font-size: 13px;" class="billing-plan__content--description">Up to {{$plan->available_templates}} templates</div>
                             </div>
+
+                            <div class="billing-plan__content--item">
+                                <div class="billing-plan__content--icon">
+                                    <i class="fa fa-check text-success" aria-hidden="true"></i>
+                                </div>
+                                <div style="font-size: 13px;" class="billing-plan__content--description">Up to {{$plan->messages_per_book}} book messages</div>
+                            </div>
+
+                            <div class="billing-plan__content--item">
+                                <div class="billing-plan__content--icon">
+                                    <i class="fa fa-check text-success" aria-hidden="true"></i>
+                                </div>
+                                <div style="font-size: 13px;" class="billing-plan__content--description">Up to {{$plan->pictures_per_book}} book pictures</div>
+                            </div>
+
+                            @if($plan->can_tranfer_book)
+                            <div class="billing-plan__content--item">
+                                <div class="billing-plan__content--icon">
+                                    <i class="fa fa-check text-success" aria-hidden="true"></i>
+                                </div>
+                                <div style="font-size: 13px;" class="billing-plan__content--description">Book transfer to other users.</div>
+                            </div>
+                            @endif
+
                             @foreach($plan->features as $feature)
                             <div class="billing-plan__content--item">
                                 <div class="billing-plan__content--icon">
-                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                    <i class="fa fa-check text-success" aria-hidden="true"></i>
                                 </div>
-                                <div class="billing-plan__content--description">{{$feature->featureDetails?->description}}</div>
+                                <div style="font-size: 13px;" class="billing-plan__content--description">{{$feature->featureDetails?->description}}</div>
                             </div>
                             @endforeach
                         </div>
                         <div class="billing-plan__cta">
                             <div class="billing-plan__cta--amount">
-                                KSH {{ $plan->cost }} <span class="billing-plan__cta--amount--period">/ {{ $plan->days_to_expiry }} day
-                                    @if($plan->days_to_expiry > 1)
-                                    s
-                                    @endif</span>
+                                {{ $plan->cost }} <span class="billing-plan__cta--amount--period"> USD
+                                </span>
                             </div>
                             <div class="billing-plan__cta--btn">
                                 <a href="{{route('billing-payments', $plan->id)}}" class="btn btn-primary">Choose Plan</a>

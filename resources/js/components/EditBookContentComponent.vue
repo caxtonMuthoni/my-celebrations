@@ -78,7 +78,11 @@
 
             <div class="col-md-2 text-center">
                 <div class="book-content__nav my-auto" style="">
-                    <a :href="`/book/books/read/${book.id}`" class="btn btn-success">Save and preview</a>
+                    <a
+                        :href="`/book/books/read/${book.id}`"
+                        class="btn btn-success"
+                        >Save and preview</a
+                    >
                 </div>
             </div>
         </div>
@@ -131,11 +135,12 @@
                         }"
                     >
                         <div class="book-content__image--bt p-2">
-
-                             <button
+                            <button
                                 v-if="!image.published"
                                 class="btn btn-sm btn__primary"
-                                @click.prevent.stop="toggleImageStatus(image.id)"
+                                @click.prevent.stop="
+                                    toggleImageStatus(image.id)
+                                "
                             >
                                 Add to book
                             </button>
@@ -143,7 +148,9 @@
                             <button
                                 v-else
                                 class="btn btn-sm btn-warning"
-                                @click.prevent.stop="toggleImageStatus(image.id)"
+                                @click.prevent.stop="
+                                    toggleImageStatus(image.id)
+                                "
                             >
                                 Remove from book
                             </button>
@@ -341,7 +348,7 @@ export default {
             }
         },
 
-         async toggleImageStatus(id) {
+        async toggleImageStatus(id) {
             try {
                 const response = await axios.post(
                     "/api/celebrations/togglebookimagestatus/" + id
@@ -383,7 +390,11 @@ export default {
                     this.changeQueryParams(3);
                     location.reload();
                 } else {
-                    throw "error occured";
+                    this.$swal.fire({
+                        icon: "error",
+                        title: "An error occurred",
+                        text: responseData.message,
+                    });
                 }
             } catch (error) {
                 console.log(error);

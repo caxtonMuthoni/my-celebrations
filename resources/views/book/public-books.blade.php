@@ -11,7 +11,7 @@
                     <img class="book-card__image--picture" src="{{$book->image}}" alt="book tittle">
                 </div>
                 <div class="book-card__content">
-                    <div class="book-card__content--header text-secondary">{{ $book->title }}</div>
+                    <div class="book-card__content--header text-secondary">{{ \Illuminate\Support\Str::limit($book->title, 24, '...') }}</div>
                     <div class="book-card__content--description">
                         {{ \Illuminate\Support\Str::limit($book->cover_message, 50, $end='...') }}
                     </div>

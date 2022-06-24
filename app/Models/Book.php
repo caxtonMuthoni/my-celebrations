@@ -48,5 +48,9 @@ class Book extends Model
         return $this->hasMany(BookMessage::class);
     }
 
+    public function subscriptionPlan() {
+        return $this->belongsTo(SubscriptionPlan::class);
+    }
+
 
 }

@@ -10,6 +10,8 @@ use App\Http\Requests\UpdateBookRequest;
 use App\Mail\BookTransferMail;
 use App\Models\BookPdf;
 use App\Models\BookTransfer;
+use App\Models\Subscriber;
+use App\Models\SubscriptionPlan;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -63,6 +65,7 @@ class BookController extends Controller
     {
         $fileUploadUtil = new FileOperationUtil($request->cover_image, 'cover_images');
         $fileUrl = $fileUploadUtil->uploadFile();
+        $plan = Subscriber::where([['user_id', Auth::id()], ['is_active', true]])->first();
         $book =  new Book();
         $book->title = $request->title;
         $book->cover_message = $request->cover_message;
@@ -72,9 +75,13 @@ class BookController extends Controller
         $book->public = filter_var($request->public, FILTER_VALIDATE_BOOLEAN);
         $book->published = false;
         $book->accepting_message = filter_var($request->accepting_message, FILTER_VALIDATE_BOOLEAN);
+        $book->publish_messages_to_book = filter_var($request->publish_messages_to_book, FILTER_VALIDATE_BOOLEAN);
         $book->cover_image = $fileUrl;
+        $book->subscription_plan_id = $plan->subscription_plan_id;
         if ($book->save()) {
             $book = $book->refresh();
+            $plan->is_active = false;
+            $plan->save();
             return response()->json([
                 'status' => true,
                 'id' => $book->id,
@@ -95,10 +102,11 @@ class BookController extends Controller
         return view('book.mybooks', compact('books'));
     }
 
-    public function bookEditView($id) {
+    public function bookEditView($id)
+    {
         $book = Book::find($id);
         return view('book.detailedit', compact('book'));
-    } 
+    }
 
 
     /**
@@ -131,7 +139,7 @@ class BookController extends Controller
 
     public function printBook($id)
     {
-        
+
         $book = Book::with(['template', 'content', 'bookMessages.user', 'bookMessages'  => function ($query) {
             $query->where('public', true);
         },  'bookImages' => function ($query) {
@@ -222,7 +230,7 @@ class BookController extends Controller
         $book->cover_message = $request->cover_message;
         $book->public = $request->public ?? 0;
         $book->accepting_message = $request->accepting_message ?? 0;
-        if($book->save()) {
+        if ($book->save()) {
             return redirect()->route('my-books')->with('success', 'The book was updated successfully.');
         }
     }
@@ -238,7 +246,8 @@ class BookController extends Controller
         //
     }
 
-    public function bookTemplateCreate($id) {
+    public function bookTemplateCreate($id)
+    {
         $book = Book::with(['template', 'content', 'bookMessages.user', 'bookMessages'  => function ($query) {
             $query->where('public', true);
         },  'bookImages' => function ($query) {
@@ -248,24 +257,26 @@ class BookController extends Controller
     }
 
 
-    public function bookTransferView($id) {
+    public function bookTransferView($id)
+    {
         return view('book.book-transfer', compact('id'));
     }
 
-    public function transferBookRequest(Request $request, $id) {
+    public function transferBookRequest(Request $request, $id)
+    {
 
         // validation
         $this->validate($request, [
             'email' => 'required | email | exists:users'
         ]);
 
-        if(Auth::user()->email ==  $request->email) {
+        if (Auth::user()->email ==  $request->email) {
             return redirect()->back()->with('error', 'You can\'t transfer the book to your own account.');
         }
 
         $book = Book::where([['user_id', Auth::id()], ['id', $id]])->first();
 
-        if(isset($book)) {
+        if (isset($book)) {
             $token  = time() * random_int(10, 1000);
             $toUser = User::where('email', $request->email)->first();
             $bookTransfer = new BookTransfer();
@@ -282,27 +293,26 @@ class BookController extends Controller
         }
 
         return redirect()->back()->with('error', 'Sorry, the book does not exist.');
-
     }
 
-    public function bookAcceptBook($token) {
+    public function bookAcceptBook($token)
+    {
         $transfer = BookTransfer::where('transfer_token', $token)->first();
 
-        if(isset($transfer)) {
+        if (isset($transfer)) {
 
-            if($transfer->to_user_id != Auth::id()) {
+            if ($transfer->to_user_id != Auth::id()) {
                 return redirect()->route('home')->with('error', 'Oops! You are not allowed to complete this process.');
             }
 
             $book = Book::find($transfer->book_id);
 
-            if(isset($book)) {
+            if (isset($book)) {
                 $book->user_id = $transfer->to_user_id;
-                if($book->save()) {
+                if ($book->save()) {
                     return redirect()->route('my-books')->with('success', 'The book was added to your books successfully.');
                 }
             }
-
         }
         return redirect()->route('home')->with('error', 'Oops! an error occured during the process please try again later.');
     }

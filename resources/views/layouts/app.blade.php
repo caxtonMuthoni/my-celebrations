@@ -40,14 +40,11 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('home')}}">{{ __('Dashboard') }}</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Account
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarDarkDropdownMenuLink">
-                                <li><a class="dropdown-item" href="{{ route('billing-plans') }}">Billing</a></li>
-                                <li><a class="dropdown-item" href="{{route('my-books')}}">My Books</a></li>
-                            </ul>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('my-books')}}">{{ __('My Books') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('billing-plans')}}">{{ __('Billing') }}</a>
                         </li>
 
                         <li class="nav-item">
