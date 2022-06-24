@@ -32,10 +32,10 @@ class EnsureUserIsAsubscriber
             return redirect()->route('billing-plans')->with('error', 'Please subscribe in order to continue');
         }
 
-        // more books 
-        if ($books >= $subsbscription->subscriptionPlan->total_number_books) {
-            return redirect()->route('billing-plans')->with('error', 'You have reached the maximum number of books for your subscription.');
-        }
+        // // more books 
+        // if ($books >= $subsbscription->subscriptionPlan->total_number_books) {
+        //     return redirect()->route('billing-plans')->with('error', 'You have reached the maximum number of books for your subscription.');
+        // }
         return $next($request);
     }
 }
