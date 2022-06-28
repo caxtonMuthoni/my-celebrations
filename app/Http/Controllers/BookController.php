@@ -8,6 +8,8 @@ use App\Models\Book;
 use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
 use App\Mail\BookTransferMail;
+use App\Models\BookImage;
+use App\Models\BookMessage;
 use App\Models\BookPdf;
 use App\Models\BookTransfer;
 use App\Models\Subscriber;
@@ -74,7 +76,7 @@ class BookController extends Controller
         $book->template_id = $request->template;
         $book->public = filter_var($request->public, FILTER_VALIDATE_BOOLEAN);
         $book->published = false;
-        $book->accepting_message = filter_var($request->accepting_message, FILTER_VALIDATE_BOOLEAN);
+        $book->accepting_message = filter_var($request->accept_message, FILTER_VALIDATE_BOOLEAN);
         $book->publish_messages_to_book = filter_var($request->publish_messages_to_book, FILTER_VALIDATE_BOOLEAN);
         $book->cover_image = $fileUrl;
         $book->subscription_plan_id = $plan->subscription_plan_id;
@@ -117,7 +119,9 @@ class BookController extends Controller
      */
     public function show($id)
     {
-        $book = Book::with('content', 'bookImages', 'bookMessages.user')->find($id);
+        $book = Book::with(['content', 'bookImages' => function($query) {
+            $query->where('user_id', Auth::id());
+        }, 'bookMessages.user'])->find($id);
         $content = $book->content;
         return view('book.edit', compact('book', 'content'));
     }
@@ -315,5 +319,11 @@ class BookController extends Controller
             }
         }
         return redirect()->route('home')->with('error', 'Oops! an error occured during the process please try again later.');
+    }
+
+    public function viewMessagesAndPictures($id) {
+        $messages = BookMessage::with('user')->where('book_id', $id)->get();
+        $pictures = BookImage::with('user')->where([['book_id', $id], ['user_id', '!=', Auth::id()]])->get();
+        return view('book.book-pictures-messages', compact('messages', 'pictures'));
     }
 }

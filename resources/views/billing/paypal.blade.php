@@ -9,7 +9,7 @@
         <div class="col-md-6">
             <div class="card billing-payment__card p-5 shadow-sm">
                 <img src="{{asset('images/payments/paypal.png')}}" alt="" class="billing-payment__img">
-                <div class="billing-payment__type">Subscribe to {{$plan->name}} plan @ KSH {{$plan->cost}}</div>
+                <div class="billing-payment__type">Subscribe to {{$plan->name}} plan @  ${{$plan->cost}}</div>
                 <paypal-component :plan="{{$plan}}" />
             </div>
         </div>

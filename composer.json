@@ -21,6 +21,7 @@
         "laravel/tinker": "^2.7",
         "laravel/ui": "^3.4",
         "mailjet/laravel-mailjet": "^3.0",
+        "mews/captcha": "^3.2",
         "mpdf/mpdf": "v8.0.17",
         "niklasravnsborg/laravel-pdf": "^4.1",
         "orchid/platform": "^12.2",

@@ -61,21 +61,6 @@
                 </div>
             </div>
 
-            <div class="col-md-2 col-sm-6 mb-2 col-xs-6 col text-center">
-                <div class="book-content__nav">
-                    <input
-                        v-model="selectedTab"
-                        value="4"
-                        id="bookMessages"
-                        type="radio"
-                        class="book-content__nav--input"
-                    />
-                    <label class="book-content__nav--label" for="bookMessages"
-                        >Book Messages</label
-                    >
-                </div>
-            </div>
-
             <div class="col-md-2 text-center">
                 <div class="book-content__nav my-auto" style="">
                     <a
@@ -159,57 +144,6 @@
                                 @click="deleteImage(image.id)"
                                 v-tooltip.top="'Delete this image'"
                                 class="btn btn-outline-danger btn-sm book-content__image--btn"
-                            >
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div v-if="selectedTab == 4" class="col-md-9">
-            <h4 class="heading text__dark">Book messages</h4>
-            <div class="row justify-content-center">
-                <div class="col-md-10">
-                    <div
-                        v-for="(message, i) in messages"
-                        :key="i + 'sadfdsfeswe'"
-                        class="card p-2 px-5 mt-3 book-content__message"
-                    >
-                        <figure class="text-center">
-                            <blockquote class="blockquote">
-                                <p>
-                                    {{ message.message }}
-                                </p>
-                            </blockquote>
-                            <figcaption class="blockquote-footer">
-                                {{ message.relationship }}
-                                <cite title="Source Title">{{
-                                    message.user.name
-                                }}</cite>
-                            </figcaption>
-                        </figure>
-                        <div class="book-content__message--btn">
-                            <button
-                                v-if="!message.public"
-                                class="btn btn-sm btn__primary"
-                                @click="toggleBookStatus(message.id)"
-                            >
-                                Add to book
-                            </button>
-
-                            <button
-                                v-else
-                                class="btn btn-sm btn-warning"
-                                @click="toggleBookStatus(message.id)"
-                            >
-                                Remove from book
-                            </button>
-
-                            <button
-                                @click="deleteMessage(message.id)"
-                                class="btn btn-outline-danger btn-sm"
                             >
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </button>
@@ -322,34 +256,11 @@ export default {
             }
         },
 
-        async toggleBookStatus(id) {
-            try {
-                const response = await axios.post(
-                    "/api/celebrations/togglebookstatus/" + id
-                );
-                const responseData = response.data;
-                if (responseData.status) {
-                    Toast.fire({
-                        icon: "success",
-                        text: "The message was updated successfully",
-                    });
-                    this.changeQueryParams(4);
-                    location.reload();
-                } else {
-                    throw "error occured";
-                }
-            } catch (error) {
-                console.log(error);
-                this.$swal.fire({
-                    icon: "error",
-                    title: "An error occurred",
-                    text: "Oops! There was an error when uploading data, Please try again.",
-                });
-            }
-        },
+        
 
         async toggleImageStatus(id) {
             try {
+                this.loading = true;
                 const response = await axios.post(
                     "/api/celebrations/togglebookimagestatus/" + id
                 );
@@ -371,6 +282,8 @@ export default {
                     title: "An error occurred",
                     text: "Oops! There was an error when uploading data, Please try again.",
                 });
+            } finally {
+                this.loading = false;
             }
         },
 
@@ -408,34 +321,7 @@ export default {
             }
         },
 
-        async deleteMessage(id) {
-            try {
-                this.loading = true;
-                const response = await axios.delete(
-                    `/api/celebrations/bookmessage/${id}`
-                );
-                const responseData = response.data;
-                if (responseData.status) {
-                    Toast.fire({
-                        icon: "success",
-                        text: "Your message deleted successfully",
-                    });
-                    this.changeQueryParams(4);
-                    location.reload();
-                } else {
-                    throw "error occured";
-                }
-            } catch (error) {
-                console.log(error);
-                this.$swal.fire({
-                    icon: "error",
-                    title: "An error occurred",
-                    text: "Oops! There was an error when deleting data, Please try again.",
-                });
-            } finally {
-                this.loading = false;
-            }
-        },
+        
 
         async deleteImage(id) {
             try {

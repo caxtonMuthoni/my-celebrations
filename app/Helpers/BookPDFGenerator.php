@@ -6,6 +6,7 @@ use App\Models\Book;
 use App\Models\BookPdf;
 use Barryvdh\Snappy\Facades\SnappyPdf;
 use DOMDocument;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use PhpOffice\PhpWord\Element\Table;
 use PhpOffice\PhpWord\Shared\Html;
@@ -80,7 +81,12 @@ class BookPDFGenerator
             libxml_use_internal_errors($internalErrors);
 
             // book images
-            $images = $book->bookImages;
+            $bookUserImages = Book::with(['bookImages' => function($query) {
+                $query->where('user_id', Auth::id());
+            }])->find($book->id);
+
+            $images = $bookUserImages->bookImages;
+
             if ($images) {
                 $images = $images->toArray();
                 $imageChunks = array_chunk($images, 2);
@@ -90,8 +96,9 @@ class BookPDFGenerator
                         "book_image_photo#" . $key + 1,
                         array(
                             'path' => self::getImageRelativePathFromURL($image[0]['image']),
-                            'width' => 200,
-                            'height' => 200
+                            'width' => 350,
+                            'height' => 250,
+                            'ratio' => true
                         )
                     );
 
@@ -101,8 +108,9 @@ class BookPDFGenerator
                             "book_image_photo_left#" . $key + 1,
                             array(
                                 'path' => self::getImageRelativePathFromURL($image[1]['image']),
-                                'width' => 300,
-                                'height' => 300
+                                'width' => 350,
+                                'height' => 250,
+                                'ratio' => true
                             )
                         );
                         $templateProcesser->setValue("book_image_caption_left#" . $key + 1, $image[1]['caption']);
@@ -112,6 +120,51 @@ class BookPDFGenerator
                             ' '
                         );
                         $templateProcesser->setValue("book_image_caption_left#" . $key + 1, ' ');
+                    }
+                }
+            }
+
+            // friend images
+
+            $bookUserImages = Book::with(['bookImages' => function($query) {
+                $query->where('user_id', '!=',  Auth::id());
+            }])->find($book->id);
+
+            $images = $bookUserImages->bookImages;
+
+            if ($images) {
+                $images = $images->toArray();
+                $imageChunks = array_chunk($images, 2);
+                $templateProcesser->cloneBlock('book_friend_image', count($imageChunks), true, true);
+                foreach ($imageChunks as $key => $image) {
+                    $templateProcesser->setImageValue(
+                        "book_friend_image_photo#" . $key + 1,
+                        array(
+                            'path' => self::getImageRelativePathFromURL($image[0]['image']),
+                            'width' => 350,
+                            'height' => 250,
+                            'ratio' => true
+                        )
+                    );
+
+                    $templateProcesser->setValue("book_friend_image_caption#" . $key + 1, $image[0]['caption']);
+                    if (count($image) > 1) {
+                        $templateProcesser->setImageValue(
+                            "book_friend_image_photo_left#" . $key + 1,
+                            array(
+                                'path' => self::getImageRelativePathFromURL($image[1]['image']),
+                                'width' => 350,
+                                'height' => 250,
+                                'ratio' => true
+                            )
+                        );
+                        $templateProcesser->setValue("book_friend_image_caption_left#" . $key + 1, $image[1]['caption']);
+                    } else {
+                        $templateProcesser->setValue(
+                            "book_friend_image_photo_left#" . $key + 1,
+                            ' '
+                        );
+                        $templateProcesser->setValue("book_friend_image_caption_left#" . $key + 1, ' ');
                     }
                 }
             }
@@ -138,6 +191,7 @@ class BookPDFGenerator
             return $file;
         } catch (\Throwable $th) {
             throw $th;
+
         }
     }
 

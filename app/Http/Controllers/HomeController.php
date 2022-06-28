@@ -73,16 +73,26 @@ class HomeController extends Controller
     }
 
     public function contactUs(Request $request) {
+        $this->validate($request, [
+            'captcha' => 'required | captcha'
+        ], [
+            'captcha.captcha' => 'You entered invalid captcha.'
+        ]);
         $message = [
             'name' => $request->name,
             'email' => $request->email,
             'phone_number' => $request->phone_number,
             'reason' => $request->reason,
-            'message' => $request->message
+            'message' => $request->message,
         ];
 
         Mail::to('githinjicaxton323@gmail.com')->send(new ContactFormMail($message));
         Mail::to($request->email)->send(new ContactFormReplyMail($request->name));
         return redirect()->back()->with('success', 'Message was sent successfully');
+    }
+
+    public function reloadCaptcha()
+    {
+        return response()->json(['captcha'=> captcha_img()]);
     }
 }

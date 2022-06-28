@@ -93,7 +93,7 @@
                         </div>
                         <div class="billing-plan__cta">
                             <div class="billing-plan__cta--amount">
-                                {{ $plan->cost }} <span class="billing-plan__cta--amount--period"> USD
+                               ${{ $plan->cost }} <span class="billing-plan__cta--amount--period"> / book
                                 </span>
                             </div>
                             <div class="billing-plan__cta--btn">

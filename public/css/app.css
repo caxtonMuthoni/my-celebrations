@@ -11568,9 +11568,10 @@ body {
   position: relative;
 }
 .book-content__message--btn {
-  position: absolute;
-  top: 10px;
-  right: 15px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .book-read__cta {
@@ -11581,6 +11582,11 @@ body {
 
 .mybooks__img {
   height: 80px;
+  max-width: 150px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
 }
 
 .book-create {

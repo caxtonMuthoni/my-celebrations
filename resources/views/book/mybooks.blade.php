@@ -13,8 +13,9 @@
                 <th>Access</th>
                 <th>Status</th>
                 <th>Accepting Messages</th>
-                <th>Edit Details</th>
-                <th>Edit Content</th>
+                <th>Friends Messages and Pictures</th>
+                <th>Edit Cover Details</th>
+                <th>Edit Book Content</th>
             </thead>
             <tbody>
                 @foreach($books as $key => $book)
@@ -33,7 +34,7 @@
                             @endif
                         </span>
                     </td>
-                        <td><span class="table__item">
+                    <td><span class="table__item">
                             @if($book->published)
                             <span class="badge bg-success">published</span>
                             @else
@@ -47,6 +48,11 @@
                             @else
                             <span class="badge bg-primary">NO</span>
                             @endif
+                        </span>
+                    </td>
+                    <td>
+                        <span class="table__item">
+                            <a href="{{route('book-view-messages-pictures', $book->id)}}" class="btn btn-sm btn-primary"> <i class="fa fa-envelope me-2" aria-hidden="true"></i> View</a>
                         </span>
                     </td>
                     <td>

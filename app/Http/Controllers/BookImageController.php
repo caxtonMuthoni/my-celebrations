@@ -180,6 +180,7 @@ class BookImageController extends Controller
     {
         try {
             $bookImage = BookImage::find($id);
+            $bookId = $bookImage->book_id;
             $prefix = env('APP_URL') . "/storage/";
             $str = $bookImage->image;
             if (substr($str, 0, strlen($prefix)) == $prefix) {
@@ -189,7 +190,7 @@ class BookImageController extends Controller
 
             $bookImage->delete();
 
-            BookPDFGenerator::generatePDF($id);
+            BookPDFGenerator::generatePDF($bookId);
 
             return response()->json([
                 'status' => true,

@@ -80,14 +80,37 @@
     @if(session('success') || session('error'))
     <section class="mt-5 w-100 container" style="margin-top: 40px;">
         <div class="row justify-content-center">
-            <div class="col-md-6">
+            <div class="col-md-8">
                 @if(session('success'))
-                <div class="alert alert-success">{{session('success')}}</div>
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <strong> {{session('success')}}</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
                 @endif
 
                 @if(session('error'))
-                <div class="alert alert-danger">{{session('error')}}</div>
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <strong> {{session('error')}}</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
                 @endif
+            </div>
+        </div>
+    </section>
+    @endif
+
+    @if ($errors->any())
+    <section class="mt-5 w-100 container" style="margin-top: 40px;">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div><br />
             </div>
         </div>
     </section>
@@ -113,15 +136,15 @@
                     <form id="contact-form" role="form" action="{{route('contact-us-form')}}" method="post">
                         @csrf
                         <div class="col-md-6 col-sm-6">
-                            <input type="text" class="form-control" placeholder="Full Name" id="name" name="name" required="">
+                            <input type="text" class="form-control" placeholder="Full Name" id="name" name="name" required>
                         </div>
 
                         <div class="col-md-6 col-sm-6">
-                            <input type="email" class="form-control" placeholder="Your Email" id="email" name="email" required="">
+                            <input type="email" class="form-control" placeholder="Your Email" id="email" name="email" required>
                         </div>
 
                         <div class="col-md-6 col-sm-6">
-                            <input type="tel" class="form-control" placeholder="Your Phone" id="number" name="phone_number" required="">
+                            <input type="tel" class="form-control" placeholder="Your Phone" id="number" name="phone_number" required>
                         </div>
 
                         <div class="col-md-6 col-sm-6">
@@ -135,7 +158,22 @@
                         </div>
 
                         <div class="col-md-12 col-sm-12">
-                            <textarea class="form-control" rows="6" placeholder="Your requirements" id="cf-message" name="message" required=""></textarea>
+                            <textarea class="form-control" rows="6" placeholder="Your requirements" id="cf-message" name="message" required></textarea>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6">
+                            <div class="form-group mt-4 mb-4">
+                                <div class="captcha">
+                                    <span>{!! captcha_img() !!}</span>
+                                    <button type="button" class="btn btn-danger" class="reload" id="reload">
+                                        &#x21bb;
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6">
+                            <input type="text" class="form-control" placeholder="Enter Captcha on the left" id="captcha" name="captcha" required>
                         </div>
 
                         <div class="col-md-4 col-sm-12">
@@ -299,6 +337,18 @@
     <script src="js/jquery.magnific-popup.min.js"></script>
     <script src="js/smoothscroll.js"></script>
     <script src="js/custom.js"></script>
+
+    <script type="text/javascript">
+        $('#reload').click(function() {
+            $.ajax({
+                type: 'GET',
+                url: 'reload-captcha',
+                success: function(data) {
+                    $(".captcha span").html(data.captcha);
+                }
+            });
+        });
+    </script>
 
 </body>
 

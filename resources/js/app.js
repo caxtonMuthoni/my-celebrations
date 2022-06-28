@@ -20,6 +20,8 @@ Vue.component('edit-book-content-component', require('./components/EditBookConte
 Vue.component('add-book-message-component', require('./components/AddBookMessageComponent.vue').default);
 Vue.component('paypal-component', require('./components/PaypalComponent.vue').default);
 Vue.component('book-reader', require('./components/BookReaderComponent.vue').default);
+Vue.component('book-messages-component', require('./components/BookMessagesComponent.vue').default);
+Vue.component('book-pictures-component', require('./components/BookPicturesComponent.vue').default);
 
 
 Vue.component(HasError.name, HasError);
