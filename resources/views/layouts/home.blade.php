@@ -163,8 +163,8 @@
 
                         <div class="col-md-6 col-sm-6">
                             <div class="form-group mt-4 mb-4">
-                                <div class="captcha">
-                                    <span>{!! captcha_img() !!}</span>
+                                <div class="captcha" style="width:100%;">
+                                    <span style="width:100%;">{!! captcha_img() !!}</span>
                                     <button type="button" class="btn btn-danger" class="reload" id="reload">
                                         &#x21bb;
                                     </button>

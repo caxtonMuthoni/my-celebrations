@@ -86,7 +86,7 @@ class HomeController extends Controller
             'message' => $request->message,
         ];
 
-        Mail::to('githinjicaxton323@gmail.com')->send(new ContactFormMail($message));
+        Mail::to('info@mycelebrationbooks.com')->send(new ContactFormMail($message));
         Mail::to($request->email)->send(new ContactFormReplyMail($request->name));
         return redirect()->back()->with('success', 'Message was sent successfully');
     }
