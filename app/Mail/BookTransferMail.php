@@ -37,7 +37,7 @@ class BookTransferMail extends Mailable
     public function build()
     {
         return $this->subject($this->book->title. 'book transfer')
-        ->from('info@ngothotech.com', "MyCelebrationBooks Team")
+        ->from('info@mycelebrationbooks.com', "MyCelebrationBooks Team")
         ->view('emails.accept_book_transfer');
     }
 }
