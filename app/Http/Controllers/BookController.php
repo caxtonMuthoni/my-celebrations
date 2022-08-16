@@ -68,6 +68,17 @@ class BookController extends Controller
         $fileUploadUtil = new FileOperationUtil($request->cover_image, 'cover_images');
         $fileUrl = $fileUploadUtil->uploadFile();
         $plan = Subscriber::where([['user_id', Auth::id()], ['is_active', true]])->first();
+        if (!isset($plan)) {
+            $plan = SubscriptionPlan::where('name', 'bronze')->first();
+            $subscriber = new Subscriber();
+            $subscriber->user_id = Auth::id();
+            $subscriber->subscription_plan_id = $plan->id;
+            $subscriber->is_active = true;
+            $subscriber->save();
+
+            $plan = $subscriber->refresh();
+        }
+
         $book =  new Book();
         $book->title = $request->title;
         $book->cover_message = $request->cover_message;
@@ -119,7 +130,7 @@ class BookController extends Controller
      */
     public function show($id)
     {
-        $book = Book::with(['content', 'bookImages' => function($query) {
+        $book = Book::with(['content', 'bookImages' => function ($query) {
             $query->where('user_id', Auth::id());
         }, 'bookMessages.user'])->find($id);
         $content = $book->content;
@@ -321,7 +332,8 @@ class BookController extends Controller
         return redirect()->route('home')->with('error', 'Oops! an error occured during the process please try again later.');
     }
 
-    public function viewMessagesAndPictures($id) {
+    public function viewMessagesAndPictures($id)
+    {
         $messages = BookMessage::with('user')->where('book_id', $id)->get();
         $pictures = BookImage::with('user')->where([['book_id', $id], ['user_id', '!=', Auth::id()]])->get();
         return view('book.book-pictures-messages', compact('messages', 'pictures'));
