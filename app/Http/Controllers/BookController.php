@@ -69,7 +69,7 @@ class BookController extends Controller
         $fileUrl = $fileUploadUtil->uploadFile();
         $plan = Subscriber::where([['user_id', Auth::id()], ['is_active', true]])->first();
         if (!isset($plan)) {
-            $plan = SubscriptionPlan::where('name', 'bronze')->first();
+            $plan = SubscriptionPlan::where('name', 'like', '%bronze%')->first();
             $subscriber = new Subscriber();
             $subscriber->user_id = Auth::id();
             $subscriber->subscription_plan_id = $plan->id;
