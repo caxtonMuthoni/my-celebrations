@@ -117,7 +117,7 @@
 
             <div class="col-md-3 col-sm-12">
                 <div class="about-image">
-                    <img src="images/about-image.jpg" class="img-responsive" alt="">
+                    <img src="images/about-image.png" class="img-responsive" alt="">
                 </div>
             </div>
 
@@ -142,7 +142,7 @@
                 <!-- BLOG THUMB -->
                 <div class="media blog-thumb">
                     <div class="media-object media-left">
-                        <a href="blog-detail.html"><img src="images/blog-image1.jpg" class="img-responsive" alt=""></a>
+                        <a href="blog-detail.html"><img src="images/blog-image1.png" class="img-responsive" alt=""></a>
                     </div>
                     <div class="media-body blog-info">
                         <!-- <small><i class="fa fa-clock-o"></i> December 22, 2017</small> -->
@@ -174,7 +174,7 @@
                 <!-- BLOG THUMB -->
                 <div class="media blog-thumb">
                     <div class="media-object media-left">
-                        <a href="blog-detail.html"><img src="images/blog-image3.jpg" class="img-responsive" alt=""></a>
+                        <a href="blog-detail.html"><img src="images/blog-image3.png" class="img-responsive" alt=""></a>
                     </div>
                     <div class="media-body blog-info">
                         <!-- <small><i class="fa fa-clock-o"></i> December 14, 2017</small> -->
@@ -190,7 +190,7 @@
                 <!-- BLOG THUMB -->
                 <div class="media blog-thumb">
                     <div class="media-object media-left">
-                        <a href="blog-detail.html"><img src="images/blog-image4.jpg" class="img-responsive" alt=""></a>
+                        <a href="blog-detail.html"><img src="images/blog-image4.png" class="img-responsive" alt=""></a>
                     </div>
                     <div class="media-body blog-info">
                         <!-- <small><i class="fa fa-clock-o"></i> December 10, 2017</small> -->

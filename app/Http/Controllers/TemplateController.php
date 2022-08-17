@@ -17,7 +17,12 @@ class TemplateController extends Controller
     public function index($category)
     {
         $numberOfTemplates = TemplatesNumberGetter::getNumberOfTemplates();
-        return Template::with('image')->where([['template_type', 'book'], ['category_id', $category]])->latest()->take($numberOfTemplates)->get();
+        $templatesQuery = Template::with('image')->latest()->take($numberOfTemplates);
+        if($category != 'others') {
+            $templatesQuery = $templatesQuery-> where('category_id', $category);
+        }
+
+        return $templatesQuery->get();
     }
 
     public function messages() {

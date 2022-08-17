@@ -45,6 +45,33 @@
                         </label>
                     </div>
                 </div>
+
+                 <div
+                    class="col-md-3"
+                >
+                    <div class="book-create__category">
+                        <input
+                            v-model="form.category"
+                            class="book-create__category--input"
+                            type="radio"
+                            name="category"
+                            id="others"
+                            value="others"
+                        />
+                        <label
+                            for="others"
+                            class="book-create__category--lable shadow-sm"
+                            style="background: url('/images/about-image.png');"
+                        >
+                            <div class="book-create__category--text">
+                                <span
+                                    class="book-create__category--text--inner"
+                                    >Others</span
+                                >
+                            </div>
+                        </label>
+                    </div>
+                </div>
             </div>
             <div class="col-md-10">
                 <div class="book-create__btns">

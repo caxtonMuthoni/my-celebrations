@@ -20,7 +20,7 @@
 
             <div class="col-md-6 col-sm-12">
                 <div class="home-video">
-                    <img src="{{asset('images/branding/logo.jpeg')}}" alt="">
+                    <img src="{{asset('images/faqs.png')}}" alt="">
                 </div>
             </div>
 

@@ -18,7 +18,7 @@
 
             <div class="col-md-6 col-sm-12">
                 <div class="home-video">
-                    <img src="{{asset('images/branding/logo.jpeg')}}" alt="">
+                    <img src="{{asset('images/about.png')}}" alt="">
                 </div>
             </div>
 
@@ -49,85 +49,19 @@
 
             <div class="col-md-5 col-sm-12">
                 <div class="about-image">
-                    <img src="images/about-image.jpg" class="img-responsive" alt="">
+                    <img src="images/about-image.png" class="img-responsive" alt="">
                 </div>
             </div>
 
         </div>
     </div>
 </section>
+
+<section>
+<div class="my-5 py-5">&nbsp;</div>
+</section>
+
+
 
 <!-- WORK -->
-<section id="work" data-stellar-background-ratio="0.5">
-    <div class="container">
-        <div class="row">
-
-            <div class="col-md-12 col-sm-12">
-                <div class="section-title">
-                    <h2>Meet our team</h2>
-                    <span class="line-bar">...</span>
-                </div>
-            </div>
-
-            <div class="col-md-3 col-sm-6">
-                <!-- WORK THUMB -->
-                <div class="work-thumb">
-                    <a href="{{asset('images/team/John.jpg')}}" class="image-popup">
-                        <img src="{{asset('images/team/John.jpg')}}" class="img-responsive" alt="Work">
-
-                        <div class="work-info">
-                            <h3>John Doe</h3>
-                            <small>CEO, Founder</small>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-md-3 col-sm-6">
-                <!-- WORK THUMB -->
-                <div class="work-thumb">
-                    <a href="{{asset('images/team/mary.jpg')}}" class="image-popup">
-                        <img src="{{asset('images/team/mary.jpg')}}" class="img-responsive" alt="Work">
-
-                        <div class="work-info">
-                            <h3>Mary Doe</h3>
-                            <small>Marketing Manager</small>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-md-3 col-sm-6">
-                <!-- WORK THUMB -->
-                <div class="work-thumb">
-                    <a href="{{asset('images/team/elvis.jpg')}}" class="image-popup">
-                        <img src="{{asset('images/team/elvis.jpg')}}" class="img-responsive" alt="Work">
-
-                        <div class="work-info">
-                            <h3>Elvis Doe</h3>
-                            <small>CTO, Manager</small>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-
-            <div class="col-md-3 col-sm-6">
-                <!-- WORK THUMB -->
-                <div class="work-thumb">
-                    <a href="{{asset('images/team/Jane.jpg')}}" class="image-popup">
-                        <img src="{{asset('images/team/Jane.jpg')}}" class="img-responsive" alt="Work">
-
-                        <div class="work-info">
-                            <h3>Jane Doe</h3>
-                            <small>Art, Design</small>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-
 @endsection

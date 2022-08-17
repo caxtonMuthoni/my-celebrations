@@ -11,12 +11,12 @@ class MpesaSubscription
     public function stkPush(string $phonenumber, int $amount)
     {
         $mpesa = new \Safaricom\Mpesa\Mpesa();
-        $BusinessShortCode = '174379';
-        $LipaNaMpesaPasskey = "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919";
+        $BusinessShortCode = '7613613';
+        $LipaNaMpesaPasskey = "32d76a41b226485449118859ac5d7e58691d31f9d81ba0a33fe0bc5644ad6f0a";
         $TransactionType = 'CustomerPayBillOnline';
         $Amount = $amount;
         $PartyA = $phonenumber;
-        $PartyB = '174379';
+        $PartyB = '7613613';
         $PhoneNumber = $phonenumber;
         $CallBackURL = 'https://mycelebrationbooks.com/api/billing/callback/mpesa';
         $AccountReference = 'MyCelebrationBooks.com';
