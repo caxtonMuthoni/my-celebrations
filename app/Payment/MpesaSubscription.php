@@ -13,7 +13,7 @@ class MpesaSubscription
         $mpesa = new \Safaricom\Mpesa\Mpesa();
         $BusinessShortCode = '7613613';
         $LipaNaMpesaPasskey = "32d76a41b226485449118859ac5d7e58691d31f9d81ba0a33fe0bc5644ad6f0a";
-        $TransactionType = 'CustomerBuyGoodsOnline';
+        $TransactionType = 'CustomerPayBillOnline';
         $Amount = $amount;
         $PartyA = $phonenumber;
         $PartyB = '7613613';
