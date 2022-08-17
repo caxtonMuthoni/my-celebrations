@@ -111,12 +111,16 @@ Route::group([
 });
 
 Route::get('test', function() {
-    BookPDFGenerator::generatePDF(7);
-    $book = Book::with(['user', 'template.template_file', 'content', 'bookMessages.user', 'bookMessages'  => function ($query) {
-        $query->where('public', true);
-    },  'bookImages' => function ($query) {
-        $query->where('published', true);
-    }])->find(7);
+    try {
+        $consumer_key = env("MPESA_CONSUMER_KEY");
+        $consumer_secret = env("MPESA_CONSUMER_SECRET");
+    } catch (\Throwable $th) {
+        $consumer_key = self::env("MPESA_CONSUMER_KEY");
+        $consumer_secret = self::env("MPESA_CONSUMER_SECRET");
+    }
 
-    return $book;
+    return response()->json([
+        'consumer_key' => $consumer_key,
+        'consumer_secret' => $consumer_secret
+    ]);
 });
