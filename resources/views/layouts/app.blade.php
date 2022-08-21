@@ -5,6 +5,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <meta name="description" content="From special days such as weddings, birthdays, father's day, mother's day and baby showers, we help
+you to create stories, upload photos and invite friends to send in comments and photos to help you
+remember each event.">
+    <meta name="keywords" content="Father's day ,Celebrations ,Holidays ,Weddings ,Memories ,Party ,December global holidays ,Christmas ,Diwali ,Merry Christmas ,Labor Day ,Christmas tree ,International women's day ,Bride ,Famous birthday ,4 th of July ,Wedding Cake ,Holiday today ,Wedding gown ,Good Friday ,Mothersday ,Tomorrow holiday ,Easter holidays ,Party central ,Memorial ,Briday makeup ,Just married ,Bachelorette party ,Free cloud storage ,Pre wedding ,Wedding bells ,Wedding shower ,Valentine's gifts for him">
+    <meta name="author" content="Caxton Muthoni">
+
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -116,7 +122,7 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
-    
+
 </body>
 
 </html>

@@ -19,6 +19,7 @@ class MpesaSubscription
         $PartyB = '7613613';
         $PhoneNumber = $phonenumber;
         $CallBackURL = 'https://mycelebrationbooks.com/api/billing/callback/mpesa';
+        
         $AccountReference = 'MyCelebrationBooks.com';
         $TransactionDesc = 'Subscription';
         $Remarks = 'Plan Subscription';
@@ -35,6 +36,7 @@ class MpesaSubscription
             $TransactionDesc,
             $Remarks
         );
+        
         return json_decode($stkPushSimulation);
     }
 

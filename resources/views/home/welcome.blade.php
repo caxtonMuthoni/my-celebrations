@@ -179,8 +179,10 @@
                     <div class="media-body blog-info">
                         <!-- <small><i class="fa fa-clock-o"></i> December 14, 2017</small> -->
                         <h3><a href="blog-detail.html">Become an author within a short period of time.</a></h3>
-                        <p>People take years to publish their first book. Others must take a course, go through an editor and the bureaucratic publishing process. With my celebrations book, you are your own boss. All you need is an internet-enabled gadget and friends. Give your book a title then invite others to fill it with content free of charge.
-                            Your friends and family will help co-create your book as fast as within a day!</p>
+                        <p>With my celebrations book, you capture important moments and progressively build it over the years.
+Imagine, for instance capturing your marriage life from wedding day and each consecutive anniversary!
+The same applies to other yearly events such as birthdays, allowing you to keep the stories and images
+of yourself and your loved ones, including the messages from others.</p>
 
                     </div>
                 </div>
@@ -194,10 +196,11 @@
                     </div>
                     <div class="media-body blog-info">
                         <!-- <small><i class="fa fa-clock-o"></i> December 10, 2017</small> -->
-                        <h3><a href="blog-detail.html">The storage space is unlimited!</a></h3>
-                        <p>How much can you hold in your mind, computer, phone, or photo album? Well, the space at mycelebrationsbook.com is unlimited. You can create as many books as possible, as often as you want.
-                            All you need to do is select an appropriate subscription plan for your needs.
-                            Our pricing is affordable and so if you’re looking for near-free cloud storage, you’re welcome to explore the available options.</p>
+                        <h3><a href="blog-detail.html">One account; many books!</a></h3>
+                        <p>How much can you hold in your mind, computer, phone, or photo album? At mycelebrationsbook.com
+you can create as many books as possible, as often as you want. All you need to do is select an
+appropriate subscription plan for your needs. Our pricing is affordable and so if you’re looking for near-
+free cloud storage, you’re welcome to explore the available options.</p>
                     </div>
                 </div>
             </div>

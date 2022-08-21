@@ -6,9 +6,11 @@
     <title>Welcome to my celebration books</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-    <meta name="author" content="">
+    <meta name="description" content="From special days such as weddings, birthdays, father's day, mother's day and baby showers, we help
+you to create stories, upload photos and invite friends to send in comments and photos to help you
+remember each event.">
+    <meta name="keywords" content="Father's day ,Celebrations ,Holidays ,Weddings ,Memories ,Party ,December global holidays ,Christmas ,Diwali ,Merry Christmas ,Labor Day ,Christmas tree ,International women's day ,Bride ,Famous birthday ,4 th of July ,Wedding Cake ,Holiday today ,Wedding gown ,Good Friday ,Mothersday ,Tomorrow holiday ,Easter holidays ,Party central ,Memorial ,Briday makeup ,Just married ,Bachelorette party ,Free cloud storage ,Pre wedding ,Wedding bells ,Wedding shower ,Valentine's gifts for him">
+    <meta name="author" content="Caxton Muthoni">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
@@ -104,7 +106,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="alert alert-danger alert-dismissible" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <ul>
                         @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>

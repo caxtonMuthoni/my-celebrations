@@ -38,7 +38,7 @@
                 </div>
             </div>
 
-            <div class="col-md-10 row justify-content-center">
+            <div class="col-md-12 row justify-content-center">
                 @foreach($categories as $category)
                 <div class="col-md-3">
                    <div class="card">
