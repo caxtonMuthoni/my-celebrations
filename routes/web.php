@@ -62,6 +62,7 @@ Route::get('auth/google', [SocialiteCOntroller::class, 'redirectToGoogle']);
 Route::get('auth/google/callback', [SocialiteCOntroller::class, 'handleGoogleCallback']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware(['verified', 'auth']);
+Route::get('books/public', [BookController::class, 'publicBooks'])->name('book-public-show');
 
 Route::group([
     'middleware' => ['auth', 'verified'],
@@ -77,7 +78,6 @@ Route::group([
     Route::get('content/{id}', [BookController::class, 'bookContent'])->name('book-content');
     Route::get('mybooks', [BookController::class, 'myBooks'])->name('my-books');
     Route::get('book/{book}', [BookController::class, 'show'])->name('book-show');
-    Route::get('books/public', [BookController::class, 'publicBooks'])->name('book-public-show');
     Route::get('books/read/{id}', [BookController::class, 'readBook'])->name('book-read');
     Route::get('messages/and/pictures/{id}', [BookController::class, 'viewMessagesAndPictures'])->name('book-view-messages-pictures');
     Route::get('books/message/{id}', [BookController::class, 'bookMessage'])->name('book-message');

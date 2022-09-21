@@ -1088,9 +1088,27 @@ http://www.templatemo.com/tm-509-hydro
     border-color: #0575E6 !important;
   }
 
+  @media screen and (min-width: 1000px) {
+    .billing-plan {
+      width: 100%;
+      display: flex;
+      align-items: stretch;
+      justify-content: space-around;
+    }
+  }
+
+  
+  @media screen and (max-width: 1000px) {
+    .billing-plan__card {
+      margin-top: 20px;
+    }
+  }
+ 
+
   .billing-plan__card {
     display: flex;
     width: 100%;
+    height: 100%;
     background-color: #fff;
     flex-direction: column;
     border-radius: 5px;
@@ -1148,4 +1166,18 @@ http://www.templatemo.com/tm-509-hydro
   font-size: 30px;
   font-weight: bold;
   margin-bottom: 10px;
+}
+
+.about_image {
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.about_image--img{
+  width: 100%;
+  height: auto;
+}
+
+.about-image {
+  margin-top: 20px !important;
 }

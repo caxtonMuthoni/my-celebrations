@@ -17,8 +17,8 @@
             </div>
 
             <div class="col-md-6 col-sm-12">
-                <div class="home-video">
-                    <img src="{{asset('images/about-image.png')}}" alt="">
+                <div class="home-video about_image">
+                    <img class="about_image--img" src="{{asset('images/shared/pineapple.png')}}" alt="">
                 </div>
             </div>
 

@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('content')
-<script src="https://cdn.tailwindcss.com"></script>
 <div class="public-books">
     <div class="container row">
         @foreach ($books as $book)

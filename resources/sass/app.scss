@@ -57,3 +57,13 @@
     font-weight: bold !important;
     margin-right: 20px;
 }
+
+
+.overlay_login {
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+}

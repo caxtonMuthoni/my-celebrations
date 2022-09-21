@@ -17,8 +17,8 @@
             </div>
 
             <div class="col-md-6 col-sm-12">
-                <div class="home-video">
-                    <img src="{{asset('images/shared/happy-couple.png')}}" alt="">
+                <div class="home-video about_image">
+                    <img class="about_image--img" src="{{asset('images/shared/aboutus.jpg')}}" alt="">
                 </div>
             </div>
 
@@ -35,7 +35,7 @@
             <div class="col-md-6 col-sm-6">
                 <div class="about-info">
                     <div class="section-title">
-                        <h2>Meet The CEO Founder</h2>
+                        <h2>Memories</h2>
                         <span class="line-bar">...</span>
                     </div>
                     <p>We live our lives story by story through the memories we create.
@@ -49,7 +49,7 @@
 
             <div class="col-md-5 col-sm-12">
                 <div class="about-image">
-                    <img src="images/about-image.png" class="img-responsive" alt="">
+                    <img src="{{asset('images/shared/about.jpg')}}" class="img-responsive" alt="">
                 </div>
             </div>
 

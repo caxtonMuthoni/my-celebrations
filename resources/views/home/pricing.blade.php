@@ -30,7 +30,7 @@
 <!-- WORK -->
 <section id="work" data-stellar-background-ratio="0.5">
     <div class="container">
-        <div class="row">
+        <div class="row justify-content-center mx-auto">
 
             <div class="col-md-12 col-sm-12">
                 <div class="section-title">
@@ -39,9 +39,9 @@
                 </div>
             </div>
 
-            <div class="col-md-10 row justify-content-center">
+            <div class="row billing-plan" style="margin: 0 auto;">
                 @foreach($plans as $plan)
-                <div class="col-md-4 mt-3">
+                <div class="col-md-4 mt-3 align-items-stretch">
                     <div class="billing-plan__card shadow-sm">
                         <div class="billing-plan__header">
                             <div class="billing-plan__header--icon shadow-sm">

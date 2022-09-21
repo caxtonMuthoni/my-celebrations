@@ -25,10 +25,8 @@
             </div>
 
             <div class="col-md-5 col-sm-12">
-                <div class="home-video">
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <iframe src="https://www.youtube.com/embed/jdjYt7DFsZg" frameborder="0" allowfullscreen></iframe>
-                    </div>
+            <div class="home-video about_image">
+                    <img class="about_image--img" src="{{asset('images/shared/wedding.png')}}" alt="">
                 </div>
             </div>
 
@@ -141,7 +139,7 @@
                 <!-- BLOG THUMB -->
                 <div class="media blog-thumb">
                     <div class="media-object media-left">
-                        <a href="blog-detail.html"><img src="images/blog-image1.png" class="img-responsive" alt=""></a>
+                        <a href="blog-detail.html"><img src="{{asset('images/shared/onlymemory.jpg')}}" class="img-responsive" alt=""></a>
                     </div>
                     <div class="media-body blog-info">
                         <!-- <small><i class="fa fa-clock-o"></i> December 22, 2017</small> -->
@@ -158,7 +156,7 @@
                 <!-- BLOG THUMB -->
                 <div class="media blog-thumb">
                     <div class="media-object media-left">
-                        <a href="blog-detail.html"><img src="images/blog-image2.jpg" class="img-responsive" alt=""></a>
+                        <a href="blog-detail.html"><img src="{{asset('images/shared/cartoon.jpg')}}" class="img-responsive" alt=""></a>
                     </div>
                     <div class="media-body blog-info">
                         <!-- <small><i class="fa fa-clock-o"></i> December 18, 2017</small> -->
@@ -173,7 +171,7 @@
                 <!-- BLOG THUMB -->
                 <div class="media blog-thumb">
                     <div class="media-object media-left">
-                        <a href="blog-detail.html"><img src="images/blog-image3.png" class="img-responsive" alt=""></a>
+                        <a href="blog-detail.html"><img src="{{asset('images/shared/author.jpg')}}" class="img-responsive" alt=""></a>
                     </div>
                     <div class="media-body blog-info">
                         <!-- <small><i class="fa fa-clock-o"></i> December 14, 2017</small> -->
@@ -191,7 +189,7 @@ of yourself and your loved ones, including the messages from others.</p>
                 <!-- BLOG THUMB -->
                 <div class="media blog-thumb">
                     <div class="media-object media-left">
-                        <a href="blog-detail.html"><img src="images/blog-image4.png" class="img-responsive" alt=""></a>
+                        <a href="blog-detail.html"><img src="{{asset('images/shared/oneaccount.jpg')}}" class="img-responsive" alt=""></a>
                     </div>
                     <div class="media-body blog-info">
                         <!-- <small><i class="fa fa-clock-o"></i> December 10, 2017</small> -->

@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="overlay_login particles-js" id="particles-js"></div>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6 auth-card__container">
@@ -63,8 +64,9 @@
                     </form>
                     <div class="dropdown-divider mt-2"></div>
                     <div class="mt-3 auth-card__socials">
-                        <a href="{{ url('auth/google') }}" class="btn">
-                            <img src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png" style="margin-left: 3em;">
+                          <h5>OR</h5>
+                        <a href="{{ url('auth/google') }}" class="btn btn-sm">
+                            <img class="btn__socials" src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png" style="margin-left: 3em;">
                         </a>
                     </div>
                 </div>

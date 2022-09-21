@@ -121,7 +121,9 @@ remember each event.">
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-   
+
+    <script src="{{ asset('js/particlesjs/particles.min.js') }}" defer></script>
+    <script src="{{ asset('js/particlesjs/app.js') }}" defer></script>
 
 
 </body>
