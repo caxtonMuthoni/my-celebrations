@@ -2,13 +2,12 @@
 @section('content')
 <!-- HOME -->
 <section id="home" data-stellar-background-ratio="0.5">
-    <div class="overlay"></div>
+    <div class="overlay particles-js" id="particles-js"></div>
     <div class="container">
         <div class="row">
-
-            <div class="col-md-6 col-sm-12">
+            <div class="col-md-7 col-sm-12">
                 <div class="home-info">
-                    <h1>My Celebrations Book, where memories never fail</h1>
+                    <h1 class="text-white">My Celebrations Book, where memories never fail</h1>
                     <p class="text-white">
                         We live our lives story by story through the memories we create.
                         While it is important to preserve our most cherished memories,
@@ -25,7 +24,7 @@
                 </div>
             </div>
 
-            <div class="col-md-6 col-sm-12">
+            <div class="col-md-5 col-sm-12">
                 <div class="home-video">
                     <div class="embed-responsive embed-responsive-16by9">
                         <iframe src="https://www.youtube.com/embed/jdjYt7DFsZg" frameborder="0" allowfullscreen></iframe>
@@ -117,7 +116,7 @@
 
             <div class="col-md-3 col-sm-12">
                 <div class="about-image">
-                    <img src="images/about-image.png" class="img-responsive" alt="">
+                    <img src="images/shared/happy-woman.png" class="img-responsive" alt="">
                 </div>
             </div>
 

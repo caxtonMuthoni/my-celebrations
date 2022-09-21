@@ -4,6 +4,7 @@
 // Variables
 @import "variables";
 
+
 // Bootstrap
 @import "~bootstrap/scss/bootstrap";
 
@@ -22,6 +23,7 @@
 @import "./pages/billing/billing-payment";
 
 @import "./pages/verify-card";
+
 
 .table {
     &__item {

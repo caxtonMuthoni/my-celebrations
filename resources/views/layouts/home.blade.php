@@ -340,6 +340,9 @@ remember each event.">
     <script src="js/smoothscroll.js"></script>
     <script src="js/custom.js"></script>
 
+    <script src="{{ asset('js/particlesjs/particles.min.js') }}" defer></script>
+    <script src="{{ asset('js/particlesjs/app.js') }}" defer></script>
+
     <script type="text/javascript">
         $('#reload').click(function() {
             $.ajax({

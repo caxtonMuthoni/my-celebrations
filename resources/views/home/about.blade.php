@@ -2,7 +2,7 @@
 @section('content')
 <!-- HOME -->
 <section id="home" data-stellar-background-ratio="0.5">
-    <div class="overlay"></div>
+    <div class="overlay particles-js-about" id="particles-js-about"></div>
     <div class="container">
         <div class="row">
 
@@ -18,7 +18,7 @@
 
             <div class="col-md-6 col-sm-12">
                 <div class="home-video">
-                    <img src="{{asset('images/about.png')}}" alt="">
+                    <img src="{{asset('images/shared/happy-couple.png')}}" alt="">
                 </div>
             </div>
 
