@@ -92,7 +92,7 @@ class BookContentController extends Controller
         // $bookContent->book_id = $request->book_id;
         $bookContent->page = $request->page;
         if($bookContent->save()) {
-            BookPDFGenerator::generatePDF($request->book_id);
+            BookPDFGenerator::generatePDF($bookContent->book_id);
             return response()->json([
                 'status' => true,
                 'message' => "The book content was uploaded"

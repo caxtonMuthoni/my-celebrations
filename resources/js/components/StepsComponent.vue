@@ -489,6 +489,7 @@ export default {
                     });
                 }
             } catch (error) {
+                console.log(error);
                 this.$swal.fire({
                     icon: "error",
                     title: "An error occurred",
