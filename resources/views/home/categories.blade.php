@@ -41,8 +41,10 @@
             <div class="col-md-12 row justify-content-center">
                 @foreach($categories as $category)
                 <div class="col-md-3">
-                   <div class="card">
-                     <img src="{{$category->image}}" class="card-img-top" style="width: 100%;" alt="...">
+                   <div class="card shadow">
+                    <div class="category-img-container">
+                    <img src="{{$category->image}}" class="card-img-top category-img" style="width: 100%;" alt="...">
+                    </div>
                      <div class="card-body">
                        <h5 class="card-title">{{$category->name}}</h5>
                      </div>
