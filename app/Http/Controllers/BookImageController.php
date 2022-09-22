@@ -46,7 +46,7 @@ class BookImageController extends Controller
             $bookId = $request->book_id;
             $userId = Auth::id();
             $book = Book::withCount('bookImages')->with('subscriptionPlan')->findOrFail($request->book_id);
-            if($book->book_images_count >= $book->subscriptionPlan->pictures_per_book) {
+            if(($book->book_images_count + count($request->images)) >= $book->subscriptionPlan->pictures_per_book) {
                 return response()->json([
                     'status' => false,
                     'message' => 'You can and any more messages to this book'
