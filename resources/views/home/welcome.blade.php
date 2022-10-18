@@ -25,7 +25,7 @@
             </div>
 
             <div class="col-md-5 col-sm-12">
-            <div class="home-video about_image">
+                <div class="home-video about_image">
                     <img class="about_image--img" src="{{asset('images/shared/wedding.png')}}" alt="">
                 </div>
             </div>
@@ -143,10 +143,8 @@
                     </div>
                     <div class="media-body blog-info">
                         <!-- <small><i class="fa fa-clock-o"></i> December 22, 2017</small> -->
-                        <h3><a href="#">The only memory that never fails.</a></h3>
-                        <p>The human memory fails as we age. However, the cloud neither fails nor forgets.
-                            Write down your story when it’s
-                            fresh in your memory then store it in the cloud. Mycelebrationsbook.com will keep it safe forever.</p>
+                        <h3><a href="#">The only memory that never fails is the cloud</a></h3>
+                        <p>The human memory fails as we age. However, the cloud neither fails nor forgets. Write down your story when it’s fresh in your memory then store it in the cloud. Mycelebrationsbook.com will keep it safe forever.</p>
 
                     </div>
                 </div>
@@ -161,8 +159,7 @@
                     <div class="media-body blog-info">
                         <!-- <small><i class="fa fa-clock-o"></i> December 18, 2017</small> -->
                         <h3><a href="blog-detail.html">Be in charge of your privacy.</a></h3>
-                        <p>At my celebrationsbook.com, we keep secrets. Unlike the social media where everyone has access to your memories, my celebrations book allows you to invite only the people who care about you to contribute and celebrate with you.
-                            In addition, we give you the freedom to make your books public or private, and what you have made private will remain private forever.</p>
+                        <p>At my celebrationsbook.com, we keep secrets. Unlike the social media where everyone has access to your memories, my celebrations book allows you to invite only the people who care about you to contribute and celebrate with you. In addition, we give you the freedom to make your books public or private, and what you have made private will remain private.</p>
                     </div>
                 </div>
             </div>
@@ -175,11 +172,11 @@
                     </div>
                     <div class="media-body blog-info">
                         <!-- <small><i class="fa fa-clock-o"></i> December 14, 2017</small> -->
-                        <h3><a href="blog-detail.html">Become an author within a short period of time.</a></h3>
+                        <h3><a href="blog-detail.html">Become the author of your own life story.</a></h3>
                         <p>With my celebrations book, you capture important moments and progressively build it over the years.
-Imagine, for instance capturing your marriage life from wedding day and each consecutive anniversary!
-The same applies to other yearly events such as birthdays, allowing you to keep the stories and images
-of yourself and your loved ones, including the messages from others.</p>
+                            Imagine, for instance capturing your marriage life from wedding day and each consecutive anniversary!
+                            The same applies to other yearly events such as birthdays, allowing you to keep the stories and images
+                            of yourself and your loved ones, including the messages from others.</p>
 
                     </div>
                 </div>
@@ -195,9 +192,9 @@ of yourself and your loved ones, including the messages from others.</p>
                         <!-- <small><i class="fa fa-clock-o"></i> December 10, 2017</small> -->
                         <h3><a href="blog-detail.html">One account; many books!</a></h3>
                         <p>How much can you hold in your mind, computer, phone, or photo album? At mycelebrationsbook.com
-you can create as many books as possible, as often as you want. All you need to do is select an
-appropriate subscription plan for your needs. Our pricing is affordable and so if you’re looking for near-
-free cloud storage, you’re welcome to explore the available options.</p>
+                            you can create as many books as possible, as often as you want. All you need to do is select an
+                            appropriate subscription plan for your needs. Our pricing is affordable and so if you’re looking for near-
+                            free cloud storage, you’re welcome to explore the available options.</p>
                     </div>
                 </div>
             </div>
@@ -302,7 +299,7 @@ free cloud storage, you’re welcome to explore the available options.</p>
                             Generate link to invite loved ones to send messages
                         </div>
                         <div class="step__icon">
-                           <i class="fa fa-share" aria-hidden="true"></i>
+                            <i class="fa fa-share" aria-hidden="true"></i>
                         </div>
                     </div>
                 </div>
