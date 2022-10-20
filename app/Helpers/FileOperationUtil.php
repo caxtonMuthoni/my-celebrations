@@ -23,11 +23,11 @@ class FileOperationUtil
         // Get just Extension
         $extension = $this->file->getClientOriginalExtension();
         // Filename To store
-        $fileNameToStore = $filename . '_' . time() . '.' . $extension;
+        $fileNameToStore = preg_replace('/\s+/', '', $filename) . '_' . time() . '.' . $extension;
         // Upload Image
-        // $path = $this->file->storeAs($this->folder, $fileNameToStore, 'public');
-        $img = \Image::make($this->file)->encode('jpg', 10);
-        Storage::disk('public')->put("/$this->folder/$fileNameToStore", (string)$img);
+        $path = $this->file->storeAs($this->folder, $fileNameToStore, 'public');
+        // $img = \Image::make($this->file)->encode('jpg', 10);
+        // Storage::disk('public')->put("/$this->folder/$fileNameToStore", (string)$img);
         return $fileNameToStore;
     }
 

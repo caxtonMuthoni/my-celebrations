@@ -18,56 +18,31 @@
         <div class="col-md-9 mb-3 row bg-white p-2">
             <div class="col col-md-3 col-sm-6 mb-2 col-xs-6 text-center">
                 <div class="book-content__nav">
-                    <input
-                        v-model="selectedTab"
-                        value="1"
-                        id="bookContnet"
-                        type="radio"
-                        class="book-content__nav--input"
-                    />
-                    <label class="book-content__nav--label" for="bookContnet"
-                        >Book content</label
-                    >
+                    <input v-model="selectedTab" value="1" id="bookContnet" type="radio"
+                        class="book-content__nav--input" />
+                    <label class="book-content__nav--label" for="bookContnet">Book content</label>
                 </div>
             </div>
 
             <div class="col col-md-2 col-sm-6 mb-2 col-xs-6 text-center">
                 <div class="book-content__nav">
-                    <input
-                        v-model="selectedTab"
-                        value="2"
-                        id="bookGallary"
-                        type="radio"
-                        class="book-content__nav--input"
-                    />
-                    <label class="book-content__nav--label" for="bookGallary"
-                        >Upload Gallery</label
-                    >
+                    <input v-model="selectedTab" value="2" id="bookGallary" type="radio"
+                        class="book-content__nav--input" />
+                    <label class="book-content__nav--label" for="bookGallary">Upload Gallery</label>
                 </div>
             </div>
 
             <div class="col-md-2 col-sm-6 mb-2 col-xs-6 col text-center">
                 <div class="book-content__nav">
-                    <input
-                        v-model="selectedTab"
-                        value="3"
-                        id="bookGallery"
-                        type="radio"
-                        class="book-content__nav--input"
-                    />
-                    <label class="book-content__nav--label" for="bookGallery"
-                        >Book Gallery</label
-                    >
+                    <input v-model="selectedTab" value="3" id="bookGallery" type="radio"
+                        class="book-content__nav--input" />
+                    <label class="book-content__nav--label" for="bookGallery">Book Gallery</label>
                 </div>
             </div>
 
             <div class="col-md-2 text-center">
                 <div class="book-content__nav my-auto" style="">
-                    <a
-                        :href="`/book/books/read/${book.id}`"
-                        class="btn btn-success"
-                        >Save and preview</a
-                    >
+                    <a :href="`/book/books/read/${book.id}`" class="btn btn-success">Save and preview</a>
                 </div>
             </div>
         </div>
@@ -86,14 +61,12 @@
         <div v-if="selectedTab == 2" class="col-md-9">
             <h4 class="heading text-dark">Upload book images</h4>
             <div>
-                <UploadImages
-                    uploadMsg="upload book images"
-                    :max="10"
-                    @changed="handleImages"
-                />
+                <UploadImages uploadMsg="upload book images" :max="10" @changed="handleImages" />
             </div>
             <div class="text-end mt-3">
-                <button class="btn btn__primary" @click="uploadImages">
+                <h4 class="heading" disabled v-if="compressingImages">
+                    Compressing image[{{compressingImageNumber}}]: {{uploadPercentage}} %</h4>
+                <button v-else class="btn btn__primary" :disabled="uploadDisabled" @click="uploadImages">
                     Upload images
                 </button>
             </div>
@@ -101,50 +74,28 @@
 
         <div v-if="selectedTab == 3" class="col-md-9">
             <div>
-                <gallery
-                    :images="images"
-                    :index="index"
-                    @close="index = null"
-                ></gallery>
-                <div
-                    v-for="(image, imageIndex) in bookImages"
-                    :key="imageIndex"
-                >
-                    <div
-                        class="book-content__image"
-                        @click="index = imageIndex"
-                        :style="{
-                            backgroundImage: 'url(' + image.image + ')',
-                            width: '300px',
-                            height: '200px',
-                        }"
-                    >
+                <gallery :images="images" :index="index" @close="index = null"></gallery>
+                <div v-for="(image, imageIndex) in bookImages" :key="imageIndex">
+                    <div class="book-content__image" @click="index = imageIndex" :style="{
+                        backgroundImage: 'url(' + image.image + ')',
+                        width: '300px',
+                        height: '200px',
+                    }">
                         <div class="book-content__image--bt p-2">
-                            <button
-                                v-if="!image.published"
-                                class="btn btn-sm btn__primary"
-                                @click.prevent.stop="
-                                    toggleImageStatus(image.id)
-                                "
-                            >
+                            <button v-if="!image.published" class="btn btn-sm btn__primary" @click.prevent.stop="
+                                toggleImageStatus(image.id)
+                            ">
                                 Add to book
                             </button>
 
-                            <button
-                                v-else
-                                class="btn btn-sm btn-warning"
-                                @click.prevent.stop="
-                                    toggleImageStatus(image.id)
-                                "
-                            >
+                            <button v-else class="btn btn-sm btn-warning" @click.prevent.stop="
+                                toggleImageStatus(image.id)
+                            ">
                                 Remove from book
                             </button>
 
-                            <button
-                                @click="deleteImage(image.id)"
-                                v-tooltip.top="'Delete this image'"
-                                class="btn btn-outline-danger btn-sm book-content__image--btn"
-                            >
+                            <button @click="deleteImage(image.id)" v-tooltip.top="'Delete this image'"
+                                class="btn btn-outline-danger btn-sm book-content__image--btn">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </button>
                         </div>
@@ -162,6 +113,7 @@ import LoaderComponent from "./LoaderComponent.vue";
 import Toast from "../utils/toast";
 import UploadImages from "vue-upload-drop-images";
 import Gallery from "vue-gallery";
+import imageCompression from 'browser-image-compression';
 
 export default {
     components: {
@@ -200,6 +152,10 @@ export default {
         selectedTab: 1,
         index: null,
         loading: false,
+        compressingImages: false,
+        uploadPercentage: 0,
+        compressingImageNumber: 1,
+        uploadDisabled: true,
     }),
 
     computed: {
@@ -230,9 +186,45 @@ export default {
     },
 
     methods: {
-        handleImages(files) {
-            this.imageUploadForm.images = files;
+        async handleImages(files) {
+            this.compressingImages = true;
+            let images = [];
+            const options = {
+                maxSizeMB: 1,
+                maxWidthOrHeight: 1920,
+                useWebWorker: true,
+                onProgress: this.fileUploadOnProgress,
+            }
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const fileSizeMB = file.size / 1024 / 1024;
+                if (fileSizeMB > 1) {
+                    try {
+                        this.compressingImageNumber = i + 1;
+                        let compressedFile = new Blob()
+                        compressedFile = await imageCompression(file, options);
+                        const storeFile = new File([compressedFile], file.name);
+                        images.push(storeFile)
+                    } catch (error) {
+                        console.log(error);
+                    }
+                } else {
+                    images.push(file)
+                }
+            }
+
+            if (images.length > 0) {
+                this.uploadDisabled = false;
+                this.imageUploadForm.images = images;
+                console.log(images);
+            }
+            this.compressingImages = false
         },
+
+        fileUploadOnProgress(percentage) {
+            this.uploadPercentage = percentage;
+        },
+
 
         changeQueryParams(tab) {
             if (history.pushState) {
@@ -256,7 +248,7 @@ export default {
             }
         },
 
-        
+
 
         async toggleImageStatus(id) {
             try {
@@ -321,7 +313,7 @@ export default {
             }
         },
 
-        
+
 
         async deleteImage(id) {
             try {
@@ -403,4 +395,6 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+
+</style>

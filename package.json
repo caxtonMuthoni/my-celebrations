@@ -24,6 +24,7 @@
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
+        "browser-image-compression": "^2.0.0",
         "pdfjs-dist": "^2.7.570",
         "pdfvuer": "^1.9.2",
         "v-tooltip": "^2.1.3",

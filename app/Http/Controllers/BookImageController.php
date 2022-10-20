@@ -49,7 +49,7 @@ class BookImageController extends Controller
             if(($book->book_images_count + count($request->images)) >= $book->subscriptionPlan?->pictures_per_book) {
                 return response()->json([
                     'status' => false,
-                    'message' => 'You cann\'t add more than '. $book->subscriptionPlan?->pictures_per_book . ' images to this book'
+                    'message' => 'You can\'t add more than '. $book->subscriptionPlan?->pictures_per_book . ' images to this book'
                 ]);
             }
 
