@@ -13,4 +13,8 @@ class SubscriptionPlan extends Model
     public function features() {
         return $this->hasMany(SubscriptionPlanFeatures::class);
     }
+
+    public function books() {
+        return $this->hasMany(Book::class);
+    }
 }
