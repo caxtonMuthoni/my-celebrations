@@ -26,7 +26,7 @@
 
             <div class="col-md-5 col-sm-12">
                 <div class="home-video about_image">
-                    <img class="about_image--img" src="{{asset('images/shared/wedding.png')}}" alt="">
+                    <img class="about_image--img" src="{{asset('images/shared/home.jpg')}}" alt="">
                 </div>
             </div>
 

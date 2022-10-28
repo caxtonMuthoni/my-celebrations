@@ -18,7 +18,7 @@ class BookPDFGenerator
     public static function generatePDF(int $id)
     {
         ini_set('max_execution_time', 1200);
-        $book = Book::with(['user', 'template.template_file', 'content', 'bookMessages.user', 'bookMessages'  => function ($query) {
+        $book = Book::with(['user', 'template.template_file', 'content', 'bookMessages'  => function ($query) {
             $query->where('public', true);
         },  'bookImages' => function ($query) {
             $query->where('published', true);
@@ -58,8 +58,8 @@ class BookPDFGenerator
                 'cover_image',
                 array(
                     'path' => self::getImageRelativePathFromURL($book->image),
-                    'width' => 150,
-                    'height' => 150,
+                    'width' => 250,
+                    'height' => 250,
                     'ratio' => false
                 )
             );
@@ -81,10 +81,11 @@ class BookPDFGenerator
             libxml_use_internal_errors($internalErrors);
 
             // book images
-            $bookUserImages = Book::with(['bookImages' => function($query) {
-                $query->where('user_id', Auth::id());
+            $bookUserImages = Book::with(['bookImages' => function($query) use($book) {
+                $query->where('user_id', $book->user_id);
             }])->find($book->id);
 
+            
             $images = $bookUserImages->bookImages;
 
             if ($images) {
@@ -125,9 +126,8 @@ class BookPDFGenerator
             }
 
             // friend images
-
-            $bookUserImages = Book::with(['bookImages' => function($query) {
-                $query->where('user_id', '!=',  Auth::id());
+            $bookUserImages = Book::with(['bookImages' => function($query) use($book) {
+                $query->where('user_id', '!=',  $book->user_id)->orWhereNull('user_id');
             }])->find($book->id);
 
             $images = $bookUserImages->bookImages;
@@ -141,8 +141,8 @@ class BookPDFGenerator
                         "book_friend_image_photo#" . $key + 1,
                         array(
                             'path' => self::getImageRelativePathFromURL($image[0]['image']),
-                            'width' => 350,
-                            'height' => 250,
+                            'width' => 550,
+                            'height' => 550,
                             'ratio' => true
                         )
                     );
@@ -178,7 +178,7 @@ class BookPDFGenerator
                         "book_message#" . $key + 1,
                         $message->message
                     );
-                    $templateProcesser->setValue("book_message_user#" . $key + 1,  $message['user']['name']);
+                    $templateProcesser->setValue("book_message_user#" . $key + 1, $message['title'] ." ". $message['name']);
                     $templateProcesser->setValue("book_message_relationship#" . $key + 1,  $message['relationship']);
                 }
             }

@@ -19,7 +19,7 @@
         </div>
     </div>
     <div class="mt-0 pt-0">
-        <book-reader pdfurl="{{$pdfurl}}" :book="{{$book}}" :userid="{{Auth::id()}}" shorturl="{{$shorturl}}"></book-reader>
+        <book-reader pdfurl="{{$pdfurl}}" :book="{{$book}}" :userid="{{Auth::id() ?? 0}}" shorturl="{{$shorturl}}"></book-reader>
     </div>
 </div>
 @endsection

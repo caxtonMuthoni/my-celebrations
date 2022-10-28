@@ -74,7 +74,7 @@
                             <div class="mb-3">
                                 <label for="name" class="form-label">Your name</label>
                                 <input v-model="form.name" type="text" class="form-control" name="name" id="name"
-                                    aria-describedby="name" placeholder="eg. John"  required/>
+                                    aria-describedby="name" placeholder="eg. John" required />
                                 <small id="name" class="form-text text-muted">What is your name ?</small>
                             </div>
                             <div class="mb-3">
@@ -91,15 +91,16 @@
                                 <label for="relationship" class="form-label">What is your relationship with the book
                                     owner?</label>
                                 <input v-model="form.relationship" type="text" class="form-control" name="relationship"
-                                    id="relationship" aria-describedby="relationship" placeholder="eg. Brother" required />
+                                    id="relationship" aria-describedby="relationship" placeholder="eg. Brother"
+                                    required />
                                 <small id="relationship" class="form-text text-muted">Examples friend, brother, mother,
                                     teacher
                                     etc.</small>
                             </div>
                             <div class="mb-3">
                                 <label for="message" class="form-label">Enter the message</label>
-                                <textarea v-model="form.message" class="form-control" name="message" id="message" required
-                                    rows="3"></textarea>
+                                <textarea v-model="form.message" class="form-control" name="message" id="message"
+                                    required rows="3"></textarea>
                                 <p class="form-text" :class="{ 'text-danger': form.message.length > maxCharacteres }">
                                     Maximum characters is {{ maxCharacteres }} - {{ form.message.length }} / {{
                                             maxCharacteres
@@ -113,6 +114,10 @@
 
             <div class="col-md-8">
                 <div class="book-create__btns">
+                    <button class="btn btn-danger btn-lg" :disabled="loading" @click="deleteMessage">
+                        Delete Message
+                        <i class="fa fa-trash ms-2" aria-hidden="true"></i>
+                    </button>
                     <button class="btn btn-block btn-lg btn__primary mt-3" @click="createMessage"
                         :disabled="form.message.length > maxCharacteres">
                         Send Message
@@ -129,12 +134,18 @@ import LoaderComponent from "./LoaderComponent.vue";
 import SearchComponent from "./SearchComponent.vue";
 import Form from "vform";
 import Toast from "../utils/toast";
+import axios from "axios";
 
 export default {
     components: { SearchComponent, LoaderComponent },
     props: {
         bookId: {
             type: Number,
+            required: true,
+        },
+
+        message: {
+            type: Object,
             required: true,
         },
     },
@@ -149,7 +160,9 @@ export default {
             email: '',
             message: '',
             template: null,
+            token: null,
             relationship: null,
+            book_message_id: null,
             book_id: null,
         }),
         loading: false,
@@ -159,6 +172,15 @@ export default {
         try {
             this.loading = true;
             // await this.fetchTemplates();
+            this.form.name = this.message.name;
+            this.form.title = this.message.title;
+            this.form.email = this.message.email;
+            this.form.message = this.message.message;
+            this.form.template = this.message.template;
+            this.form.token = this.message.token;
+            this.form.relationship = this.message.relationship;
+            this.form.book_message_id = this.message.id
+            this.form.book_id = this.bookId
         } catch (error) {
         } finally {
             this.loading = false;
@@ -182,7 +204,7 @@ export default {
                 this.loading = true;
                 this.form.book_id = this.bookId;
                 const response = await this.form.post(
-                    "/api/celebrations/message"
+                    "/api/celebrations/message/update"
                 );
 
                 const responseData = response.data;
@@ -206,6 +228,37 @@ export default {
                     icon: "error",
                     title: "An error occurred",
                     text: "Oops! There was an error when uploading data, Please try again.",
+                });
+            } finally {
+                this.loading = false;
+            }
+        },
+
+        async deleteMessage() {
+            try {
+                this.loading = true;
+                const response = await axios.delete(`/api/celebrations/message/delete?email=${this.form.email}&token=${this.form.token}`)
+                const responseData = response.data;
+
+                if (responseData.status) {
+                    Toast.fire({
+                        icon: "success",
+                        text: "Your message was deleted successfully",
+                    });
+                    location.href = `/book/book/pdf/read/${this.bookId}`;
+                } else {
+                    this.$swal.fire({
+                        icon: "error",
+                        title: "An error occurred",
+                        text: responseData.message,
+                    });
+                }
+            } catch (error) {
+                const err = {...error};
+                this.$swal.fire({
+                    icon: "error",
+                    title: "An error occurred",
+                    text: err?.response?.data?.message || "An error occured please try again later",
                 });
             } finally {
                 this.loading = false;

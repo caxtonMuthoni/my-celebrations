@@ -39,9 +39,16 @@ Route::group([
     Route::post('bookimages', [BookImageController::class, 'store']);
     Route::delete('bookimage/{id}', [BookImageController::class, 'destroy']);
     Route::delete('bookmessage/{id}', [BookMessageController::class, 'destroy']);
-    Route::post('message', [BookMessageController::class, 'store']);
     Route::post('togglebookstatus/{id}', [BookMessageController::class, 'toggleMessageStatus']);
     Route::post('togglebookimagestatus/{id}', [BookImageController::class, 'toggleImageStatus']);
+});
+
+Route::group([
+    'prefix' => 'celebrations',
+], function () { 
+    Route::post('message', [BookMessageController::class, 'store']);
+    Route::post('message/update', [BookMessageController::class, 'update']);
+    Route::delete('message/delete', [BookMessageController::class, 'ownerMessageDelete']);
 });
 
 

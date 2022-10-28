@@ -13,7 +13,7 @@ class UpdateBookMessageRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,10 @@ class UpdateBookMessageRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'email' => 'required',
+            'book_message_id' => 'required | integer',
+            'message' => 'required | string | max:150',
+            'relationship' => 'required | string',
         ];
     }
 }

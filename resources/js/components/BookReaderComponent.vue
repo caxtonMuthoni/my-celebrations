@@ -235,7 +235,8 @@ export default {
 
         userid: {
             type: Number,
-            required: true
+            required: false,
+            default: null
         }
     },
     data() {

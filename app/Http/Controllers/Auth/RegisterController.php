@@ -51,11 +51,11 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        $data['phonenumber'] = PhoneSanitizer::sanitize($data['phonenumber']);
+        $data['phonenumber'] = $data['phonenumber'] ? PhoneSanitizer::sanitize($data['phonenumber']) : $data['phonenumber'];
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'phonenumber' => ['required', 'min:10', 'max:13', 'unique:users'],
+            'phonenumber' => ['nullable', 'min:10', 'max:13', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -71,7 +71,7 @@ class RegisterController extends Controller
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'phonenumber' => PhoneSanitizer::sanitize($data['phonenumber']),
+            'phonenumber' => $data['phonenumber'] ? PhoneSanitizer::sanitize($data['phonenumber']) : $data['phonenumber'],
             'password' => Hash::make($data['password']),
         ]);
     }

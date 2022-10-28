@@ -5,9 +5,12 @@ use App\Helpers\TemplatesNumberGetter;
 use App\Http\Controllers\BillingController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\BookImageController;
+use App\Http\Controllers\BookMessageController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SocialiteCOntroller;
+use App\Mail\MessageDeleteUpdateMail;
 use App\Models\Book;
+use App\Models\BookMessage;
 use App\Payment\MpesaSubscription;
 use App\Payment\PaypalSubscription;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -71,7 +74,7 @@ Route::group([
 
     Route::group([
         'middleware' => ['subscriber']
-    ], function() {
+    ], function () {
         Route::get('create', [BookController::class, 'create'])->name('book-create');
     });
 
@@ -80,13 +83,9 @@ Route::group([
     Route::get('book/{book}', [BookController::class, 'show'])->name('book-show');
     Route::get('books/read/{id}', [BookController::class, 'readBook'])->name('book-read');
     Route::get('messages/and/pictures/{id}', [BookController::class, 'viewMessagesAndPictures'])->name('book-view-messages-pictures');
-    Route::get('books/message/{id}', [BookController::class, 'bookMessage'])->name('book-message');
-    Route::get('books/images/{id}', [BookController::class, 'bookImages'])->name('book-images');
-    Route::post('/upload/bookimage', [BookImageController::class, 'friendImageUpload'])->name('friend-upload-image');
     Route::get('publish/book/{id}', [BookController::class, 'publishBook'])->name('publish-book');
     Route::get('/print/book/{id}', [BookController::class, 'printBook'])->name('print-book');
     Route::get('/print/temp/{id}', [BookController::class, 'bookTemplateCreate'])->name('print-book-template');
-    Route::get('/book/pdf/read/{id}', [BookController::class, 'readBookPDf'])->name('readBookPDf');
     Route::get('/book/edit/details/{id}', [BookController::class, 'bookEditView'])->name('edit-book-details');
     Route::post('/book/update/details/{id}', [BookController::class, 'update'])->name('update-book-details');
     Route::get('/book/transfer/{id}', [BookController::class, 'bookTransferView'])->name('book-transfer');
@@ -94,6 +93,18 @@ Route::group([
     Route::post('/book/request/transfer/{id}', [BookController::class, 'transferBookRequest'])->name('book-request-transfer');
 });
 
+Route::group([
+    'prefix' => 'book'
+], function () {
+    Route::get('/book/pdf/read/{id}', [BookController::class, 'readBookPDf'])->name('readBookPDf');
+    Route::get('books/message/{id}', [BookController::class, 'bookMessage'])->name('book-message');
+    Route::get('books/images/{id}', [BookController::class, 'bookImages'])->name('book-images');
+    Route::get('/message/update/view', [BookMessageController::class, 'bookMessageUpdateView'])->name('bookMessageUpdateView');
+    Route::get('/image/update/view', [BookImageController::class, 'bookImageUpdateView'])->name('bookImageUpdateView');
+    Route::post('/upload/bookimage', [BookImageController::class, 'friendImageUpload'])->name('friend-upload-image');
+    Route::post('/image/update', [BookImageController::class, 'update'])->name('update-book-image');
+    Route::get('/image/delete', [BookImageController::class, 'ownerImageDelete'])->name('owner-delete-book-image');
+});
 
 Route::group([
     'middleware' => ['auth', 'verified'],
@@ -107,20 +118,14 @@ Route::group([
     Route::post('mpesa/stkpush', [BillingController::class, 'payWithMpesa'])->name('billing-with-mpesa');
 
     Route::get('paypal/view/{id}', [BillingController::class, 'paypalView'])->name('billing-paypal-view');
-
 });
 
-Route::get('test', function() {
-    try {
-        $consumer_key = env("MPESA_CONSUMER_KEY");
-        $consumer_secret = env("MPESA_CONSUMER_SECRET");
-    } catch (\Throwable $th) {
-        $consumer_key = self::env("MPESA_CONSUMER_KEY");
-        $consumer_secret = self::env("MPESA_CONSUMER_SECRET");
-    }
-
-    return response()->json([
-        'consumer_key' => $consumer_key,
-        'consumer_secret' => $consumer_secret
-    ]);
+Route::get('test', function () {
+    $book = Book::latest()->first();
+    $bookMessage = BookMessage::latest()->first();
+    $token = $bookMessage->token;
+    $email = $bookMessage->email;
+    $url = route('bookMessageUpdateView')."?token=$token&email=$email";
+    Mail::to("githinjicaxton323@gmail.com")->send(new MessageDeleteUpdateMail($book, $bookMessage, $url));
+    return response()->json(['status' => 'sent']);
 });

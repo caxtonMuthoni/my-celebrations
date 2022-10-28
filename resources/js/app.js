@@ -15,9 +15,11 @@ window.Vue = require('vue').default;
 
 
 Vue.component('steps-component', require('./components/StepsComponent.vue').default);
+Vue.component('password-input-component', require('./components/PasswordInputComponent.vue').default);
 Vue.component('book-content-component', require('./components/BookContentComponent.vue').default);
 Vue.component('edit-book-content-component', require('./components/EditBookContentComponent.vue').default);
 Vue.component('add-book-message-component', require('./components/AddBookMessageComponent.vue').default);
+Vue.component('update-book-message-component', require('./components/UpdateBookMessageComponent.vue').default);
 Vue.component('paypal-component', require('./components/PaypalComponent.vue').default);
 Vue.component('book-reader', require('./components/BookReaderComponent.vue').default);
 Vue.component('book-messages-component', require('./components/BookMessagesComponent.vue').default);
