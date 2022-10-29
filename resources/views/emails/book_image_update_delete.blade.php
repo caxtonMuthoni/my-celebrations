@@ -16,7 +16,7 @@
             Your Image
         </h3>
        <div>
-          <img src="{{$bookImage->image}}" alt="Book Image">
+          <img src="{{$bookImage->image}}" alt="Book Image" style="height: 350px;">
        </div>
         <h3>
             Book Details
