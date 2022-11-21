@@ -1,37 +1,25 @@
 <template>
-    <div class="w-100">
+    <div class="">
         <div v-if="shorturl !== 'none'" class="row cta_bar">
             <div class="col-sm-7 col-md-7">
                 <h4>{{ book.title }}</h4>
             </div>
             <div class="col-sm-5 col-md-5">
-                <a
-                    href="#"
-                    class="btn btn-primary me-4"
-                    @click.prevent="requestFullScreen"
-                >
+                <a href="#" class="btn btn-primary m-2" @click.prevent="requestFullScreen">
                     <i class="fa fa-expand me-2" aria-hidden="true"></i>
-                    Fullscreen</a
-                >
-                
-                <a
-                  v-if="userid == book.user_id"
-                    href="#"
-                    class="btn btn__primary me-4"
-                    @click.prevent="printPDF"
-                    ><i class="fa fa-print me-2" aria-hidden="true"></i>Print</a
-                >
+                    Fullscreen</a>
 
-                <a
-                    href="#"
-                    class="btn btn-success"
-                    data-bs-toggle="modal"
-                    data-bs-target="#sharemodal"
-                    ><i class="fa fa-share me-2" aria-hidden="true"></i>Share</a
-                >
+                <a v-if="userid == book.user_id" href="#" class="btn btn__primary m-2" @click.prevent="printPDF"><i
+                        class="fa fa-print me-2" aria-hidden="true"></i>Print</a>
+
+                <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#sharemodal"><i
+                        class="fa fa-share me-2" aria-hidden="true"></i>Share</a>
             </div>
         </div>
-        <div id="pdfvuerdiv" class="pdfvuerclas bg-dark container">
+        <div id="flipbook-wrapper-id" class="flipbook-wrapper">
+            <div id="flipbook"></div>
+        </div>
+        <!-- <div id="pdfvuerdiv" class="pdfvuerclas bg-dark container">
             <div id="pdfvuer">
                 <div
                     id="buttons"
@@ -80,46 +68,27 @@
                     </template>
                 </pdf>
             </div>
-        </div>
+        </div> -->
         <!-- Share modal -->
-        <div
-            class="modal fade"
-            id="sharemodal"
-            tabindex="-1"
-            role="dialog"
-            aria-labelledby="modelTitleId"
-            aria-hidden="true"
-        >
+        <div class="modal fade" id="sharemodal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+            aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">
                             Select the social network to share to
                         </h5>
-                        <button
-                            type="button"
-                            class="btn-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                        ></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="share">
-                                    <i
-                                        class="fab fa-facebook share-icon"
-                                        aria-hidden="true"
-                                    ></i>
+                                    <i class="fab fa-facebook share-icon" aria-hidden="true"></i>
                                     <div class="share__btn">
-                                        <ShareNetwork
-                                            network="facebook"
-                                            :url="shorturl"
-                                            :title="book.title"
-                                            :description="book.cover_message"
-                                            :quote="book.cover_message"
-                                            hashtags="mycelebrationbooks"
-                                        >
+                                        <ShareNetwork network="facebook" :url="shorturl" :title="book.title"
+                                            :description="book.cover_message" :quote="book.cover_message"
+                                            hashtags="mycelebrationbooks">
                                             Facebook
                                         </ShareNetwork>
                                     </div>
@@ -127,19 +96,11 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="share">
-                                    <i
-                                        class="fab fa-whatsapp share-icon"
-                                        aria-hidden="true"
-                                    ></i>
+                                    <i class="fab fa-whatsapp share-icon" aria-hidden="true"></i>
                                     <div class="share__btn">
-                                        <ShareNetwork
-                                            network="whatsapp"
-                                            :url="shorturl"
-                                            :title="book.title"
-                                            :description="book.cover_message"
-                                            :quote="book.cover_message"
-                                            hashtags="mycelebrationbooks"
-                                        >
+                                        <ShareNetwork network="whatsapp" :url="shorturl" :title="book.title"
+                                            :description="book.cover_message" :quote="book.cover_message"
+                                            hashtags="mycelebrationbooks">
                                             Whatsapp
                                         </ShareNetwork>
                                     </div>
@@ -148,19 +109,11 @@
 
                             <div class="col-md-4">
                                 <div class="share">
-                                    <i
-                                        class="fa fa-envelope share-icon"
-                                        aria-hidden="true"
-                                    ></i>
+                                    <i class="fa fa-envelope share-icon" aria-hidden="true"></i>
                                     <div class="share__btn">
-                                        <ShareNetwork
-                                            network="email"
-                                            :url="shorturl"
-                                            :title="book.title"
-                                            :description="book.cover_message"
-                                            :quote="book.cover_message"
-                                            hashtags="mycelebrationbooks"
-                                        >
+                                        <ShareNetwork network="email" :url="shorturl" :title="book.title"
+                                            :description="book.cover_message" :quote="book.cover_message"
+                                            hashtags="mycelebrationbooks">
                                             Email
                                         </ShareNetwork>
                                     </div>
@@ -169,19 +122,11 @@
 
                             <div class="col-md-4 mt-2">
                                 <div class="share">
-                                    <i
-                                        class="fab fa-telegram share-icon"
-                                        aria-hidden="true"
-                                    ></i>
+                                    <i class="fab fa-telegram share-icon" aria-hidden="true"></i>
                                     <div class="share__btn">
-                                        <ShareNetwork
-                                            network="telegram"
-                                            :url="shorturl"
-                                            :title="book.title"
-                                            :description="book.cover_message"
-                                            :quote="book.cover_message"
-                                            hashtags="mycelebrationbooks"
-                                        >
+                                        <ShareNetwork network="telegram" :url="shorturl" :title="book.title"
+                                            :description="book.cover_message" :quote="book.cover_message"
+                                            hashtags="mycelebrationbooks">
                                             Telegram
                                         </ShareNetwork>
                                     </div>
@@ -190,16 +135,13 @@
 
                             <div class="col-md-4 mt-2">
                                 <input hidden id="linkInput" type="text" :value="shorturl">
-                                <a href="#" class="btn btn-outline-info mt-2 btn-lg" @click.prevent="copyTextToClipboard">Copy Link</a>
+                                <a href="#" class="btn btn-outline-info mt-2 btn-lg"
+                                    @click.prevent="copyTextToClipboard">Copy Link</a>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button
-                            type="button"
-                            class="btn btn-light"
-                            data-bs-dismiss="modal"
-                        >
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">
                             Close
                         </button>
                     </div>
@@ -208,15 +150,11 @@
         </div>
     </div>
 </template>
+
 <script>
-import pdfvuer from "pdfvuer";
 import Toast from '../utils/toast';
 
-
 export default {
-    components: {
-        pdf: pdfvuer,
-    },
     props: {
         pdfurl: {
             type: String,
@@ -241,94 +179,110 @@ export default {
     },
     data() {
         return {
-            page: 1,
-            numPages: 0,
-            pdfdata: undefined,
-            errors: [],
-            scale: "page-width",
+            screenWidth: 0,
         };
     },
-    computed: {
-        formattedZoom() {
-            return Number.parseInt(this.scale * 100);
-        },
-    },
+
     mounted() {
-        this.getPdf();
+        this.screenWidth = screen.width;
+        this.loadPdfData()
     },
-    watch: {
-        show: function (s) {
-            if (s) {
-                this.getPdf();
-            }
-        },
-        page: function (p) {
-            if (
-                window.pageYOffset <=
-                    this.findPos(document.getElementById(p)) ||
-                (document.getElementById(p + 1) &&
-                    window.pageYOffset >=
-                        this.findPos(document.getElementById(p + 1)))
-            ) {
-                // window.scrollTo(0,this.findPos(document.getElementById(p)));
-                document.getElementById(p).scrollIntoView();
-            }
-        },
-    },
+
     methods: {
-        handle_pdf_link: function (params) {
-            // Scroll to the appropriate place on our page - the Y component of
-            // params.destArray * (div height / ???), from the bottom of the page div
-            var page = document.getElementById(String(params.pageNumber));
-            page.scrollIntoView();
-        },
-        getPdf() {
-            var self = this;
-            self.pdfdata = pdfvuer.createLoadingTask(this.pdfurl);
-            self.pdfdata.then((pdf) => {
-                self.numPages = pdf.numPages;
-                window.onscroll = function () {
-                    changePage();
-                    stickyNav();
-                };
 
-                // Get the offset position of the navbar
-                var sticky = $("#buttons")[0].offsetTop;
-
-                // Add the sticky class to the self.$refs.nav when you reach its scroll position. Remove "sticky" when you leave the scroll position
-                function stickyNav() {
-                    if (window.pageYOffset >= sticky) {
-                        $("#buttons")[0].classList.remove("hidden");
-                    } else {
-                        $("#buttons")[0].classList.add("hidden");
-                    }
+        loadPdfData() {
+            var loadingTask = pdfjsLib.getDocument(this.pdfurl);
+            const _vm = this;
+            loadingTask.promise.then(function (pdf) {
+                const parent = document.getElementById('flipbook');
+                for (let i = 0; i < pdf.numPages; i++) {
+                    const node = document.createElement("canvas");
+                    var pageNumber = i + 1;
+                    node.id = "canvas-id-" + pageNumber;
+                    parent.appendChild(node)
+                    _vm.renderPage(pdf, node, pageNumber)
                 }
 
-                function changePage() {
-                    var i = 1,
-                        count = Number(pdf.numPages);
-                    do {
-                        if (
-                            window.pageYOffset >=
-                                self.findPos(document.getElementById(i)) &&
-                            window.pageYOffset <=
-                                self.findPos(document.getElementById(i + 1))
-                        ) {
-                            self.page = i;
+                const node = document.createElement("div");
+                node.style.backgroundColor = "#fff";
+                node.style.display = "flex";
+                node.style.alignItems = "center";
+                node.style.justifyContent = "center";
+                const h1Node = document.createElement("h1");
+                const textnode = document.createTextNode("THE END.");
+                h1Node.appendChild(textnode);
+                node.appendChild(h1Node)
+                parent.appendChild(node)
+                _vm.renderPage(pdf, node, pageNumber + 1)
+
+                if (_vm.screenWidth > 1024) {
+                    $('#flipbook').turn({
+                        display: 'double',
+                        acceleration: true,
+                        elevation: 50,
+                        autocenter: true,
+                        gradients: true,
+                        zoom: 2,
+                        duration: 1000,
+                        when: {
+                            turned: function (e, page) {
+                                const canvaOne = document.getElementById('flipbook');
+                                if (page < 2) {
+                                    canvaOne.style.marginLeft = "-100px";
+                                }
+                                else {
+                                    canvaOne.style.margin = "auto";
+                                }
+                            }
                         }
-                        i++;
-                    } while (i < count);
-                    if (
-                        window.pageYOffset >=
-                        self.findPos(document.getElementById(i))
-                    ) {
-                        self.page = i;
+                    });
+
+                } else {
+                    $('#flipbook').turn({
+                    display: 'single',
+                    acceleration: true,
+                    elevation: 50,
+                    autocenter: true,
+                    gradients: true,
+                    zoom: 2,
+                    duration: 1000,
+                    when: {
+                        turned: function (e, page) {
+                            // const canvaOne = document.getElementById('flipbook');
+                            // if (page < 2) {
+                            //     canvaOne.style.marginLeft = "-100px";
+                            // }
+                            // else {
+                            //     canvaOne.style.margin = "auto";
+                            // }
+                        }
                     }
+                });
+
                 }
+
+            }, function (reason) {
+                // PDF loading error
+                console.error(reason);
             });
         },
-        findPos(obj) {
-            return obj.offsetTop;
+
+        renderPage(pdf, canvas, pageNumber) {
+            pdf.getPage(pageNumber).then(function (page) {
+                var scale = 1.5;
+                var viewport = page.getViewport({ scale: scale });
+                var context = canvas.getContext('2d');
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+                var renderContext = {
+                    canvasContext: context,
+                    viewport: viewport
+                };
+                var renderTask = page.render(renderContext);
+                renderTask.promise.then(function () {
+
+                });
+            });
         },
 
         // print pdf
@@ -342,7 +296,7 @@ export default {
         },
 
         requestFullScreen() {
-            var elem = document.getElementById("pdfvuerdiv");
+            var elem = document.getElementById("flipbook-wrapper-id");
             if (elem.requestFullscreen) {
                 elem.requestFullscreen();
             } else if (elem.webkitRequestFullscreen) {
@@ -357,7 +311,7 @@ export default {
         copyTextToClipboard() {
             var copyText = document.getElementById("linkInput");
             copyText.select();
-            copyText.setSelectionRange(0, 99999); 
+            copyText.setSelectionRange(0, 99999);
             navigator.clipboard.writeText(copyText.value);
             Toast.fire({
                 title: 'Success',
@@ -368,30 +322,55 @@ export default {
     },
 };
 </script>
-<style src="pdfvuer/dist/pdfvuer.css"></style>
+
 <style lang="css" scoped>
-@import "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.9/semantic.min.css";
 .cta_bar {
     border-bottom: 1px solid rgba(192, 192, 192, 0.229);
     padding: 20px;
     padding-top: 0 !important;
 }
-.pdfvuerclas {
-    padding: 20px 10%;
-    margin-top: 20px;
-    border-radius: 5px;
-}
+
 #buttons {
     margin-left: 0 !important;
     margin-right: 0 !important;
 }
+
 /* Page content */
-.content {
-    padding: 16px;
+.flipbook-wrapper {
+    background: rgb(27, 27, 27);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.pdfvuerclas {
-    overflow-y: auto;
+#flipbook {
+    width: 80%;
+    height: 100vh;
+    margin: auto;
+    overflow: hidden;
+
+}
+
+@media screen and (max-width:1024px) {
+  #flipbook {
+    width: 100%;
+    padding: 10px;
+    padding-right: 0;
+  }
+}
+
+#flipbook {
+    -webkit-transition: margin-left 0.2s ease-in-out;
+    -moz-transition: margin-left 0.2s ease-in-out;
+    -o-transition: margin-left 0.2s ease-in-out;
+    -ms-transition: margin-left 0.2s ease-in-out;
+    transition: margin-left 0.2s ease-in-out;
+}
+
+#flipbook .turn-page {
+    background-color: rgb(243, 243, 243);
+    background-size: cover;
 }
 
 .share {

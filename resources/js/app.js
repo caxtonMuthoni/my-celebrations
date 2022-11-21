@@ -5,9 +5,7 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 import { HasError } from 'vform/src/components/bootstrap5'
 import VTooltip from 'v-tooltip'
 import VueSocialSharing from 'vue-social-sharing'
-
-
-
+import VueMeta from 'vue-meta'
 
 require('./bootstrap');
 
@@ -31,6 +29,8 @@ Vue.use(VueLoaders);
 Vue.use(VueSweetalert2);
 Vue.use(VTooltip)
 Vue.use(VueSocialSharing);
+Vue.use(VueMeta)
+
 
 const app = new Vue({
     el: '#app',
