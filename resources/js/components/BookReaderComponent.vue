@@ -355,8 +355,9 @@ export default {
 @media screen and (max-width:1024px) {
   #flipbook {
     width: 100%;
-    padding: 10px;
+    padding-left: 10px;
     padding-right: 0;
+    height: 90vh;
   }
 }
 
