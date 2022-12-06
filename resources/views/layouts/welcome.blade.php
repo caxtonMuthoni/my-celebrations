@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <nav class="nav nav__nav-open">
+    <nav class="nav">
         <a href="/" class="nav__brand">
             <img src="{{asset('images/branding/logo.jpeg')}}" alt="" class="nav__brand--logo">
         </a>
