@@ -1,0 +1,44 @@
+.btn {
+    background: $color-primary;
+    border: 0;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: inherit;
+    font-weight: normal;
+    padding: 15px 30px;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @media screen and (max-width:600px) {
+        font-size: 12px;
+        padding: 10px 20px;
+     }
+
+    &__rounded {
+        border-radius: 100px;
+
+        &:hover {
+            background: $body-color;
+            color: $color-primary !important;
+        }
+    }
+
+    &__borderd {
+        background: transparent;
+        border: 2px solid $color-primary;
+        color: $color-primary;
+
+        &:hover {
+            background: $color-primary;
+            color: $body-color !important;
+        }
+    }
+
+    i {
+        margin: 0 20px;
+    }
+}

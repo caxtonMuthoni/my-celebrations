@@ -187,12 +187,6 @@ remember each event.">
 
                 <div class="col-md-4 col-sm-4">
                     <div class="google-map">
-                        <!-- How to change your own map point
-            1. Go to Google Maps
-            2. Click on your location point
-            3. Click "Share" and choose "Embed map" tab
-            4. Copy only URL and paste it within the src="" field below
-	-->
                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15955.364608344307!2d36.80127391953077!3d-1.2681032326610508!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f173c0a1f9de7%3A0xad2c84df1f7f2ec8!2sWestlands%2C%20Nairobi!5e0!3m2!1sen!2ske!4v1656073547817!5m2!1sen!2ske" width="600" height="450" style="border:0;" allowfullscreen="true" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </div>
@@ -257,7 +251,7 @@ remember each event.">
                                 <p>Copyright &copy; {{date("Y")}} Mycelebrations.com</p>
                             </div>
                         </div>
-                        <div class="col-md-6 col-sm-7">
+                        <div class="col-md-6 col-sm-7 footer__cta">
                             <div class="phone-contact">
                                 <p>Call us/ whatsapp <span>+254768069134/+254738121484</span></p>
                             </div>

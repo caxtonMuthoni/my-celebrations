@@ -1,0 +1,82 @@
+*,
+*::after,
+*::before {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-size: 16px;
+    background-color: $body-color;
+    font-family: $font-family-body;
+    color: $color-secondary;
+    font-weight: 300;
+}
+
+.heading {
+    font-family: $font-family-heading;
+    transition: all .5s;
+
+    &__1 {
+        font-size: 50px;
+        color: $color-primary;
+
+        @media screen and (max-width:600px) {
+            font-size: 30px;
+        }
+    }
+
+    &__2 {
+        font-size: 40px;
+        position: relative;
+        margin-bottom: 40px;
+
+        @media screen and (max-width:600px) {
+            font-size: 25px;
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            top: 55px;
+            background-color: $color-primary;
+            height: 2px;
+            width: 50%;
+            left: 25%;
+        }
+    }
+
+    &__3 {
+        font-size: 30px;
+        font-family: $font-family-body;
+
+        @media screen and (max-width:600px) {
+            font-size: 20px;
+        }
+    }
+
+    &__4 {
+        font-size: 18px;
+        font-family: $font-family-body;
+
+        @media screen and (max-width:600px) {
+            font-size: 16px;
+        }
+    }
+
+    &__description {
+        font-size: 24px;
+        font-weight: 300;
+        line-height: 150%;
+        margin-bottom: 50px;
+
+        @media screen and (max-width:600px) {
+            font-size: 18px;
+        }
+    }
+}

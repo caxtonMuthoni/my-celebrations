@@ -1,0 +1,74 @@
+.footer {
+    padding: 100px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: linear-gradient(rgba(0, 0, 0, 0.812), rgba(0, 0, 0, 0.812)), url('/images/new/about.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: $color-secondary-light;
+    background-position: center;
+
+    &__content {
+        display: grid;
+        grid-template-columns: 400px repeat(3, 250px);
+        grid-gap: 20px;
+
+
+        @media screen and (max-width:968px) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @media screen and (max-width:600px) {
+            grid-template-columns: repeat(1, 1fr);
+        }
+    }
+
+    &__heading {
+        color: $color-primary;
+        margin-bottom: 15px;
+    }
+
+    &__paragraph {
+        font-size: 18px;
+        color: $color-secondary-light;
+        line-height: 170%;
+    }
+
+    &__li {
+        list-style: none;
+        padding: 5px 0;
+    }
+
+    &__link {
+        text-decoration: none;
+        color: $color-light;
+        font-weight: 400;
+        text-transform: capitalize;
+        font-size: 14px;
+        transition: all .5s;
+
+        &--active {
+            color: $color-primary !important;
+        }
+
+        &:hover {
+            color: $color-primary;
+        }
+    }
+
+    &__legal {
+        margin-top: 20px;
+        width: 100%;
+        padding-top: 20px;
+        border-top: 1px solid rgba($color-secondary-light, 0.2);
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__cta {
+        display: flex;
+        justify-content: space-between;
+    }
+}

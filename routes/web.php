@@ -120,6 +120,11 @@ Route::group([
     Route::get('paypal/view/{id}', [BillingController::class, 'paypalView'])->name('billing-paypal-view');
 });
 
+Route::get('/new/design', function() {
+    $books = Book::with('user')->where('public', true)->latest()->take(4)->get();
+    return view('layouts.welcome', compact('books'));
+});
+
 Route::get('test', function () {
     $book = Book::latest()->first();
     $bookMessage = BookMessage::latest()->first();
@@ -129,3 +134,6 @@ Route::get('test', function () {
     Mail::to("githinjicaxton323@gmail.com")->send(new MessageDeleteUpdateMail($book, $bookMessage, $url));
     return response()->json(['status' => 'sent']);
 });
+
+
+
