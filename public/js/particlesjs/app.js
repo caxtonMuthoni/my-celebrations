@@ -154,9 +154,9 @@ if(aboutEl) {
         "value": "random"
       },
       "shape": {
-        "type": "circle",
+        "type": "star",
         "stroke": {
-          "width": 1,
+          "width": 0,
           "color": 'random'
         },
         "polygon": {

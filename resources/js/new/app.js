@@ -19,3 +19,21 @@ menuIcon.addEventListener('click', function () {
         navbar.classList.add('nav__nav-open')
     }
 })
+
+// acordion
+
+const acc = document.getElementsByClassName("faqs__accordion");
+if (acc.length > 0) {
+    let i;
+    for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function () {
+            this.classList.toggle("faqs__accordion--active");
+            var panel = this.nextElementSibling;
+            if (panel.style.maxHeight) {
+                panel.style.maxHeight = null;
+            } else {
+                panel.style.maxHeight = panel.scrollHeight + "px";
+            }
+        });
+    }
+}

@@ -7,6 +7,7 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\BookImageController;
 use App\Http\Controllers\BookMessageController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\NewDesignController;
 use App\Http\Controllers\SocialiteCOntroller;
 use App\Mail\MessageDeleteUpdateMail;
 use App\Models\Book;
@@ -120,10 +121,11 @@ Route::group([
     Route::get('paypal/view/{id}', [BillingController::class, 'paypalView'])->name('billing-paypal-view');
 });
 
-Route::get('/new/design', function() {
-    $books = Book::with('user')->where('public', true)->latest()->take(4)->get();
-    return view('layouts.welcome', compact('books'));
-});
+Route::get('/new/design',  [NewDesignController::class, 'welcome'])->name('new-welcome');
+Route::get('/new/about',  [NewDesignController::class, 'about'])->name('new-about');
+Route::get('/new/plans',  [NewDesignController::class, 'plans'])->name('new-plans');
+Route::get('/new/categories',  [NewDesignController::class, 'categories'])->name('new-categories');
+Route::get('/new/faqs',  [NewDesignController::class, 'faqs'])->name('new-faqs');
 
 Route::get('test', function () {
     $book = Book::latest()->first();

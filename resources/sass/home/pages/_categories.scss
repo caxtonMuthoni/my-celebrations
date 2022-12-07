@@ -1,0 +1,19 @@
+.categories {
+    background: $color-secondary-light;
+    height: 100vh;
+    padding: 120px 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    &__list {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+
+        @media screen and (max-width:968px) {
+            grid-template-columns: repeat(1, 1fr);
+            grid-area: 20px;
+        }
+    }
+}
