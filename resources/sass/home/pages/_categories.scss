@@ -7,6 +7,11 @@
     justify-content: center;
     flex-direction: column;
 
+    @media screen and (max-width:968px) {
+      height: auto;
+      padding: 80px 20px;
+    }
+
     &__list {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
