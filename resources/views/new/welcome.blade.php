@@ -129,7 +129,7 @@
     </div>
     <div class="latest__books">
         @foreach($books as $book)
-        <a href="{{route('book-read', $book->id)}}" class="latest__books--book shadow_card">
+        <a href="{{route('readBookPDf', $book->id)}}" class="latest__books--book shadow_card">
             <div class="latest__books--book--img">
                 <img src="{{$book->image}}" alt="" class="latest__books--book--photo">
             </div>
