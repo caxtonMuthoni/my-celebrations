@@ -1,5 +1,5 @@
 .categories {
-    background: $color-secondary-light;
+    background-color: #fdfdfd;
     height: 100vh;
     padding: 120px 80px;
     display: flex;
@@ -15,10 +15,11 @@
     &__list {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
 
         @media screen and (max-width:968px) {
             grid-template-columns: repeat(1, 1fr);
-            grid-area: 20px;
+            gap: 20px;
         }
     }
 }

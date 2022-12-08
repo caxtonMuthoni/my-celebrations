@@ -27,6 +27,7 @@
         align-items: center;
         justify-content: center;
         padding: 120px 80px;
+        background-color: #fdfdfd;
 
         @media screen and (max-width:968px) {
             padding: 80px 20px;
@@ -54,7 +55,7 @@
             }
 
             &--2 {
-                width: 100%;
+                flex-basis: 40%;
                 overflow: hidden;
             }
         }

@@ -18,13 +18,13 @@
         </a>
         <div class="nav__container">
             <ul class="nav__ul">
-                <li class="nav__li"><a href="/new/design" class="nav__link nav__link--active">Home</a></li>
-                <li class="nav__li"><a href="{{route('new-about')}}" class="nav__link">About</a></li>
+                <li class="nav__li"><a href="/new/design" class="nav__link js_home">Home</a></li>
+                <li class="nav__li"><a href="{{route('new-about')}}" class="nav__link js_about">About</a></li>
                 <li class="nav__li"><a href="{{route('book-public-show')}}" class="nav__link">Public Books</a></li>
-                <li class="nav__li"><a href="{{route('new-plans')}}" class="nav__link">Plans</a></li>
-                <li class="nav__li"><a href="{{route('new-categories')}}" class="nav__link">Categories</a></li>
-                <li class="nav__li"><a href="{{route('new-faqs')}}" class="nav__link">FAQs</a></li>
-                <li class="nav__li"><a href="#contact" class="nav__link">Contact</a></li>
+                <li class="nav__li"><a href="{{route('new-plans')}}" class="nav__link js_plans">Plans</a></li>
+                <li class="nav__li"><a href="{{route('new-categories')}}" class="nav__link js_categories">Categories</a></li>
+                <li class="nav__li"><a href="{{route('new-faqs')}}" class="nav__link js_faqs">FAQs</a></li>
+                <li class="nav__li"><a href="#contact" class="nav__link js_contact">Contact</a></li>
                 @auth
                 <li class="nav__li"><a href="{{ url('/home') }}" class="nav__link">Dashboard</a></li>
                 @else

@@ -76,6 +76,23 @@
 
         &--active {
             color: $color-primary !important;
+            position: relative;
+
+            &::after {
+                content: "";
+                height: 2px;
+                width: 50%;
+                position: absolute;
+                top: 20px;
+                background: $color-primary;
+                left: 25%;
+
+                @media screen and (max-width:968px) {
+                    display: none;
+                }
+            }
+
+
         }
 
         &:hover {

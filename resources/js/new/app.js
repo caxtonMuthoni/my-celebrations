@@ -20,8 +20,35 @@ menuIcon.addEventListener('click', function () {
     }
 })
 
-// acordion
+// menu active status toggle
+window.onload = function () {
+    const elements = document.querySelectorAll('.nav__link')
+    const activeElement = document.querySelector('.nav__link--active')
+    if (activeElement) {
+        activeElement.classList.remove('nav__link--active')
+    }
+    const href = window.location.href
+    let currentRoute = 'js_home';
+    const routes = [
+        'about',
+        'contact',
+        'plans',
+        'categories',
+        'faqs',
+    ]
+    routes.forEach(el => {
+        if (href.includes(el)) {
+            currentRoute = "js_" + el
+        }
+    })
+    elements.forEach(element => {
+        if (element.classList.contains(currentRoute)) {
+            element.classList.add('nav__link--active')
+        }
+    })
+}
 
+// acordion
 const acc = document.getElementsByClassName("faqs__accordion");
 if (acc.length > 0) {
     let i;

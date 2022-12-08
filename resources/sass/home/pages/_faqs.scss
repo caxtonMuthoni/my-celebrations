@@ -1,15 +1,14 @@
 .faqs {
-    height: 100vh;
     padding: 120px 80px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     width: 100%;
+    background-color: #fdfdfd;
 
     @media screen and (max-width:968px) {
         padding: 80px 20px;
-        height: auto;
     }
 
     &__list {
@@ -32,7 +31,7 @@
         transition: 0.4s;
         font-weight: 400;
         font-family: $font-family-body;
-      
+
         &--active,
         &:hover {
             background-color: #ccc;
@@ -54,7 +53,7 @@
             }
         }
 
-         @media screen and (max-width:968px) {
+        @media screen and (max-width:968px) {
             width: 100%;
         }
     }
@@ -71,7 +70,7 @@
         font-size: 20px;
         line-height: 165%;
 
-         @media screen and (max-width:968px) {
+        @media screen and (max-width:968px) {
             width: 100%;
         }
     }
