@@ -189,4 +189,4 @@
 
 @include('includes.contact')
 
-@end section
+@endsection
