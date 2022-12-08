@@ -55,7 +55,7 @@
         <p class="heading__description">A platform to capture your special moments forever.</p>
     </div>
     <div class="features__list">
-        <div class="features__feature">
+        <div class="features__feature shadow_card">
             <div class="features__feature--img">
                 <img class="features__feature--photo" src="{{asset('images/new/1.jpg')}}" alt="">
             </div>
@@ -70,7 +70,7 @@
             </div>
         </div>
 
-        <div class="features__feature">
+        <div class="features__feature shadow_card">
             <div class="features__feature--img">
                 <img class="features__feature--photo" src="{{asset('images/new/2.jpg')}}" alt="">
             </div>
@@ -86,7 +86,7 @@
             </div>
         </div>
 
-        <div class="features__feature">
+        <div class="features__feature shadow_card">
             <div class="features__feature--img">
                 <img class="features__feature--photo" src="{{asset('images/new/3.jpg')}}" alt="">
             </div>
@@ -103,7 +103,7 @@
             </div>
         </div>
 
-        <div class="features__feature">
+        <div class="features__feature shadow_card">
             <div class="features__feature--img">
                 <img class="features__feature--photo" src="{{asset('images/new/4.jpg')}}" alt="">
             </div>
@@ -129,7 +129,7 @@
     </div>
     <div class="latest__books">
         @foreach($books as $book)
-        <a href="{{route('book-read', $book->id)}}" class="latest__books--book">
+        <a href="{{route('book-read', $book->id)}}" class="latest__books--book shadow_card">
             <div class="latest__books--book--img">
                 <img src="{{$book->image}}" alt="" class="latest__books--book--photo">
             </div>

@@ -11,7 +11,7 @@
    </div>
    <div class="categories__list">
       @foreach($categories as $category)
-      <div class="features__feature">
+      <div class="features__feature shadow_card">
          <div class="features__feature--img">
             <img class="features__feature--photo" src="{{$category->image}}" alt="">
          </div>
