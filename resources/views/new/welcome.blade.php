@@ -13,8 +13,8 @@
         </p>
 
         <div class="header__btns">
-            <a href="{{ route('book-create') }}" class="btn btn__borderd header__btns--btn">Create new Book <i class="fa fa-plus"></i></a>
-            <a href="#dos" class="btn btn__rounded header__btns--btn header__btns--learn">Learn More <i class="fa fa-arrow-down"></i></a>
+            <a href="{{ route('book-create') }}" class="btn btn__rounded header__btns--btn">Create new Book <i class="fa fa-plus"></i></a>
+            <a href="#dos" class="btn btn__borderd  header__btns--btn header__btns--learn">Learn More <i class="fa fa-arrow-down"></i></a>
         </div>
     </div>
     <div class="particaljs particles-js" id="particles-js"></div>
