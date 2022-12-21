@@ -2,7 +2,7 @@
 @section ('content')
 <header class="header">
     <div class="header__container">
-        <h1 class="heading heading__1 header__title">My Celebrations Book, where memories never fail</h1>
+        <!-- <h1 class="heading heading__1 header__title">My Celebrations Book, where memories never fail</h1>
         <p class="header__paragraph">
             We live our lives story by story through the memories we create.
             While it is important to preserve our most cherished memories,
@@ -10,14 +10,17 @@
             keep and share your happy moments in an online storage. From baby showers, to child naming ceremonies,
             rites of passage, birthdays, baptism, weddings, graduations, anniversaries,
             award ceremonies, trips, holidays and more, we shall help you keep your treasured memories safe.
-        </p>
+        </p> -->
+        <div class="header__video-container">
+            <video class="header__video" src="/images/new/celebrationv2.mp4" autoplay loop muted></video>
+        </div>
 
         <div class="header__btns">
             <a href="{{ route('book-create') }}" class="btn btn__rounded header__btns--btn">Create new Book <i class="fa fa-plus"></i></a>
             <a href="#dos" class="btn btn__borderd  header__btns--btn header__btns--learn">Learn More <i class="fa fa-arrow-down"></i></a>
         </div>
     </div>
-    <div class="particaljs particles-js" id="particles-js"></div>
+    <!-- <div class="particaljs particles-js" id="particles-js"></div> -->
 </header>
 <div class="particaljs particles-js-about" id="particles-js-about"></div>
 
