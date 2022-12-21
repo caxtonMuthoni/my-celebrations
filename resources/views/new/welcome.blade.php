@@ -14,7 +14,8 @@
             </p>
         </div>
         <div class="header__video-container">
-            <video class="header__video" src="/images/new/celebrationv2.mp4" autoplay loop muted></video>
+            <video class="header__video" src="https://res.cloudinary.com/dqnvljory/video/upload/v1671645638/celebrationv2_mf4o9v.mp4" autoplay loop muted></video>
+            <!-- <video class="header__video" src="/images/new/celebrationv2.mp4" autoplay loop muted></video> -->  
         </div>
 
         <div class="header__btns">
