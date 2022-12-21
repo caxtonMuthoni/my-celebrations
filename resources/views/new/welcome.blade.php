@@ -2,15 +2,17 @@
 @section ('content')
 <header class="header">
     <div class="header__container">
-        <!-- <h1 class="heading heading__1 header__title">My Celebrations Book, where memories never fail</h1>
-        <p class="header__paragraph">
-            We live our lives story by story through the memories we create.
-            While it is important to preserve our most cherished memories,
-            the human mind is limited. My celebrations book is now giving you an opportunity to capture,
-            keep and share your happy moments in an online storage. From baby showers, to child naming ceremonies,
-            rites of passage, birthdays, baptism, weddings, graduations, anniversaries,
-            award ceremonies, trips, holidays and more, we shall help you keep your treasured memories safe.
-        </p> -->
+        <div class="header__content">
+            <h1 class="heading heading__1 header__title">My Celebrations Book, where memories never fail</h1>
+            <p class="header__paragraph">
+                We live our lives story by story through the memories we create.
+                While it is important to preserve our most cherished memories,
+                the human mind is limited. My celebrations book is now giving you an opportunity to capture,
+                keep and share your happy moments in an online storage. From baby showers, to child naming ceremonies,
+                rites of passage, birthdays, baptism, weddings, graduations, anniversaries,
+                award ceremonies, trips, holidays and more, we shall help you keep your treasured memories safe.
+            </p>
+        </div>
         <div class="header__video-container">
             <video class="header__video" src="/images/new/celebrationv2.mp4" autoplay loop muted></video>
         </div>
