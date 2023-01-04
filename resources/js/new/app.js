@@ -64,3 +64,6 @@ if (acc.length > 0) {
         });
     }
 }
+
+var vplayer = cloudinary.videoPlayer('doc-player', { cloud_name: 'dqnvljory', transformation: [{effect: "accelerate:-50"}]});
+vplayer.source('celebrationv2_mf4o9v')
