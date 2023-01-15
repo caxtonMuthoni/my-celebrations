@@ -3,15 +3,17 @@
 }
 .book-card {
     background-color: #fff;
-    max-height: 400px;
-    height: 400px;
+    max-height: 350px;
+    height: 350px;
+    // max-width: 300px;
     width: 100%;
-    display: flex !important;
+    display: flex;
     flex-direction: column;
-    text-decoration: none !important;
+    // padding: 20px;
     border-radius: 5px;
     position: relative;
     margin: 10px 5px;
+    cursor: pointer;
     overflow: hidden;
 
     &__type {
