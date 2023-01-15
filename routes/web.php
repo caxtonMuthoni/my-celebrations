@@ -33,14 +33,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomeController::class, 'home']);
-Route::get('/about-us', [HomeController::class, 'aboutUs'])->name('about-us');
-Route::get('/pricing', [HomeController::class, 'pricing'])->name('pricing');
-Route::get('categories', [HomeController::class, 'categories'])->name('categories');
-Route::get('/faqs', [HomeController::class, 'faqs'])->name('faqs');
+Route::get('/', [NewDesignController::class, 'welcome']);
+Route::get('/about-us', [NewDesignController::class, 'about'])->name('about-us');
+Route::get('/pricing', [NewDesignController::class, 'plans'])->name('pricing');
+Route::get('categories', [NewDesignController::class, 'categories'])->name('categories');
+Route::get('/faqs', [NewDesignController::class, 'faqs'])->name('faqs');
 
 Route::post('/contactUs', [HomeController::class, 'contactUs'])->name('contact-us-form');
 Route::get('/reload-captcha', [HomeController::class, 'reloadCaptcha']);
+
+Route::get('/new/design',  [NewDesignController::class, 'welcome'])->name('new-welcome');
+Route::get('/new/about',  [NewDesignController::class, 'about'])->name('new-about');
+Route::get('/new/plans',  [NewDesignController::class, 'plans'])->name('new-plans');
+Route::get('/new/categories',  [NewDesignController::class, 'categories'])->name('new-categories');
+Route::get('/new/faqs',  [NewDesignController::class, 'faqs'])->name('new-faqs');
+
 
 Auth::routes();
 
@@ -121,11 +128,6 @@ Route::group([
     Route::get('paypal/view/{id}', [BillingController::class, 'paypalView'])->name('billing-paypal-view');
 });
 
-Route::get('/new/design',  [NewDesignController::class, 'welcome'])->name('new-welcome');
-Route::get('/new/about',  [NewDesignController::class, 'about'])->name('new-about');
-Route::get('/new/plans',  [NewDesignController::class, 'plans'])->name('new-plans');
-Route::get('/new/categories',  [NewDesignController::class, 'categories'])->name('new-categories');
-Route::get('/new/faqs',  [NewDesignController::class, 'faqs'])->name('new-faqs');
 
 Route::get('test', function () {
     $book = Book::latest()->first();

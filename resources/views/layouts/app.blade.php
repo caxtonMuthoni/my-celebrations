@@ -122,7 +122,7 @@ remember each event.">
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="https://mycondolencebook.com/public/website/js/turn.min.js"></script>
+    <script src="{{asset('js/turnjs/turnmin.js')}}"></script>
     <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.0.279/build/pdf.min.js"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.7.570/build/pdf.min.js"></script> -->
     <script src="{{ asset('js/particlesjs/particles.min.js') }}" defer></script>

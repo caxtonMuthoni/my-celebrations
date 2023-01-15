@@ -17,7 +17,15 @@
             </div>
         </div>
         <div id="flipbook-wrapper-id" class="flipbook-wrapper">
-            <div id="flipbook"></div>
+            <div class="content-con">
+                <div id="flipbook">
+                </div>
+                <div v-if="!indicatorHidden" class="flipbook-indicator text-light" @click="indicatorHidden = true">
+                    <i class="fa fa-times me-2 fa-lg"></i>
+                    <span>Click on the top or bottom ends to flip the pages</span>
+                    <i class="fa fa-arrow-right ms-2 fa-lg arrow bounce"></i>
+                </div>
+            </div>
         </div>
         <!-- <div id="pdfvuerdiv" class="pdfvuerclas bg-dark container">
             <div id="pdfvuer">
@@ -180,6 +188,7 @@ export default {
     data() {
         return {
             screenWidth: 0,
+            indicatorHidden: false,
         };
     },
 
@@ -239,25 +248,25 @@ export default {
 
                 } else {
                     $('#flipbook').turn({
-                    display: 'single',
-                    acceleration: true,
-                    elevation: 50,
-                    autocenter: true,
-                    gradients: true,
-                    zoom: 2,
-                    duration: 1000,
-                    when: {
-                        turned: function (e, page) {
-                            // const canvaOne = document.getElementById('flipbook');
-                            // if (page < 2) {
-                            //     canvaOne.style.marginLeft = "-100px";
-                            // }
-                            // else {
-                            //     canvaOne.style.margin = "auto";
-                            // }
+                        display: 'single',
+                        acceleration: true,
+                        elevation: 50,
+                        autocenter: true,
+                        gradients: true,
+                        zoom: 2,
+                        duration: 1000,
+                        when: {
+                            turned: function (e, page) {
+                                // const canvaOne = document.getElementById('flipbook');
+                                // if (page < 2) {
+                                //     canvaOne.style.marginLeft = "-100px";
+                                // }
+                                // else {
+                                //     canvaOne.style.margin = "auto";
+                                // }
+                            }
                         }
-                    }
-                });
+                    });
 
                 }
 
@@ -349,16 +358,47 @@ export default {
     height: 100vh;
     margin: auto;
     overflow: hidden;
+    
+}
 
+.content-con {
+    position: relative !important;
+}
+.flipbook-indicator {
+    position: absolute !important;
+    top: 0;
+    right: 50px;
+    background: rgba(0, 0, 0, 0.742);
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.bounce {
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateX(0);
+  }
+  40% {
+    transform: translateX(-30px);
+  }
+  60% {
+    transform: translateX(-15px);
+  }
 }
 
 @media screen and (max-width:1024px) {
-  #flipbook {
-    width: 100%;
-    padding-left: 10px;
-    padding-right: 0;
-    height: 90vh;
-  }
+    #flipbook {
+        width: 100%;
+        padding-left: 10px;
+        padding-right: 0;
+        height: 90vh;
+    }
 }
 
 #flipbook {

@@ -1,51 +1,53 @@
 <template>
     <loader-component v-if="loading" />
     <div v-else class="containe row justify-content-center">
-        <!-- <div class="row col-md-9">
-            <div class="col-md-6">
-                <div class="book-content__details mb-4 bg-white shadow-sm">
-                    <img class="book-content__img" :src="book.image" alt="" />
-                    <div class="book-content__text">
-                        <h5>{{ book.title }}</h5>
-                        <p>{{ book.cover_message }}</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <button class="btn btn-danger">Delete this book</button>
-            </div>
-        </div> -->
-        <div class="col-md-9 mb-3 row bg-white p-2">
-            <div class="col col-md-3 col-sm-6 mb-2 col-xs-6 text-center">
-                <div class="book-content__nav">
+        <div class="col-md-9 book-content__nav">
+            <div class="book-content__nav-item-container" :class="{'hidden-mobile': selectedTab != 1}">
+                <div class="book-content__nav--item">
                     <input v-model="selectedTab" value="1" id="bookContnet" type="radio"
                         class="book-content__nav--input" />
-                    <label class="book-content__nav--label" for="bookContnet">Book content</label>
+                    <label class="book-content__nav--label" for="bookContnet">
+                        <h3 class="heading heading_4 book-content__nav--label-header mb-0 pb-0">Step 1</h3>
+                        <p class="book-content__nav--label-description">Add your book content</p>
+                    </label>
                 </div>
             </div>
 
-            <div class="col col-md-2 col-sm-6 mb-2 col-xs-6 text-center">
-                <div class="book-content__nav">
+            <div class="book-content__nav-item-container" :class="{'hidden-mobile': selectedTab != 2}">
+                <div class="book-content__nav--item">
                     <input v-model="selectedTab" value="2" id="bookGallary" type="radio"
                         class="book-content__nav--input" />
-                    <label class="book-content__nav--label" for="bookGallary">Upload Gallery</label>
+                    <label class="book-content__nav--label" for="bookGallary">
+                        <h3 class="heading heading_4 book-content__nav--label-header mb-0 pb-0">Step 2</h3>
+                        <p class="book-content__nav--label-description">Upload book gallery images</p>
+                    </label>
                 </div>
             </div>
 
-            <div class="col-md-2 col-sm-6 mb-2 col-xs-6 col text-center">
-                <div class="book-content__nav">
-                    <input v-model="selectedTab" value="3" id="bookGallery" type="radio"
+            <div class="book-content__nav-item-container" :class="{'hidden-mobile': selectedTab != 3}">
+                <div class="book-content__nav--item">
+                    <input v-model="selectedTab" value="3" id="bookMessages" type="radio"
                         class="book-content__nav--input" />
-                    <label class="book-content__nav--label" for="bookGallery">Book Gallery</label>
+                    <label class="book-content__nav--label" for="bookMessages">
+                        <h3 class="heading heading_4 book-content__nav--label-header mb-0 pb-0">Step 3</h3>
+                        <p class="book-content__nav--label-description">Preview your book gallery</p>
+                    </label>
                 </div>
             </div>
 
-            <div class="col-md-2 text-center">
-                <div class="book-content__nav my-auto" style="">
-                    <a :href="`/book/books/read/${book.id}`" class="btn btn-success">Save and preview</a>
+            <div class="book-content__nav-item-container" :class="{'hidden-mobile': selectedTab != 4}">
+                <div class="book-content__nav--item">
+                    <input v-model="selectedTab" value="4" id="confrim_and_continue" type="radio"
+                        class="book-content__nav--input" />
+                    <label class="book-content__nav--label" for="confrim_and_continue">
+                        <h3 class="heading heading_4 book-content__nav--label-header mb-0 pb-0">Step 4</h3>
+                        <p class="book-content__nav--label-description">Save and preview your book</p>
+                    </label>
                 </div>
             </div>
+
         </div>
+
         <div v-if="selectedTab == 1" class="col-md-9">
             Add book content
             <vue-editor v-model="form.content"></vue-editor>
@@ -100,6 +102,27 @@
                             </button>
                         </div>
                     </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-3">
+                <button class="btn btn__primary" @click="selectedTab ++">
+                    Continue
+                </button>
+            </div>
+        </div>
+
+        <div v-if="selectedTab == 4" class="row col-md-9 justify-content-center">
+            <div class="col-md-6 mt-5">
+                <h4>Confrim you have added all your book content.</h4>
+                <p>
+                    We appreciate you taking the time to create your book. To continue, please click the
+                    button below to preview your book. Thank you for your cooperation.
+                </p>
+                <div class="text-center">
+                    <a :href="`/book/books/read/${book.id}`" class="btn btn-primary btn-lg">
+                        Continue to preview the book.
+                    </a>
                 </div>
             </div>
         </div>
