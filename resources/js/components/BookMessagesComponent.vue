@@ -18,7 +18,7 @@
                             <figcaption class="blockquote-footer">
                                 {{ message.relationship }}
                                 <cite title="Source Title">{{
-                                    name(message.user.name)
+                                    name(message)
                                 }}</cite>
                             </figcaption>
                         </figure>
