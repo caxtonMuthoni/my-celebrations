@@ -18,7 +18,7 @@
                             <figcaption class="blockquote-footer">
                                 {{ message.relationship }}
                                 <cite title="Source Title">{{
-                                    message.user.name
+                                    name(message.user.name)
                                 }}</cite>
                             </figcaption>
                         </figure>
@@ -73,6 +73,12 @@ export default {
     data: () => ({
         loading: false,
     }),
+
+    computed: {
+        name() {
+            return (message) => message.name || message?.user?.name || " ";
+        }
+    },
 
     methods: {
         async deleteMessage(id) {

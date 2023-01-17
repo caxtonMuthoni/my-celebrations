@@ -35,7 +35,7 @@
                                 </td>
                                  <td>
                                     <span class="table__item">{{
-                                        picture.user.name
+                                       name(picture)
                                     }}</span>
                                 </td>
                                 <td>
@@ -100,6 +100,12 @@ export default {
     data: () => ({
         loading: false,
     }),
+
+    computed: {
+        name() {
+            return (message) => message.name || message?.user?.name || " ";
+        }
+    },
 
     methods: {
         async toggleImageStatus(id) {
