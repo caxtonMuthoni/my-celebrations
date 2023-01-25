@@ -21,7 +21,7 @@ class BookPDFGenerator
         $book = Book::with(['user', 'template.template_file', 'content', 'bookMessages'  => function ($query) {
             $query->where('public', true);
         },  'bookImages' => function ($query) {
-            $query->where('published', true);
+            $query->where('published', true)->with('user');
         }])->find($id);
 
         $file = self::createDocx($book);
@@ -178,7 +178,8 @@ class BookPDFGenerator
                         "book_message#" . $key + 1,
                         $message->message
                     );
-                    $templateProcesser->setValue("book_message_user#" . $key + 1, $message['title'] ." ". $message['name']);
+                    $userName = $message['name'] ?? $message['user']['name'];
+                    $templateProcesser->setValue("book_message_user#" . $key + 1, $message['title'] ." ". $userName);
                     $templateProcesser->setValue("book_message_relationship#" . $key + 1,  $message['relationship']);
                 }
             }
