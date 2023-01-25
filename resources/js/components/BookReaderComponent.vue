@@ -9,7 +9,7 @@
                     <i class="fa fa-expand me-2" aria-hidden="true"></i>
                     Fullscreen</a>
 
-                <a v-if="userid == book.user_id" href="#" class="btn btn__primary m-2" @click.prevent="printPDF"><i
+                <a v-if="userid == book.user_id" href="#" class="btn btn__primary m-2  printbtn" @click.prevent="printPDF"><i
                         class="fa fa-print me-2" aria-hidden="true"></i>Print</a>
 
                 <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#sharemodal"><i
@@ -411,6 +411,12 @@ export default {
         height: 90vh;
     }
 }
+
+@media screen and (max-width:967px) { 
+    .printbtn {
+        display: none;
+    }
+ }
 
 #flipbook {
     -webkit-transition: margin-left 0.2s ease-in-out;
