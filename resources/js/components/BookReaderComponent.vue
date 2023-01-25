@@ -300,8 +300,11 @@ export default {
             iframe.style.visibility = "hidden";
             iframe.src = this.pdfurl;
             document.body.appendChild(iframe);
-            iframe.contentWindow.focus();
-            iframe.contentWindow.print();
+
+            iframe.onload = () => {
+                iframe.contentWindow.focus();
+                iframe.contentWindow.print();
+            }
         },
 
         requestFullScreen() {
@@ -358,12 +361,13 @@ export default {
     height: 100vh;
     margin: auto;
     overflow: hidden;
-    
+
 }
 
 .content-con {
     position: relative !important;
 }
+
 .flipbook-indicator {
     position: absolute !important;
     top: 0;
@@ -377,19 +381,26 @@ export default {
 }
 
 .bounce {
-  animation: bounce 2s infinite;
+    animation: bounce 2s infinite;
 }
 
 @keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
-    transform: translateX(0);
-  }
-  40% {
-    transform: translateX(-30px);
-  }
-  60% {
-    transform: translateX(-15px);
-  }
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateX(0);
+    }
+
+    40% {
+        transform: translateX(-30px);
+    }
+
+    60% {
+        transform: translateX(-15px);
+    }
 }
 
 @media screen and (max-width:1024px) {
