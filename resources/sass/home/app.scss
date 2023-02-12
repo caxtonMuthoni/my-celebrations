@@ -6,6 +6,7 @@
 
 @import './nav';
 @import './header';
+@import './introduction';
 @import './dos';
 @import './features';
 @import './latest';
@@ -18,3 +19,7 @@
 @import './pages/plans';
 @import './pages/categories';
 @import './pages/faqs';
+
+.nav__home {
+    background-color: rgba(247, 245, 245, 0.959);
+}

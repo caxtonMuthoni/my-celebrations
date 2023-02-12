@@ -3,14 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\BookPDFGenerator;
+use App\Helpers\FileOperationUtil;
 use App\Models\BookMessage;
 use App\Http\Requests\StoreBookMessageRequest;
 use App\Http\Requests\UpdateBookMessageRequest;
+use App\Mail\BookImageDeleteUpdateMail;
 use App\Mail\MessageDeleteUpdateMail;
 use App\Models\Book;
+use App\Models\BookImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 
 class BookMessageController extends Controller
 {
@@ -65,7 +69,7 @@ class BookMessageController extends Controller
             $bookMessage->save();
 
             // sendmail
-            $url = route('bookMessageUpdateView')."?token=$token&email=$email";
+            $url = route('bookMessageUpdateView') . "?token=$token&email=$email";
             Mail::to($email)->send(new MessageDeleteUpdateMail($book, $bookMessage, $url));
 
             if ($book->publish_messages_to_book) {
@@ -73,9 +77,17 @@ class BookMessageController extends Controller
                 $bookMessage->save();
                 BookPDFGenerator::generatePDF($book->id);
             }
+
+            // upload image
+            $message = "";
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $message = $this->friendImageUpload($book->id, $image, $email, $request->caption, $request->title, $request->name);
+            }
+
             return response()->json([
                 'status' => true,
-                'message' => 'Message was sent successfully'
+                'message' => 'Message was sent successfully. ' . $message
             ]);
         } catch (\Throwable $th) {
             $bookMessage->delete();
@@ -83,6 +95,49 @@ class BookMessageController extends Controller
                 'status' => false,
                 'message' => $th->getMessage()
             ]);
+        }
+    }
+
+    public function friendImageUpload($bookId, $image, $email, $caption, $title, $name)
+    {
+
+        $bookImage = new BookImage();
+        try {
+            $book = Book::withCount('bookImages')->with('subscriptionPlan')->findOrFail($bookId);
+            // if ($book->book_images_count >= $book->subscriptionPlan->pictures_per_book) {
+            //     return 'Sorry, You can\'t upload more images for this book.';
+            // }
+            $userId = Auth::id();
+
+            $fileUploadUtil = new FileOperationUtil($image, 'book-images');
+            $path = $fileUploadUtil->uploadFile();
+            $url = env('APP_URL') . Storage::url('book-images/' . $path);
+            $email = $email;
+            $token = $this->generateToken();
+
+            $bookImage->user_id = $userId;
+            $bookImage->book_id = $bookId;
+            $bookImage->caption = $caption;
+            $bookImage->image = str_replace(' ', '%20', $url);
+            $bookImage->published = false;
+            $bookImage->email = $email;
+            $bookImage->token = $token;
+            $bookImage->title = $title;
+            $bookImage->name = $name;
+            $bookImage->save();
+            // sendmail
+            $url = route('bookImageUpdateView') . "?token=$token&email=$email";
+            Mail::to($email)->send(new BookImageDeleteUpdateMail($book, $bookImage, $url));
+            return "Image was uploaded successfully.";
+        } catch (\Throwable $th) {
+            $prefix = env('APP_URL') . "/storage/";
+            $str = $bookImage->image;
+            if (substr($str, 0, strlen($prefix)) == $prefix) {
+                $str = substr($str, strlen($prefix));
+                Storage::disk('public')->delete($str);
+            }
+            $bookImage->delete();
+            return "Image could not be uploaded. ";
         }
     }
 
@@ -145,19 +200,19 @@ class BookMessageController extends Controller
      * 
      */
 
-     public function bookMessageUpdateView(Request $request) {
+    public function bookMessageUpdateView(Request $request)
+    {
         $email = $request->email;
         $token = $request->token;
         $bookMessage = BookMessage::where([['token', $token], ['email', $email]])->first();
         $id = $bookMessage->book_id;
 
-        if(isset($bookMessage)) {
-           return view('book.updatemessage', compact('email', 'token', 'bookMessage', 'id'));
-        } else  {
+        if (isset($bookMessage)) {
+            return view('book.updatemessage', compact('email', 'token', 'bookMessage', 'id'));
+        } else {
             return redirect('/');
         }
-
-     }
+    }
     public function update(UpdateBookMessageRequest $request, BookMessage $bookMessage)
     {
         $bookMessage = BookMessage::find($request->book_message_id);
@@ -170,7 +225,7 @@ class BookMessageController extends Controller
         $bookMessage->name = $request->name;
         $bookMessage->save();
         BookPDFGenerator::generatePDF($bookMessage->book_id);
-       
+
         return response()->json([
             'status' => true,
             'message' => 'Message was updated successfully'

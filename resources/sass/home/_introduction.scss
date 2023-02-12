@@ -1,0 +1,12 @@
+.introduction {
+    padding: 180px 80px;
+    background: $color-secondary-light;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @media screen and (max-width:600px) {
+        padding: 80px 20px;
+    }
+
+}

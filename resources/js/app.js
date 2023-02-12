@@ -24,6 +24,9 @@ Vue.component('book-messages-component', require('./components/BookMessagesCompo
 Vue.component('book-pictures-component', require('./components/BookPicturesComponent.vue').default);
 
 
+Vue.component('test-component', require('./components/TestComponent.vue').default);
+
+
 Vue.component(HasError.name, HasError);
 Vue.use(VueLoaders);
 Vue.use(VueSweetalert2);

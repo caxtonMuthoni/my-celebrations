@@ -335,7 +335,7 @@ class BookController extends Controller
     public function viewMessagesAndPictures($id)
     {
         $messages = BookMessage::with('user')->where('book_id', $id)->get();
-        $pictures = BookImage::with('user')->where([['book_id', $id], ['user_id', '!=', Auth::id()]])->get();
+        $pictures = BookImage::with('user')->where('book_id', $id)->get();
         return view('book.book-pictures-messages', compact('messages', 'pictures'));
     }
 }

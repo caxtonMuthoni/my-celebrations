@@ -3,28 +3,34 @@
 <header class="header">
     <div class="header__container">
         <div class="header__content">
-            <h1 class="heading heading__1 header__title">My Celebrations Book, where memories never fail</h1>
+            <h1 class="heading heading__1 header__title">&nbsp;</h1>
             <p class="header__paragraph">
-                We live our lives story by story through the memories we create.
-                While it is important to preserve our most cherished memories,
-                the human mind is limited. My celebrations book is now giving you an opportunity to capture,
-                keep and share your happy moments in an online storage. From baby showers, to child naming ceremonies,
-                rites of passage, birthdays, baptism, weddings, graduations, anniversaries,
-                award ceremonies, trips, holidays and more, we shall help you keep your treasured memories safe.
             </p>
         </div>
         <div class="header__video-container">
-            <video  id="doc-player" class="header__video cld-video-player cld-fluid"  autoplay loop muted></video>
-            <!-- <video class="header__video" src="/images/new/celebrationv2.mp4" autoplay loop muted></video> -->  
+            <video id="doc-player" class="header__video cld-video-player cld-fluid" autoplay loop muted></video>
+            <!-- <video class="header__video" src="/images/new/celebrationv2.mp4" autoplay loop muted></video> -->
         </div>
 
         <div class="header__btns">
             <a href="{{ route('book-create') }}" class="btn btn__rounded header__btns--btn">Create new Book <i class="fa fa-plus"></i></a>
-            <a href="#dos" class="btn btn__borderd  header__btns--btn header__btns--learn">Learn More <i class="fa fa-arrow-down"></i></a>
+            <a href="#dos" class="btn btn-primary  header__btns--bt header__btns--lear">Learn More <i class="fa fa-arrow-down"></i></a>
         </div>
     </div>
     <!-- <div class="particaljs particles-js" id="particles-js"></div> -->
 </header>
+<section id="introduction" class="introduction">
+    <div class="dos__container">
+        <h2 class="heading heading__2">My Celebrations Book, where memories never fail</h2>
+        <p class="heading__description"> We live our lives story by story through the memories we create.
+            While it is important to preserve our most cherished memories,
+            the human mind is limited. My celebrations book is now giving you an opportunity to capture,
+            keep and share your happy moments in an online storage. From baby showers, to child naming ceremonies,
+            rites of passage, birthdays, baptism, weddings, graduations, anniversaries,
+            award ceremonies, trips, holidays and more, we shall help you keep your treasured memories safe.
+        </p>
+    </div>
+</section>
 <div class="particaljs particles-js-about" id="particles-js-about"></div>
 
 <section id="dos" class="dos">

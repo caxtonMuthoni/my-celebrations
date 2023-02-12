@@ -25,7 +25,7 @@ class StoreBookMessageRequest extends FormRequest
     {
         return [
             'book_id' => 'required | integer',
-            'message' => 'required | string | max:150',
+            'message' => 'required | string | max:500',
             'relationship' => 'required | string',
             // 'template' => 'required | integer'
         ];

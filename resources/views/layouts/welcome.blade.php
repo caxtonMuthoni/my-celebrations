@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <nav class="nav">
+    <nav class="nav nav__home">
         <a href="/new/design" class="nav__brand">
             <img src="{{asset('images/branding/logo.jpeg')}}" alt="" class="nav__brand--logo">
         </a>

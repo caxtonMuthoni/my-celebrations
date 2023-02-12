@@ -94,9 +94,9 @@ class BookImageController extends Controller
 
         try {
             $book = Book::withCount('bookImages')->with('subscriptionPlan')->findOrFail($request->book_id);
-            // if ($book->book_images_count >= $book->subscriptionPlan->pictures_per_book) {
-            //     return redirect()->back()->with('error', 'Sorry, You can\'t upload more images for this book');
-            // }
+            if ($book->book_images_count >= $book->subscriptionPlan->pictures_per_book) {
+                return redirect()->back()->with('error', 'Sorry, You can\'t upload more images for this book');
+            }
             $bookId = $request->book_id;
             $userId = Auth::id();
             $image = $request->file('image');

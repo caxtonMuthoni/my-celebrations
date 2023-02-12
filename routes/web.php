@@ -130,13 +130,7 @@ Route::group([
 
 
 Route::get('test', function () {
-    $book = Book::latest()->first();
-    $bookMessage = BookMessage::latest()->first();
-    $token = $bookMessage->token;
-    $email = $bookMessage->email;
-    $url = route('bookMessageUpdateView')."?token=$token&email=$email";
-    Mail::to("githinjicaxton323@gmail.com")->send(new MessageDeleteUpdateMail($book, $bookMessage, $url));
-    return response()->json(['status' => 'sent']);
+   return view('test.test');
 });
 
 

@@ -74,7 +74,7 @@
                             <div class="mb-3">
                                 <label for="name" class="form-label">Your name</label>
                                 <input v-model="form.name" type="text" class="form-control" name="name" id="name"
-                                    aria-describedby="name" placeholder="eg. John"  required/>
+                                    aria-describedby="name" placeholder="eg. John" required />
                                 <small id="name" class="form-text text-muted">What is your name ?</small>
                             </div>
                             <div class="mb-3">
@@ -91,21 +91,41 @@
                                 <label for="relationship" class="form-label">What is your relationship with the book
                                     owner?</label>
                                 <input v-model="form.relationship" type="text" class="form-control" name="relationship"
-                                    id="relationship" aria-describedby="relationship" placeholder="eg. Brother" required />
+                                    id="relationship" aria-describedby="relationship" placeholder="eg. Brother"
+                                    required />
                                 <small id="relationship" class="form-text text-muted">Examples friend, brother, mother,
                                     teacher
                                     etc.</small>
                             </div>
                             <div class="mb-3">
                                 <label for="message" class="form-label">Enter the message</label>
-                                <textarea v-model="form.message" class="form-control" name="message" id="message" required
-                                    rows="3"></textarea>
+                                <textarea v-model="form.message" class="form-control" name="message" id="message"
+                                    required rows="3"></textarea>
                                 <p class="form-text" :class="{ 'text-danger': form.message.length > maxCharacteres }">
                                     Maximum characters is {{ maxCharacteres }} - {{ form.message.length }} / {{
-                                            maxCharacteres
+                                        maxCharacteres
                                     }}
                                 </p>
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center px-5 mt-3">
+                    <h4 class="heading">Add book image (Optional)</h4>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="image" class="form-label text-start text-left">Upload an image (Optional)</label>
+                            <input type="file" class="form-control form-control-lg" name="image" id="image"
+                                aria-describedby="title" placeholder="" @change="handleImage"/>
+                            <small id="titl" class="form-text text-muted">Upload an image to attach to the book</small>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="caption" class="form-label text-start text-left">Add image caption (Optional)</label>
+                            <textarea v-model="form.caption" type="text" class="form-control" name="caption" id="caption"
+                                aria-describedby="caption"></textarea>
+                            <small id="cp" class="form-text text-muted">Add caption to the uploaded image.</small>
                         </div>
                     </div>
                 </div>
@@ -142,7 +162,7 @@ export default {
     data: () => ({
         step: 2,
         templates: [],
-        maxCharacteres: 150,
+        maxCharacteres: 500,
         form: new Form({
             name: '',
             title: '',
@@ -151,32 +171,13 @@ export default {
             template: null,
             relationship: null,
             book_id: null,
+            image: null,
+            caption: ''
         }),
         loading: false,
     }),
 
-    async mounted() {
-        try {
-            this.loading = true;
-            // await this.fetchTemplates();
-        } catch (error) {
-        } finally {
-            this.loading = false;
-        }
-    },
-
     methods: {
-        async fetchTemplates() {
-            try {
-                const response = await axios.get(
-                    "/api/celebrations/templates/messages"
-                );
-                this.templates = response.data;
-            } catch (e) {
-                throw e;
-            }
-        },
-
         async createMessage() {
             try {
                 this.loading = true;
@@ -190,7 +191,7 @@ export default {
                 if (responseData.status) {
                     Toast.fire({
                         icon: "success",
-                        text: "Your message was added successfully",
+                        text: responseData.message,
                     });
                     location.href = `/book/book/pdf/read/${this.bookId}`;
                 } else {
@@ -212,9 +213,10 @@ export default {
             }
         },
 
-        handleFile(event) {
+        handleImage(event) {
             const file = event.target.files[0];
-            this.form.cover_image = file;
+            this.form.image = file;
+            console.log(this.form, "Tedting");
         },
 
         nextPage() {
