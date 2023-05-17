@@ -22,6 +22,7 @@ Vue.component('paypal-component', require('./components/PaypalComponent.vue').de
 Vue.component('book-reader', require('./components/BookReaderComponent.vue').default);
 Vue.component('book-messages-component', require('./components/BookMessagesComponent.vue').default);
 Vue.component('book-pictures-component', require('./components/BookPicturesComponent.vue').default);
+Vue.component('swipper-component', require('./components/SwipperComponent.vue').default);
 
 
 Vue.component('test-component', require('./components/TestComponent.vue').default);
