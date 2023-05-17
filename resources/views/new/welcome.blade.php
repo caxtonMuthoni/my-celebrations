@@ -34,7 +34,7 @@
         </p>
     </div>
 </section>
-<!-- <div class="particaljs particles-js-about" id="particles-js-about"></div> -->
+<div class="particaljs particles-js-about" id="particles-js-about"></div>
 
 <section id="dos" class="dos">
     <div class="dos__container">
