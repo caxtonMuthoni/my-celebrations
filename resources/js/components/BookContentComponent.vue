@@ -2,10 +2,9 @@
     <loader-component v-if="loading" />
     <div v-else class="containe row justify-content-center">
         <div class="col-md-9 book-content__nav">
-            <div class="book-content__nav-item-container" :class="{'hidden-mobile': selectedTab != 1}">
+            <div class="book-content__nav-item-container" :class="{ 'hidden-mobile': selectedTab != 1 }">
                 <div class="book-content__nav--item">
-                    <input v-model="selectedTab" value="1" id="bookContnet" type="radio"
-                        class="book-content__nav--input" />
+                    <input v-model="selectedTab" value="1" id="bookContnet" type="radio" class="book-content__nav--input" />
                     <label class="book-content__nav--label" for="bookContnet">
                         <h3 class="heading heading_4 book-content__nav--label-header mb-0 pb-0">Step 1</h3>
                         <p class="book-content__nav--label-description">Add your book content</p>
@@ -13,10 +12,9 @@
                 </div>
             </div>
 
-            <div class="book-content__nav-item-container" :class="{'hidden-mobile': selectedTab != 2}">
+            <div class="book-content__nav-item-container" :class="{ 'hidden-mobile': selectedTab != 2 }">
                 <div class="book-content__nav--item">
-                    <input v-model="selectedTab" value="2" id="bookGallary" type="radio"
-                        class="book-content__nav--input" />
+                    <input v-model="selectedTab" value="2" id="bookGallary" type="radio" class="book-content__nav--input" />
                     <label class="book-content__nav--label" for="bookGallary">
                         <h3 class="heading heading_4 book-content__nav--label-header mb-0 pb-0">Step 2</h3>
                         <p class="book-content__nav--label-description">Upload book gallery images</p>
@@ -24,7 +22,7 @@
                 </div>
             </div>
 
-            <div class="book-content__nav-item-container" :class="{'hidden-mobile': selectedTab != 3}">
+            <div class="book-content__nav-item-container" :class="{ 'hidden-mobile': selectedTab != 3 }">
                 <div class="book-content__nav--item">
                     <input v-model="selectedTab" value="3" id="bookMessages" type="radio"
                         class="book-content__nav--input" />
@@ -35,7 +33,7 @@
                 </div>
             </div>
 
-            <div class="book-content__nav-item-container" :class="{'hidden-mobile': selectedTab != 4}">
+            <div class="book-content__nav-item-container" :class="{ 'hidden-mobile': selectedTab != 4 }">
                 <div class="book-content__nav--item">
                     <input v-model="selectedTab" value="4" id="confrim_and_continue" type="radio"
                         class="book-content__nav--input" />
@@ -49,10 +47,13 @@
         </div>
         <div v-if="selectedTab == 1" class="col-md-9">
             Add book content
-            <vue-editor v-model="form.content"></vue-editor>
-            <HasError :form="form" field="content" />
-            <HasError :form="form" field="book_id" />
-            <HasError :form="form" field="page" />
+            <div>
+                <Editor v-model="form.content" api-key="eijrcgbuvmrbgp4rdrixsyd2w5v68kmqwfr8odi3zdg2mpxv" :init="{
+                    plugins: 'lists link wordcount'
+                }" />
+                <HasError :form="form" field="book_id" />
+                <HasError :form="form" field="page" />
+            </div>
             <div class="text-end mt-3">
                 <button class="btn btn__primary" @click="createBookContent">
                     Save Content
@@ -89,7 +90,7 @@
                 </div>
             </div>
             <div class="text-center mt-3">
-                <button class="btn btn__primary" @click="selectedTab ++">
+                <button class="btn btn__primary" @click="selectedTab++">
                     Continue
                 </button>
             </div>
@@ -113,7 +114,7 @@
 </template>
 
 <script>
-import { VueEditor } from "vue2-editor";
+import Editor from '@tinymce/tinymce-vue'
 import Form from "vform";
 import LoaderComponent from "./LoaderComponent.vue";
 import Toast from "../utils/toast";
@@ -124,7 +125,7 @@ import imageCompression from 'browser-image-compression';
 
 export default {
     components: {
-        VueEditor,
+        Editor,
         LoaderComponent,
         UploadImages,
         Gallery,
