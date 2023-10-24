@@ -1,28 +1,48 @@
 <template>
     <div class="">
-        <div v-if="shorturl !== 'none'" class="row cta_bar">
-            <div class="col-sm-7 col-md-7">
+        <div v-if="shorturl != 'none'" class="row cta_bar py-0 my-0">
+            <div class="col-sm-7 col-md-7 py-0 my-0">
                 <h4>{{ book.title }}</h4>
             </div>
-            <div class="col-sm-5 col-md-5">
-                <a href="#" class="btn btn-primary m-2" @click.prevent="requestFullScreen">
+            <div class="col-sm-5 col-md-5 py-0 my-0">
+                <a
+                    href="#"
+                    class="btn btn-sm btn-primary mx-2"
+                    @click.prevent="requestFullScreen"
+                >
                     <i class="fa fa-expand me-2" aria-hidden="true"></i>
-                    Fullscreen</a>
+                    Fullscreen</a
+                >
 
-                <a v-if="userid == book.user_id" href="#" class="btn btn__primary m-2  printbtn" @click.prevent="printPDF"><i
-                        class="fa fa-print me-2" aria-hidden="true"></i>Print</a>
+                <a
+                    v-if="userid == book.user_id"
+                    href="#"
+                    class="btn btn-sm btn__primary mx-2 printbtn"
+                    @click.prevent="printPDF"
+                    ><i class="fa fa-print me-2" aria-hidden="true"></i>Print</a
+                >
 
-                <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#sharemodal"><i
-                        class="fa fa-share me-2" aria-hidden="true"></i>Share</a>
+                <a
+                    href="#"
+                    class="btn btn-sm btn-success"
+                    data-bs-toggle="modal"
+                    data-bs-target="#sharemodal"
+                    ><i class="fa fa-share me-2" aria-hidden="true"></i>Share</a
+                >
             </div>
         </div>
         <div id="flipbook-wrapper-id" class="flipbook-wrapper">
             <div class="content-con">
-                <div id="flipbook">
-                </div>
-                <div v-if="!indicatorHidden" class="flipbook-indicator text-light" @click="indicatorHidden = true">
+                <div id="flipbook"></div>
+                <div
+                    v-if="!indicatorHidden"
+                    class="flipbook-indicator text-light"
+                    @click="indicatorHidden = true"
+                >
                     <i class="fa fa-times me-2 fa-lg"></i>
-                    <span>Click on the top or bottom ends to flip the pages</span>
+                    <span
+                        >Click on the top or bottom ends to flip the pages</span
+                    >
                     <i class="fa fa-arrow-right ms-2 fa-lg arrow bounce"></i>
                 </div>
             </div>
@@ -78,25 +98,44 @@
             </div>
         </div> -->
         <!-- Share modal -->
-        <div class="modal fade" id="sharemodal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
-            aria-hidden="true">
+        <div
+            class="modal fade"
+            id="sharemodal"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="modelTitleId"
+            aria-hidden="true"
+        >
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">
                             Select the social network to share to
                         </h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                        ></button>
                     </div>
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="share">
-                                    <i class="fab fa-facebook share-icon" aria-hidden="true"></i>
+                                    <i
+                                        class="fab fa-facebook share-icon"
+                                        aria-hidden="true"
+                                    ></i>
                                     <div class="share__btn">
-                                        <ShareNetwork network="facebook" :url="shorturl" :title="book.title"
-                                            :description="book.cover_message" :quote="book.cover_message"
-                                            hashtags="mycelebrationbooks">
+                                        <ShareNetwork
+                                            network="facebook"
+                                            :url="shorturl"
+                                            :title="book.title"
+                                            :description="book.cover_message"
+                                            :quote="book.cover_message"
+                                            hashtags="mycelebrationbooks"
+                                        >
                                             Facebook
                                         </ShareNetwork>
                                     </div>
@@ -104,11 +143,19 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="share">
-                                    <i class="fab fa-whatsapp share-icon" aria-hidden="true"></i>
+                                    <i
+                                        class="fab fa-whatsapp share-icon"
+                                        aria-hidden="true"
+                                    ></i>
                                     <div class="share__btn">
-                                        <ShareNetwork network="whatsapp" :url="shorturl" :title="book.title"
-                                            :description="book.cover_message" :quote="book.cover_message"
-                                            hashtags="mycelebrationbooks">
+                                        <ShareNetwork
+                                            network="whatsapp"
+                                            :url="shorturl"
+                                            :title="book.title"
+                                            :description="book.cover_message"
+                                            :quote="book.cover_message"
+                                            hashtags="mycelebrationbooks"
+                                        >
                                             Whatsapp
                                         </ShareNetwork>
                                     </div>
@@ -117,11 +164,19 @@
 
                             <div class="col-md-4">
                                 <div class="share">
-                                    <i class="fa fa-envelope share-icon" aria-hidden="true"></i>
+                                    <i
+                                        class="fa fa-envelope share-icon"
+                                        aria-hidden="true"
+                                    ></i>
                                     <div class="share__btn">
-                                        <ShareNetwork network="email" :url="shorturl" :title="book.title"
-                                            :description="book.cover_message" :quote="book.cover_message"
-                                            hashtags="mycelebrationbooks">
+                                        <ShareNetwork
+                                            network="email"
+                                            :url="shorturl"
+                                            :title="book.title"
+                                            :description="book.cover_message"
+                                            :quote="book.cover_message"
+                                            hashtags="mycelebrationbooks"
+                                        >
                                             Email
                                         </ShareNetwork>
                                     </div>
@@ -130,11 +185,19 @@
 
                             <div class="col-md-4 mt-2">
                                 <div class="share">
-                                    <i class="fab fa-telegram share-icon" aria-hidden="true"></i>
+                                    <i
+                                        class="fab fa-telegram share-icon"
+                                        aria-hidden="true"
+                                    ></i>
                                     <div class="share__btn">
-                                        <ShareNetwork network="telegram" :url="shorturl" :title="book.title"
-                                            :description="book.cover_message" :quote="book.cover_message"
-                                            hashtags="mycelebrationbooks">
+                                        <ShareNetwork
+                                            network="telegram"
+                                            :url="shorturl"
+                                            :title="book.title"
+                                            :description="book.cover_message"
+                                            :quote="book.cover_message"
+                                            hashtags="mycelebrationbooks"
+                                        >
                                             Telegram
                                         </ShareNetwork>
                                     </div>
@@ -142,14 +205,27 @@
                             </div>
 
                             <div class="col-md-4 mt-2">
-                                <input hidden id="linkInput" type="text" :value="shorturl">
-                                <a href="#" class="btn btn-outline-info mt-2 btn-lg"
-                                    @click.prevent="copyTextToClipboard">Copy Link</a>
+                                <input
+                                    hidden
+                                    id="linkInput"
+                                    type="text"
+                                    :value="shorturl"
+                                />
+                                <a
+                                    href="#"
+                                    class="btn btn-outline-info mt-2 btn-lg"
+                                    @click.prevent="copyTextToClipboard"
+                                    >Copy Link</a
+                                >
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">
+                        <button
+                            type="button"
+                            class="btn btn-light"
+                            data-bs-dismiss="modal"
+                        >
                             Close
                         </button>
                     </div>
@@ -160,7 +236,7 @@
 </template>
 
 <script>
-import Toast from '../utils/toast';
+import Toast from "../utils/toast";
 
 export default {
     props: {
@@ -182,8 +258,8 @@ export default {
         userid: {
             type: Number,
             required: false,
-            default: null
-        }
+            default: null,
+        },
     },
     data() {
         return {
@@ -194,103 +270,100 @@ export default {
 
     mounted() {
         this.screenWidth = screen.width;
-        this.loadPdfData()
+        this.loadPdfData();
     },
 
     methods: {
-
         loadPdfData() {
             var loadingTask = pdfjsLib.getDocument(this.pdfurl);
             const _vm = this;
-            loadingTask.promise.then(function (pdf) {
-                const parent = document.getElementById('flipbook');
-                for (let i = 0; i < pdf.numPages; i++) {
-                    const node = document.createElement("canvas");
-                    var pageNumber = i + 1;
-                    node.id = "canvas-id-" + pageNumber;
-                    parent.appendChild(node)
-                    _vm.renderPage(pdf, node, pageNumber)
+            loadingTask.promise.then(
+                function (pdf) {
+                    const parent = document.getElementById("flipbook");
+                    for (let i = 0; i < pdf.numPages; i++) {
+                        const node = document.createElement("canvas");
+                        var pageNumber = i + 1;
+                        node.id = "canvas-id-" + pageNumber;
+                        parent.appendChild(node);
+                        _vm.renderPage(pdf, node, pageNumber);
+                    }
+
+                    const node = document.createElement("div");
+                    node.style.backgroundColor = "#fff";
+                    node.style.display = "flex";
+                    node.style.alignItems = "center";
+                    node.style.justifyContent = "center";
+                    const h1Node = document.createElement("h1");
+                    const textnode = document.createTextNode("THE END.");
+                    h1Node.appendChild(textnode);
+                    node.appendChild(h1Node);
+                    parent.appendChild(node);
+                    _vm.renderPage(pdf, node, pageNumber + 1);
+
+                    if (_vm.screenWidth > 1024) {
+                        $("#flipbook").turn({
+                            display: "double",
+                            acceleration: true,
+                            elevation: 50,
+                            autocenter: true,
+                            gradients: true,
+                            zoom: 2,
+                            duration: 1000,
+                            when: {
+                                turned: function (e, page) {
+                                    const canvaOne =
+                                        document.getElementById("flipbook");
+                                    if (page < 2) {
+                                        canvaOne.style.marginLeft = "-100px";
+                                    } else {
+                                        canvaOne.style.margin = "auto";
+                                    }
+                                },
+                            },
+                        });
+                    } else {
+                        $("#flipbook").turn({
+                            display: "single",
+                            acceleration: true,
+                            elevation: 50,
+                            autocenter: true,
+                            gradients: true,
+                            zoom: 2,
+                            duration: 1000,
+                            when: {
+                                turned: function (e, page) {
+                                    // const canvaOne = document.getElementById('flipbook');
+                                    // if (page < 2) {
+                                    //     canvaOne.style.marginLeft = "-100px";
+                                    // }
+                                    // else {
+                                    //     canvaOne.style.margin = "auto";
+                                    // }
+                                },
+                            },
+                        });
+                    }
+                },
+                function (reason) {
+                    // PDF loading error
+                    console.error(reason);
                 }
-
-                const node = document.createElement("div");
-                node.style.backgroundColor = "#fff";
-                node.style.display = "flex";
-                node.style.alignItems = "center";
-                node.style.justifyContent = "center";
-                const h1Node = document.createElement("h1");
-                const textnode = document.createTextNode("THE END.");
-                h1Node.appendChild(textnode);
-                node.appendChild(h1Node)
-                parent.appendChild(node)
-                _vm.renderPage(pdf, node, pageNumber + 1)
-
-                if (_vm.screenWidth > 1024) {
-                    $('#flipbook').turn({
-                        display: 'double',
-                        acceleration: true,
-                        elevation: 50,
-                        autocenter: true,
-                        gradients: true,
-                        zoom: 2,
-                        duration: 1000,
-                        when: {
-                            turned: function (e, page) {
-                                const canvaOne = document.getElementById('flipbook');
-                                if (page < 2) {
-                                    canvaOne.style.marginLeft = "-100px";
-                                }
-                                else {
-                                    canvaOne.style.margin = "auto";
-                                }
-                            }
-                        }
-                    });
-
-                } else {
-                    $('#flipbook').turn({
-                        display: 'single',
-                        acceleration: true,
-                        elevation: 50,
-                        autocenter: true,
-                        gradients: true,
-                        zoom: 2,
-                        duration: 1000,
-                        when: {
-                            turned: function (e, page) {
-                                // const canvaOne = document.getElementById('flipbook');
-                                // if (page < 2) {
-                                //     canvaOne.style.marginLeft = "-100px";
-                                // }
-                                // else {
-                                //     canvaOne.style.margin = "auto";
-                                // }
-                            }
-                        }
-                    });
-
-                }
-
-            }, function (reason) {
-                // PDF loading error
-                console.error(reason);
-            });
+            );
         },
 
         renderPage(pdf, canvas, pageNumber) {
             pdf.getPage(pageNumber).then(function (page) {
                 var scale = 1.5;
                 var viewport = page.getViewport({ scale: scale });
-                var context = canvas.getContext('2d');
+                var context = canvas.getContext("2d");
                 canvas.height = viewport.height;
                 canvas.width = viewport.width;
                 var renderContext = {
                     canvasContext: context,
-                    viewport: viewport
+                    viewport: viewport,
                 };
                 var renderTask = page.render(renderContext);
-                renderTask.promise.then(function () {
-
-                });
+                renderTask.promise.then(function () {});
             });
         },
 
@@ -304,7 +377,7 @@ export default {
             iframe.onload = () => {
                 iframe.contentWindow.focus();
                 iframe.contentWindow.print();
-            }
+            };
         },
 
         requestFullScreen() {
@@ -326,10 +399,10 @@ export default {
             copyText.setSelectionRange(0, 99999);
             navigator.clipboard.writeText(copyText.value);
             Toast.fire({
-                title: 'Success',
-                text: 'Link copied to clipboard',
-                icon: 'info'
-            })
+                title: "Success",
+                text: "Link copied to clipboard",
+                icon: "info",
+            });
         },
     },
 };
@@ -338,7 +411,7 @@ export default {
 <style lang="css" scoped>
 .cta_bar {
     border-bottom: 1px solid rgba(192, 192, 192, 0.229);
-    padding: 20px;
+    /* padding: 20px; */
     padding-top: 0 !important;
 }
 
@@ -349,7 +422,7 @@ export default {
 
 /* Page content */
 .flipbook-wrapper {
-    background: rgb(27, 27, 27);
+    /* background: rgb(27, 27, 27); */
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -358,10 +431,9 @@ export default {
 
 #flipbook {
     width: 80%;
-    height: 100vh;
+    height: 80vh;
     margin: auto;
     overflow: hidden;
-
 }
 
 .content-con {
@@ -385,7 +457,6 @@ export default {
 }
 
 @keyframes bounce {
-
     0%,
     20%,
     50%,
@@ -403,7 +474,7 @@ export default {
     }
 }
 
-@media screen and (max-width:1024px) {
+@media screen and (max-width: 1024px) {
     #flipbook {
         width: 100%;
         padding-left: 10px;
@@ -412,11 +483,18 @@ export default {
     }
 }
 
-@media screen and (max-width:967px) { 
+@media screen and (max-width: 967px) {
     .printbtn {
         display: none;
     }
- }
+
+    #flipbook {
+        width: 100%;
+        height: 70vh;
+        margin: auto;
+        overflow: hidden;
+    }
+}
 
 #flipbook {
     -webkit-transition: margin-left 0.2s ease-in-out;

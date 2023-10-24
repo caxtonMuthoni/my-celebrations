@@ -26,7 +26,6 @@ class BookPDFGenerator
 
         $file = self::createDocx($book);
         $bookPath = self::convertDocxToPDF($file);
-
         // $data = ['book' => $book];
         // $pdf = SnappyPdf::loadView('book.book-print', $data)->setOption('page-height', '10');;
         // $pdf->save(public_path($bookPath));
@@ -81,11 +80,11 @@ class BookPDFGenerator
             libxml_use_internal_errors($internalErrors);
 
             // book images
-            $bookUserImages = Book::with(['bookImages' => function($query) use($book) {
+            $bookUserImages = Book::with(['bookImages' => function ($query) use ($book) {
                 $query->where('user_id', $book->user_id);
             }])->find($book->id);
 
-            
+
             $images = $bookUserImages->bookImages;
 
             if ($images) {
@@ -126,7 +125,7 @@ class BookPDFGenerator
             }
 
             // friend images
-            $bookUserImages = Book::with(['bookImages' => function($query) use($book) {
+            $bookUserImages = Book::with(['bookImages' => function ($query) use ($book) {
                 $query->where('user_id', '!=',  $book->user_id)->orWhereNull('user_id');
             }])->find($book->id);
 
@@ -179,7 +178,7 @@ class BookPDFGenerator
                         $message->message
                     );
                     $userName = $message['name'] ?? $message['user']['name'];
-                    $templateProcesser->setValue("book_message_user#" . $key + 1, $message['title'] ." ". $userName);
+                    $templateProcesser->setValue("book_message_user#" . $key + 1, $message['title'] . " " . $userName);
                     $templateProcesser->setValue("book_message_relationship#" . $key + 1,  $message['relationship']);
                 }
             }
@@ -192,7 +191,6 @@ class BookPDFGenerator
             return $file;
         } catch (\Throwable $th) {
             throw $th;
-
         }
     }
 

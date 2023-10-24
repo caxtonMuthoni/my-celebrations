@@ -10,6 +10,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewDesignController;
 use App\Http\Controllers\SocialiteCOntroller;
 use App\Mail\MessageDeleteUpdateMail;
+use App\Mail\MyTestMail;
 use App\Models\Book;
 use App\Models\BookMessage;
 use App\Payment\MpesaSubscription;
@@ -130,8 +131,13 @@ Route::group([
 
 
 Route::get('test', function () {
-   return view('test.test');
+
+    $details = [
+        'title' => 'Mail from ItSolutionStuff.com',
+        'body' => 'This is for testing email using smtp'
+    ];
+
+    Mail::to('githinjicaxton323@gmail.com')->send(new MyTestMail($details));
+
+    return view('test.test');
 });
-
-
-
