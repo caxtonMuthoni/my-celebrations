@@ -6,12 +6,12 @@
             @if($book->user_id != Auth::id())
 
             @if($book->accepting_message)
-            <a href="{{route('book-message', $book->id)}}" class="btn btn-info me-4">
+            <a href="{{route('book-message', $book->id)}}" class="btn btn-sm btn-info me-4">
                 <i class="fa fa-envelope" aria-hidden="true"></i>
                 Add message</a>
             @endif
 
-            <a href="{{route('book-images', $book->id)}}" class="btn btn-primary">
+            <a href="{{route('book-images', $book->id)}}" class="btn btn-sm btn-primary">
                 <i class="fa fa-image" aria-hidden="true"></i>
                 Add images</a>
 

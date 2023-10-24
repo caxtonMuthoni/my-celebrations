@@ -1,35 +1,25 @@
 <template>
     <div class="">
-        <div v-if="shorturl != 'none'" class="row cta_bar py-0 my-0">
-            <div class="col-sm-7 col-md-7 py-0 my-0">
-                <h4>{{ book.title }}</h4>
-            </div>
-            <div class="col-sm-5 col-md-5 py-0 my-0">
-                <a
-                    href="#"
-                    class="btn btn-sm btn-primary mx-2"
-                    @click.prevent="requestFullScreen"
-                >
-                    <i class="fa fa-expand me-2" aria-hidden="true"></i>
-                    Fullscreen</a
-                >
+        <div v-if="shorturl != 'none'" class="row cta_bar py-0 my-0 mx-lg-2">
+            <a href="#" class="btn-fab" @click.prevent="requestFullScreen">
+                <i class="fa fa-expand" aria-hidden="true"></i>
+            </a>
 
-                <a
-                    v-if="userid == book.user_id"
-                    href="#"
-                    class="btn btn-sm btn__primary mx-2 printbtn"
-                    @click.prevent="printPDF"
-                    ><i class="fa fa-print me-2" aria-hidden="true"></i>Print</a
-                >
+            <a
+                v-if="userid == book.user_id"
+                href="#"
+                class="btn-fab printbtn"
+                @click.prevent="printPDF"
+                ><i class="fa fa-print" aria-hidden="true"></i>
+            </a>
 
-                <a
-                    href="#"
-                    class="btn btn-sm btn-success"
-                    data-bs-toggle="modal"
-                    data-bs-target="#sharemodal"
-                    ><i class="fa fa-share me-2" aria-hidden="true"></i>Share</a
-                >
-            </div>
+            <a
+                href="#"
+                class="btn-fab"
+                data-bs-toggle="modal"
+                data-bs-target="#sharemodal"
+                ><i class="fa fa-share" aria-hidden="true"></i
+            ></a>
         </div>
         <div id="flipbook-wrapper-id" class="flipbook-wrapper">
             <div class="content-con">
@@ -410,9 +400,33 @@ export default {
 
 <style lang="css" scoped>
 .cta_bar {
-    border-bottom: 1px solid rgba(192, 192, 192, 0.229);
-    /* padding: 20px; */
-    padding-top: 0 !important;
+    position: absolute;
+    bottom: 50vh;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.btn-fab {
+    cursor: pointer;
+    background-color: #fff;
+    border: 1px solid #dedede;
+    color: #0d6efd;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media screen and (min-width: 1024px) {
+    .btn-fab {
+        height: 50px;
+        width: 50px;
+        font-size: 20px;
+    }
 }
 
 #buttons {
@@ -479,7 +493,7 @@ export default {
         width: 100%;
         padding-left: 10px;
         padding-right: 0;
-        height: 90vh;
+        height: 80vh;
     }
 }
 
