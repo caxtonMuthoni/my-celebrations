@@ -402,6 +402,7 @@ export default {
 .cta_bar {
     position: absolute;
     bottom: 50vh;
+    right: 0;
     z-index: 999;
     display: flex;
     flex-direction: column;
