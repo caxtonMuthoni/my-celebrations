@@ -28,7 +28,7 @@ class HomeController extends Controller
         $draft = Auth::user()->books()->where('published', '!=', true)->count();
         $latestBooks = Auth::user()->books()->latest()->take(4)->get();
         $userMessages = 0;
-        foreach($userBooks as $book) {
+        foreach ($userBooks as $book) {
             $userMessages += $book->book_messages_count;
         }
         $data = [
@@ -67,12 +67,14 @@ class HomeController extends Controller
         return view('home.pricing', compact('plans'));
     }
 
-    public function categories() {
+    public function categories()
+    {
         $categories = Category::latest()->get();
         return view('home.categories', compact('categories'));
     }
 
-    public function contactUs(Request $request) {
+    public function contactUs(Request $request)
+    {
         $this->validate($request, [
             'captcha' => 'required | captcha'
         ], [
@@ -86,13 +88,13 @@ class HomeController extends Controller
             'message' => $request->message,
         ];
 
-        Mail::to('info@mycelebrationbooks.com')->send(new ContactFormMail($message));
+        Mail::to('githinjicaxton323@gmail.com')->send(new ContactFormMail($message));
         Mail::to($request->email)->send(new ContactFormReplyMail($request->name));
         return redirect()->back()->with('success', 'Message was sent successfully');
     }
 
     public function reloadCaptcha()
     {
-        return response()->json(['captcha'=> captcha_img()]);
+        return response()->json(['captcha' => captcha_img()]);
     }
 }

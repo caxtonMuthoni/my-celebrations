@@ -40,7 +40,7 @@ Route::get('/pricing', [NewDesignController::class, 'plans'])->name('pricing');
 Route::get('categories', [NewDesignController::class, 'categories'])->name('categories');
 Route::get('/faqs', [NewDesignController::class, 'faqs'])->name('faqs');
 
-Route::post('/contactUs', [HomeController::class, 'contactUs'])->name('contact-us-form');
+Route::post('/contactUs', [HomeController::class, 'contactUs'])->middleware('auth')->name('contact-us-form');
 Route::get('/reload-captcha', [HomeController::class, 'reloadCaptcha']);
 
 Route::get('/new/design',  [NewDesignController::class, 'welcome'])->name('new-welcome');
