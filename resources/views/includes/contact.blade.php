@@ -25,9 +25,9 @@
                 <textarea class="form-control" rows="6" placeholder="Your requirements" id="cf-message" name="message" required></textarea>
                 <div class="contact__captcha">
                     <img style="width:100%;" src="{{ Captcha::src('math'); }}">
-                    <button type="button" class="btn btn__rounded" class="reload" id="reload">
+                    <!-- <button type="button" class="btn btn__rounded" class="reload" id="reload">
                         &#x21bb;
-                    </button>
+                    </button> -->
                 </div>
                 <input type="text" class="form-control" placeholder="Enter Captcha on the left" id="captcha" name="captcha" required>
 
